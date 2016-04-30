@@ -45,15 +45,15 @@ defmodule DiscordElixir.Permissions do
   @spec to_map(integer) :: map
   def to_map(permissions) do
     Enum.into @flags, %{}, fn(val) ->
-      { v, k } = val
+      {v, k} = val
       value = permissions |> bsr(v) |> band(0x1)
-      { k, value == 1 }
+      {k, value == 1}
     end
   end
 
   @spec perm_to_value(atom) :: integer
   defp perm_to_value(permission_key) do
-    { value, _ } = Enum.find @flags,
+    {value, _} = Enum.find @flags,
       fn({_k, v}) -> v == permission_key
     end
     bsl(1,value)

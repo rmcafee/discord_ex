@@ -27,7 +27,7 @@ defmodule DiscordElixir.PermissionsTest do
     assert permissions == 1048576
   end
 
-  test "duplicate credentials don't alter final result" do
+  test "duplicate permissions don't alter final result" do
     permissions =
       Permissions.add(:deafen_members)
       |> Permissions.add(:deafen_members)

@@ -38,12 +38,12 @@ defmodule DiscordElixir.RestClient do
   end
 
   def handle_call({:resource, :patch, res, payload}, _from, opts) do
-    response = REST.patch!("/#{res}", payload)
+    response = REST.patch!("/#{res}", payload, %{"Authorization" => opts.token})
     {:reply, response.body, opts}
   end
 
   def handle_call({:resource, :put, res, payload}, _from, opts) do
-    response = REST.put!("/#{res}", payload)
+    response = REST.put!("/#{res}", payload, %{"Authorization" => opts.token})
     {:reply, response.body, opts}
   end
 

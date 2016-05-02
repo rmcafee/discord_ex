@@ -1,6 +1,6 @@
 defmodule DiscordElixir.Connections.REST do
   @moduledoc """
-  Discord uses a rest API to send data to the API
+  Discord uses a REST interface to send data to the API.
   """
   use HTTPoison.Base
 

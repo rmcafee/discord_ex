@@ -28,6 +28,7 @@ defmodule DiscordElixir.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [
+      {:poison, "~> 2.0"},
       {:httpoison, "~> 0.8.0"},
       {:credo, "~> 0.3", only: [:dev, :test]}
     ]

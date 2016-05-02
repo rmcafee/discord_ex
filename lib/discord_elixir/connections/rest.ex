@@ -8,7 +8,7 @@ defmodule DiscordElixir.Connections.REST do
     DiscordElixir.discord_url <> url
   end
 
-  "Overrides"
+  #Overrides
 
   defp standard_headers do
     %{

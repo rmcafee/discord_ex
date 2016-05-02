@@ -1,6 +1,6 @@
-# DiscordElixir
+# Discord Elixir
 
-Discord library for elixir. I needed it and figured I'd share.
+Discord library for Elixir. I needed it and figured I'd share.
 
 ## Installation
 
@@ -18,3 +18,8 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:discord_elixir]]
         end
 
+## Connect and use REST API Client with Token
+  ```
+  {:ok, conn} = DiscordElixir.RestClient.start_link(%{token: <your-token>})
+  DiscordElixir.RestClient.resource(conn, :get, "users/@me")
+  ```

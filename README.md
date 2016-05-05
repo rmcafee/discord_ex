@@ -18,8 +18,5 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
           [applications: [:discord_elixir]]
         end
 
-## Connect and use REST API Client with Token
-  ```
-  {:ok, conn} = DiscordElixir.RestClient.start_link(%{token: <your-token>})
-  DiscordElixir.RestClient.resource(conn, :get, "users/@me")
-  ```
+  3. Look at the examples/echo_bot.ex file and you should honestly be
+     good to go.

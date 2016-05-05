@@ -1,4 +1,5 @@
-%{"bunt": {:hex, :bunt, "0.1.5"},
+%{"atomic_map": {:hex, :atomic_map, "0.9.0"},
+  "bunt": {:hex, :bunt, "0.1.5"},
   "certifi": {:hex, :certifi, "0.4.0"},
   "credo": {:hex, :credo, "0.3.13"},
   "hackney": {:hex, :hackney, "1.6.0"},
@@ -7,4 +8,6 @@
   "metrics": {:hex, :metrics, "1.0.1"},
   "mimerl": {:hex, :mimerl, "1.0.2"},
   "poison": {:hex, :poison, "2.1.0"},
-  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"}}
+  "socket": {:hex, :socket, "0.3.3"},
+  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0"},
+  "websocket_client": {:git, "https://github.com/jeremyong/websocket_client.git", "f6892c8b55004008ce2d52be7d98b156f3e34569", []}}

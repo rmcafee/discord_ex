@@ -29,6 +29,7 @@ defmodule DiscordElixir.Mixfile do
   defp deps do
     [
       {:poison, "~> 2.0"},
+      {:websocket_client, github: "jeremyong/websocket_client"},
       {:httpoison, "~> 0.8.0"},
       {:credo, "~> 0.3", only: [:dev, :test]}
     ]

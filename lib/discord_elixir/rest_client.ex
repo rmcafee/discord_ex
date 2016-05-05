@@ -1,21 +1,29 @@
 defmodule DiscordElixir.RestClient do
   @moduledoc """
-  Discord RestClient server. Used a GenServer so that you can have multiple
+  Discord RestClient. Used a GenServer so that you can have multiple
   clients in one application.
   """
   use GenServer
 
   alias DiscordElixir.Connections.REST
 
+  @typedoc """
+  Response body with  related options
+  """
+  @type request_reply :: {atom, map, map}
+
+
   # GenServer API
 
   @doc """
   Start process and HTTP Client.
+  {:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})
   """
   def start_link(opts) do
     GenServer.start_link(__MODULE__, opts)
   end
 
+  @spec resource(pid, atom, String.t, map) :: request_reply
   def resource(connection,  method, res, payload \\ nil) do
     GenServer.call connection, {:resource, method, res, payload}
   end

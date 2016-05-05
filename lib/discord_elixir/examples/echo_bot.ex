@@ -16,6 +16,8 @@ defmodule DiscordElixir.EchoBot do
 
   defp execute_command(payload, msg, state) do
     msg = String.upcase(msg)
+
+    # Knowing you can do this should be all you need.
     RestClient.resource(state[:rest_client], :post, "channels/#{payload.data["channel_id"]}/messages", %{content: "#{msg} yourself!"})
   end
 

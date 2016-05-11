@@ -4,8 +4,6 @@ defmodule DiscordElixir.RealtimeClient do
   """
   require Logger
 
-  alias DiscordElixir.RestClient
-
   @opcodes %{
     :dispatch               => 0,
     :heartbeat              => 1,
@@ -19,11 +17,13 @@ defmodule DiscordElixir.RealtimeClient do
     :invalid_session        => 9
   }
 
+  @static_events [:ready]
+
   @behaviour :websocket_client_handler
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def start_link(opts) do
-    {:ok, rest_client} = RestClient.start_link(%{token: opts[:token]})
+    {:ok, rest_client} = DiscordElixir.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)
 
     :crypto.start()
@@ -54,7 +54,18 @@ defmodule DiscordElixir.RealtimeClient do
   def websocket_handle({:binary, payload}, _socket, state) do
     data  = payload_decode({:binary, payload})
     event = normalize_atom(data.event_name)
-    handle_event({event, data}, state)
+
+    # Update agent sequence to track state
+    if state[:agent_seq_num] && data.seq_num do
+      agent_update(state[:agent_seq_num], data.seq_num)
+    end
+
+    # Call handler unless it is a static event
+    if state[:handler] && !static_event?(event) do
+      state[:handler].handle_event({event, data}, state)
+    else
+      handle_event({event, data}, state)
+    end
   end
 
   def handle_event({:ready, payload}, state) do
@@ -97,6 +108,10 @@ defmodule DiscordElixir.RealtimeClient do
   def opcode(value) when is_integer(value) do
     { k, _value } = Enum.find @opcodes, fn({_key, v}) -> v == value end
     k
+  end
+
+  def static_event?(event) do
+    Enum.find(@static_events, fn(e) -> e == event end) 
   end
 
   # Sequence Tracking for Resuming and Heartbeat Tracking
@@ -143,7 +158,7 @@ defmodule DiscordElixir.RealtimeClient do
 
   def socket_url(opts) do
     version  = opts[:version] || 4
-    url = RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
+    url = DiscordElixir.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
     url = String.replace(url, "gg/", "")
     url = url <> "?v=#{version}&encoding=etf"
     url

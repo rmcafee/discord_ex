@@ -12,7 +12,12 @@ defmodule DiscordElixir.EchoBot do
   def handle_event({:message_create, payload}, state) do
     spawn fn ->
       if actionable_message_for?("bk-tester-bot", payload, state) do
-        execute_command(payload, payload.data["content"], state)
+        case msg_command_parse(payload) do
+          { "echo", msg } ->
+            execute_command({"echo", msg}, payload, state)
+          { nil, _ } ->
+            Logger.info("do nothing for message")
+        end
       end
     end
     {:ok, state}
@@ -24,8 +29,9 @@ defmodule DiscordElixir.EchoBot do
     {:ok, state}
   end
 
-  defp execute_command(payload, msg, state) do
-    msg = String.upcase(msg)
+  # Echo response back to user or channel
+  defp execute_command({"echo", message}, payload, state) do
+    msg = String.upcase(message)
     # Knowing you can do this should be all you need.
     RestClient.resource(state[:rest_client], :post, "channels/#{payload.data["channel_id"]}/messages", %{content: "#{msg} yourself!"})
   end

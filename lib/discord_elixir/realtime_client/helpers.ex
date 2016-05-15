@@ -40,4 +40,18 @@ defmodule DiscordElixir.RealtimeClient.Helpers do
     |> Enum.map(fn(c) -> c["id"] end)
   end
 
+  @doc "Parses a message command from payload which is content leading with '!'"
+  @spec msg_command_parse(map) :: { String.t, String.t }
+  def msg_command_parse(payload) do
+    cmd = case Regex.scan(~r/!(.\w*){1}\s/,payload.data["content"]) do
+            []     -> nil
+            result -> result |> List.last |> List.last
+          end
+    msg =
+      payload.data["content"]
+      |> String.replace("!#{cmd}", "")
+      |> String.strip
+
+    {cmd, msg}
+  end
 end

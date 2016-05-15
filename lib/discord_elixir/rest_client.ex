@@ -12,7 +12,6 @@ defmodule DiscordElixir.RestClient do
   """
   @type request_reply :: {atom, map, map}
 
-
   # GenServer API
 
   @doc """

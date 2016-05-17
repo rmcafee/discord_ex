@@ -75,7 +75,6 @@ The following Resources are supported - you can look at their docs for examples 
 	User.create_dm_channel
 	User.dm_channels
 	User.connections
-	
 
 
 

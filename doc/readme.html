@@ -89,7 +89,7 @@ alias DiscordElixir.RestClient.Resources.User
 # Call on the resource and reap the results
 
 User.guilds(connection)</code></pre>
-<p>If you like going the longer route and obatin your token - you can use resources like this:</p>
+<p>If you like going the longer route and obtained your token already - you can use resources like this:</p>
 <pre><code class="elixir"># Create a connection
 token = &quot;&lt;your-token&gt;&quot;
 {:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})
@@ -105,7 +105,7 @@ DiscordElixir.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
-<p>The following Resources are supported:</p>
+<p>The following Resources are supported - you can look at their docs for examples and more information:</p>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
 
 User.login

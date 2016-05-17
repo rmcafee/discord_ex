@@ -1,6 +1,13 @@
 defmodule DiscordElixir.RealtimeClient do
   @moduledoc """
-  Connect to Discord to recieve and send data in realtime.
+  Connect to Discord to recieve and send data in realtime
+  You shouldn't be using this directly. You should shold pass it to a handler.
+
+  ## Examples
+
+      token = "<your-token>"
+      DiscordElixir.RealtimeClient.start_link(%{token: token, handler: DiscordElixir.EchoBot})
+      #=> {:ok, #PID<0.178.0>}
   """
   require Logger
 

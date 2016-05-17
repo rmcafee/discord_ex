@@ -30,14 +30,14 @@ defmodule DiscordElixir.Permissions do
   @doc "Add any permission to an existing set of permissions and return the complete permission value."
   @spec add(integer, atom) :: integer
   def add(existing_permissions \\ 0, new_permission) do
-    permission = perm_to_value(new_permission)
+    permission = _perm_to_value(new_permission)
     existing_permissions |> bor(permission)
   end
 
   @doc "Remove any permission from an existing set of permissions and return updated value."
   @spec remove(integer, atom) :: integer
   def remove(existing_permissions, new_permission) do
-    permission = perm_to_value(new_permission)
+    permission = _perm_to_value(new_permission)
     existing_permissions |> band(bnot(permission))
   end
 
@@ -51,8 +51,8 @@ defmodule DiscordElixir.Permissions do
     end
   end
 
-  @spec perm_to_value(atom) :: integer
-  defp perm_to_value(permission_key) do
+  @spec _perm_to_value(atom) :: integer
+  defp _perm_to_value(permission_key) do
     {value, _} = Enum.find @flags,
       fn({_k, v}) -> v == permission_key
     end

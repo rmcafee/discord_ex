@@ -69,8 +69,9 @@ defmodule DiscordElixir.RealtimeClient do
   end
 
   def handle_event({:ready, payload}, state) do
-    agent_update(state[:agent_seq_num], payload.seq_num)
     heartbeat_loop(state, payload.data.heartbeat_interval, self)
+    #require IEx
+    #IEx.pry
     {:ok, state}
   end
 

@@ -12,7 +12,6 @@ defmodule DiscordElixir.Connections.REST do
 
   defp standard_headers do
     %{
-      "Content-Type" => "application/json",
       "User-Agent" => "DiscordBot (discord-elixir, 1.0)"
     }
   end
@@ -27,10 +26,11 @@ defmodule DiscordElixir.Connections.REST do
   end
 
   defp process_request_body(body) do
-    if body == "" do
-      body
-    else
-      body |> Poison.encode!
+    case body do
+      {:form, _} -> body
+              "" -> body
+               _ -> Poison.encode!(body)
+
     end
   end
 

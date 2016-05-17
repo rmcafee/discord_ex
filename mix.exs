@@ -5,9 +5,12 @@ defmodule DiscordElixir.Mixfile do
     [app: :discord_elixir,
      version: "1.0.0",
      elixir: "~> 1.2",
+     name: "Discord Elixir",
+     source_url: "https://github.com/rmcafee/discord_elixir",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     deps: deps]
+     deps: deps,
+     docs: [extras: ["README.md"]]]
   end
 
   # Configuration for the OTP application
@@ -31,7 +34,12 @@ defmodule DiscordElixir.Mixfile do
       {:poison, "~> 2.0"},
       {:websocket_client, github: "jeremyong/websocket_client"},
       {:httpoison, "~> 0.8.0"},
-      {:credo, "~> 0.3", only: [:dev, :test]}
+      {:credo, "~> 0.3", only: [:dev, :test]},
+
+      # Docs dependencies
+      {:earmark, "~> 0.1", only: :docs},
+      {:ex_doc, "~> 0.11", only: :docs},
+      {:inch_ex, "~> 0.2", only: :docs}
     ]
   end
 end

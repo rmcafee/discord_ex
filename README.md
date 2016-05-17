@@ -62,6 +62,7 @@ The 'resource' function makes it a lot easier to use the library. The following 
 The following Resources are supported - you can look at their docs for examples and more information:
 
 	alias DiscordElixir.RestClient.Resources.User
+  [user-resource-doc](DiscordElixir.RestClient.Resources.User.html)
 
 	User.login
 	User.logout

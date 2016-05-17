@@ -105,10 +105,23 @@ DiscordElixir.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
-<p>The following Resources are supported - you can look at their docs for examples and more information:</p>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User</code></pre>
-<p>  <a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
-<pre><code class="elixir">User.login
+<p><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></p>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
+
+Image.avatar_url
+Image.icon_url</code></pre>
+<p><a href="DiscordElixir.RestClient.Resources.Image.html">image-resource-doc</a></p>
+<hr class="thin"/>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Invite
+
+Invite.accept
+Invite.delete
+Invite.get</code></pre>
+<p><a href="DiscordElixir.RestClient.Resources.Invite.html">invite-resource-doc</a></p>
+<hr class="thin"/>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
+
+User.login
 User.logout
 User.query
 User.current
@@ -119,6 +132,7 @@ User.leave_guild
 User.create_dm_channel
 User.dm_channels
 User.connections</code></pre>
+<p><a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
 
     <footer class="footer">
       <p>

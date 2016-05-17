@@ -1,6 +1,6 @@
 defmodule DiscordElixir.RestClient.Resources.User do
   @moduledoc """
-  Convience helper for User Resource
+  Convience helper for user resource
   """
 
   @doc """

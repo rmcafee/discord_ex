@@ -28,28 +28,28 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
 The easy way to use discord resources is by doing the following.
 
 	# alias the resource you wish to use to make it easy on yourself
-	
+
 	alias DiscordElixir.RestClient.Resources.User
-	
+
 	# Establish a connection
 	{:ok, connection} = User.login("<username>","<password>")
-	
+
 	# Call on the resource and reap the results
-	
+
 	User.guilds(connection)
-	
+
 If you like going the longer route and obtained your token already - you can use resources like this:
-	
+
 	# Create a connection
 	token = "<your-token>"
 	{:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})
-	
+
 	# Get to using the resource function for the rest client
 	DiscordElixir.RestClient.resource(conn, :get, "users/@me/channels")
 
 	# You can also user other method resources like 'post':
 	DiscordElixir.RestClient.resource(conn, :post, "users/@me/channels", %{recipient_id: <recipient_id>})
-	
+
 The 'resource' function makes it a lot easier to use the library. The following methods are supported.
 
 	DiscordElixir.RestClient.resource(conn, :get, <url>)
@@ -59,10 +59,28 @@ The 'resource' function makes it a lot easier to use the library. The following 
 	DiscordElixir.RestClient.resource(conn, :delete, <url>)
 
 
-The following Resources are supported - you can look at their docs for examples and more information:
+** The following Resources are supported - you can look at their docs for examples and more information: **
 
 	alias DiscordElixir.RestClient.Resources.User
-  [user-resource-doc](DiscordElixir.RestClient.Resources.User.html)
+
+  	Image.avatar_url
+  	Image.icon_url
+
+[image-resource-doc](DiscordElixir.RestClient.Resources.Image.html)
+
+  ----
+
+  	alias DiscordElixir.RestClient.Resources.Invite
+
+	Invite.accept
+	Invite.delete
+	Invite.get
+
+[invite-resource-doc](DiscordElixir.RestClient.Resources.Invite.html)
+
+  ----
+
+  	alias DiscordElixir.RestClient.Resources.User
 
 	User.login
 	User.logout
@@ -76,6 +94,6 @@ The following Resources are supported - you can look at their docs for examples 
 	User.dm_channels
 	User.connections
 
-
+[user-resource-doc](DiscordElixir.RestClient.Resources.User.html)
 
 

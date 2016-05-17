@@ -38,7 +38,7 @@ The easy way to use discord resources is by doing the following.
 	
 	User.guilds(connection)
 	
-If you like going the longer route and obatin your token - you can use resources like this:
+If you like going the longer route and obtained your token already - you can use resources like this:
 	
 	# Create a connection
 	token = "<your-token>"

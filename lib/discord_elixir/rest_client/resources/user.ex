@@ -61,7 +61,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
 
   ## Examples
 
-      User.query(conn, username, limit)
+      User.query(conn, "tontoXL3902", 10)
   """
   @spec query(pid, String.t, number) :: list
   def query(conn, username, limit \\ 25) do
@@ -94,7 +94,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
 
   ## Examples
 
-      User.get(conn, user_id)
+      User.get(conn, 329230923902390)
   """
   @spec get(pid, number) :: map
   def get(conn, user_id) do
@@ -111,7 +111,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
 
   ## Examples
 
-      User.modify(conn, options)
+      User.modify(conn, %{username: "SuperUserKato", email: "superuserkato@discordapp.com", password: "password"})
   """
   @spec modify(pid, map) :: map
   def modify(conn, options) do
@@ -148,7 +148,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
 
   ## Examples
 
-      User.guilds(conn, guild_id)
+      User.guilds(conn, 81323847812384)
   """
   @spec leave_guild(pid, number) :: nil
   def leave_guild(conn, guild_id) do
@@ -185,7 +185,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
 
   ## Examples
 
-      User.create_dm_channel(conn, recipient_id)
+      User.create_dm_channel(conn, 9999991384736571)
   """
   @spec create_dm_channel(pid, number) :: map
   def create_dm_channel(conn, recipient_id) do

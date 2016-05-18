@@ -27,9 +27,10 @@ defmodule DiscordElixir.Connections.REST do
 
   defp process_request_body(body) do
     case body do
-      {:form, _} -> body
-              "" -> body
-               _ -> Poison.encode!(body)
+           {:form, _} -> body
+      {:multipart, _} -> body
+                   "" -> body
+                    _ -> Poison.encode!(body)
 
     end
   end

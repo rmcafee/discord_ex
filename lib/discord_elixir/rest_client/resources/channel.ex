@@ -99,7 +99,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   end
 
   @doc """
-  Post a message to a guild text or DM channel
+  Post a file and message to a guild text or DM channel
 
   Requires the 'SEND_MESSAGES' permission to be present on the current user.
 
@@ -116,5 +116,25 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   @spec send_file(pid, number, map) :: map
   def send_file(conn, channel_id, file_data) do
     DiscordElixir.RestClient.resource(conn, :post_multipart, "channels/#{channel_id}/messages", file_data)
+  end
+
+  @doc """
+  Edit a previously sent message
+
+  You can only edit messages that have been sent by the current user. 
+
+  ## Parameters
+
+    - conn: User connection for REST holding auth info
+    - channel_id: Channel id
+    - message_id: The message id that you want to edit
+    - message: Message you wish to update the sent message with
+  ## Examples
+
+      Channel.update_message(conn, 439093409304934, 32892398238, "Updating this message!")
+  """
+  @spec update_message(pid, number, number, String.t) :: map
+  def update_message(conn, channel_id, message_id, message) do
+    DiscordElixir.RestClient.resource(conn, :patch, "channels/#{channel_id}/messages/#{message_id}", %{content:  message})
   end
 end

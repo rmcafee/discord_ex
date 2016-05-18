@@ -133,7 +133,7 @@
     <a href="#send_file/3">send_file(conn, channel_id, file_data)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Post a message to a guild text or DM channel</p>
+    <div class="summary-synopsis"><p>Post a file and message to a guild text or DM channel</p>
 </div>
   
 </div>
@@ -143,6 +143,15 @@
   </div>
   
     <div class="summary-synopsis"><p>Post a message to a guild text or DM channel</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_message/4">update_message(conn, channel_id, message_id, message)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Edit a previously sent message</p>
 </div>
   
 </div>
@@ -339,7 +348,7 @@
     </div>
   
   <section class="docstring">
-    <p>Post a message to a guild text or DM channel</p>
+    <p>Post a file and message to a guild text or DM channel</p>
 <p>Requires the ‘SEND_MESSAGES’ permission to be present on the current user.</p>
 <h2>Parameters</h2>
 <ul>
@@ -391,6 +400,47 @@
 </ul>
 <h2>Examples</h2>
 <pre><code class="elixir">Channel.send_message(conn, 439093409304934, %{content: &quot;Hi! Friends!&quot;})</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="update_message/4">
+  <div class="detail-header">
+    <a href="#update_message/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">update_message(conn, channel_id, message_id, message)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L137" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">update_message(pid, number, number, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Edit a previously sent message</p>
+<p>You can only edit messages that have been sent by the current user. </p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>message_id: The message id that you want to edit
+</li>
+<li>message: Message you wish to update the sent message with
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.update_message(conn, 439093409304934, 32892398238, &quot;Updating this message!&quot;)</code></pre>
 
   </section>
 </div>

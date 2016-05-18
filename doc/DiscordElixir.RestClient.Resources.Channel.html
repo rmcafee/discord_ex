@@ -1,0 +1,423 @@
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.11.5">
+    <title>DiscordElixir.RestClient.Resources.Channel – Discord Elixir v1.0.0</title>
+    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    
+    <script src="dist/sidebar_items.js"></script>
+  </head>
+  <body data-type="modules">
+
+    <div class="main">
+<button class="sidebar-toggle">
+  <i class="icon-menu"></i>
+</button>
+<section class="sidebar">
+  <button class="sidebar-toggle">
+    <i class="icon-menu"></i>
+  </button>
+
+  
+  <a href="api-reference.html" class="sidebar-projectLink">
+    <div class="sidebar-projectDetails">
+      <h1 class="sidebar-projectName">
+        Discord Elixir
+      </h1>
+      <h2 class="sidebar-projectVersion">
+        v1.0.0
+      </h2>
+    </div>
+    
+  </a>
+
+  <div class="sidebar-search">
+    <i class="icon-search"></i>
+    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list" href="#full-list">Pages</a></li>
+
+    
+      <li><a id="modules-list" href="#full-list">Modules</a></li>
+    
+
+    
+
+    
+  </ul>
+
+  <ul id="full-list" class="sidebar-fullList"></ul>
+  <div class="sidebar-noResults"></div>
+</section>
+
+<section class="content">
+  <div id="content" class="content-inner">
+
+
+      <h1>
+        <small class="visible-xs">Discord Elixir v1.0.0</small>
+        DiscordElixir.RestClient.Resources.Channel
+        
+        
+          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L1" title="View Source" class="view-source" rel="help">
+            <i class="icon-code"></i>
+          </a>
+        
+      </h1>
+
+      
+        <section id="moduledoc" class="docstring">
+          <p>Convience helper for channel</p>
+
+        </section>
+      
+
+      
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <i class="icon-link"></i>
+            </a>
+            Summary
+          </h1>
+          
+
+          
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+    <div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete/2">delete(conn, channel_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Delete a guild channel, or close a private message</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get/2">get(conn, channel_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get channel</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#messages/2">messages(conn, channel_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Retrieve messages for a channel</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#modify/3">modify(conn, channel_id, options)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Update a channels settings</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_file/3">send_file(conn, channel_id, file_data)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Post a message to a guild text or DM channel</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#send_message/3">send_message(conn, channel_id, message_data)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Post a message to a guild text or DM channel</p>
+</div>
+  
+</div>
+
+  </div>
+
+
+          
+
+          
+
+        </section>
+      
+
+      
+
+      
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <i class="icon-link"></i>
+            </a>
+            Functions
+          </h1>
+          <div class="detail" id="delete/2">
+  <div class="detail-header">
+    <a href="#delete/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">delete(conn, channel_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L58" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">delete(pid, number) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Delete a guild channel, or close a private message</p>
+<p>Requires the ‘MANAGE_GUILD’ permission for the guild containing the channel.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.delete(conn, 93209293090239)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get/2">
+  <div class="detail-header">
+    <a href="#get/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">get(conn, channel_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L19" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get(pid, number) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get channel</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.get(conn, 99999999993832)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="messages/2">
+  <div class="detail-header">
+    <a href="#messages/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">messages(conn, channel_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L77" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">messages(pid, number) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Retrieve messages for a channel</p>
+<p>Requires the ‘READ_MESSAGES’ permission for the guild containing the channel.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.messages(conn, 439093409304934)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="modify/3">
+  <div class="detail-header">
+    <a href="#modify/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">modify(conn, channel_id, options)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L39" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">modify(pid, number, map) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Update a channels settings</p>
+<p>Requires the ‘MANAGE_GUILD’ permission for the guild containing the channel.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>options: Updateable options which include (name, position, topic, bitrate)
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.modify(conn, 3290293092093, %{name: &quot;my-channel&quot;, topic&quot; &quot;we all are friends here&quot;})</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="send_file/3">
+  <div class="detail-header">
+    <a href="#send_file/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">send_file(conn, channel_id, file_data)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L117" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">send_file(pid, number, map) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Post a message to a guild text or DM channel</p>
+<p>Requires the ‘SEND_MESSAGES’ permission to be present on the current user.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>file_data: filed data which include (content, nonce, tts, file)
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.send_messages(conn, 439093409304934, %{content: &quot;Check this out!&quot;, file: &quot;/local/path/to/file.jpg&quot;})</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="send_message/3">
+  <div class="detail-header">
+    <a href="#send_message/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">send_message(conn, channel_id, message_data)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L97" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">send_message(pid, number, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Post a message to a guild text or DM channel</p>
+<p>Requires the ‘SEND_MESSAGES’ permission to be present on the current user.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>message_data: message data which include (content, nonce, tts)
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.send_message(conn, 439093409304934, %{content: &quot;Hi! Friends!&quot;})</code></pre>
+
+  </section>
+</div>
+
+        </section>
+      
+
+      
+
+      
+        <footer class="footer">
+      <p>
+        <span class="line">
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
+        </span>
+        <span class="line">
+          designed by
+          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+      </p>
+      <button class="night-mode-toggle" />
+    </footer>
+  </div>
+</section>
+</div>
+  <script src="dist/app-918614602f.js"></script>
+  </body>
+</html>
+

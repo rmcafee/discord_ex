@@ -25,6 +25,46 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   3. Look at the examples/echo_bot.ex file and you should honestly be
      good to go.
 
+## Realtime/Bot Client Usage
+
+So you want to create a bot huh? Easy peezy.
+
+1) Create a bot with a default handler to handle any event:
+
+  	# Default Fallback Handler for all events!
+  	# This way things don't blow up when you get an event you
+  	# have not set up a handler for.
+
+  	def handle_event({event, _payload}, state) do
+      IO.puts "Received Event: #{event}"
+      {:ok, state}
+  	end
+
+2) Setup an event handler to handle whatever event you want:
+  	
+  	def handle_event({:message_create, payload}, state) do
+   	  # Your stuff happens here # 
+      {:ok, state}
+  	end
+
+3) Now to start your client it is as easy as:
+
+	{:ok, bot_client } = DiscordElixir.RealtimeClient.start_link(%{
+		token: <token>,
+		handler: YourBotNameHere
+	})
+
+Alright you are done. Go forth and prosper!
+
+**As a note your bot_client is a gen_server that will have state properties that contain:**
+	
+**:rest_client** - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:
+
+	alias DiscordElixir.RestClient.Resources.User
+	
+	User.current(state[:rest_client])
+
+
 ## REST Client Usage
 
 The easy way to use discord resources is by doing the following.

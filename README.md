@@ -60,11 +60,33 @@ The 'resource' function makes it a lot easier to use the library. The following 
 
 
 ** The following Resources are supported - you can look at their docs for examples and more information: **
+  ----
 
-	alias DiscordElixir.RestClient.Resources.User
+  	alias DiscordElixir.RestClient.Resources.Channel
 
-  	Image.avatar_url
-  	Image.icon_url
+	Channel.bulk_delete_messages/3
+	Channel.create_invite/3
+	Channel.delete/2
+	Channel.delete_message/3
+	Channel.delete_permissions/3
+	Channel.edit_permissions/4
+	Channel.get/2
+	Channel.get_invites/2
+	Channel.messages/2
+	Channel.modify/3
+	Channel.send_file/3
+	Channel.send_message/3
+	Channel.trigger_typing/2
+	Channel.update_message/4
+	
+[channel-resource-doc](DiscordElixir.RestClient.Resources.Channel.html)
+
+  ----
+
+	alias DiscordElixir.RestClient.Resources.Image
+
+  	Image.avatar_url/2
+  	Image.icon_url/2
 
 [image-resource-doc](DiscordElixir.RestClient.Resources.Image.html)
 
@@ -72,9 +94,9 @@ The 'resource' function makes it a lot easier to use the library. The following 
 
   	alias DiscordElixir.RestClient.Resources.Invite
 
-	Invite.accept
-	Invite.delete
-	Invite.get
+	Invite.accept/2
+	Invite.delete/2
+	Invite.get/2
 
 [invite-resource-doc](DiscordElixir.RestClient.Resources.Invite.html)
 
@@ -82,17 +104,17 @@ The 'resource' function makes it a lot easier to use the library. The following 
 
   	alias DiscordElixir.RestClient.Resources.User
 
-	User.login
-	User.logout
-	User.query
-	User.current
-	User.get
-	User.modify
-	User.guilds
-	User.leave_guild
-	User.create_dm_channel
-	User.dm_channels
-	User.connections
+	User.connections/1
+	User.create_dm_channel/2
+	User.current/1
+	User.dm_channels/1
+	User.get/2
+	User.guilds/1
+	User.leave_guild/2
+	User.login/2
+	User.logout/1
+	User.modify/2
+	User.query/3
 
 [user-resource-doc](DiscordElixir.RestClient.Resources.User.html)
 

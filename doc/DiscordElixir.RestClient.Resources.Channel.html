@@ -94,6 +94,24 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#bulk_delete_messages/3">bulk_delete_messages(conn, channel_id, message_ids)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Bulk Delete previously sent messages</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create_invite/3">create_invite(conn, channel_id, options)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Create channel invites</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#delete/2">delete(conn, channel_id)</a>
   </div>
   
@@ -103,10 +121,46 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#delete_message/3">delete_message(conn, channel_id, message_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Delete a previously sent message</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_permissions/3">delete_permissions(conn, channel_id, overwrite_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Delete channel permissions</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#edit_permissions/4">edit_permissions(conn, channel_id, overwrite_id, options)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Edit channel permissions</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#get/2">get(conn, channel_id)</a>
   </div>
   
     <div class="summary-synopsis"><p>Get channel</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#get_invites/2">get_invites(conn, channel_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Get channel invites</p>
 </div>
   
 </div>
@@ -148,6 +202,15 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#trigger_typing/2">trigger_typing(conn, channel_id)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Trigger typing indicator</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#update_message/4">update_message(conn, channel_id, message_id, message)</a>
   </div>
   
@@ -176,7 +239,85 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="delete/2">
+          <div class="detail" id="bulk_delete_messages/3">
+  <div class="detail-header">
+    <a href="#bulk_delete_messages/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">bulk_delete_messages(conn, channel_id, message_ids)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L182" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">bulk_delete_messages(pid, number, list) :: atom</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Bulk Delete previously sent messages</p>
+<p>This endpoint can only be used on guild channels and requires the ‘MANAGE_MESSAGES’ permission.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>message_ids: list of msssage ids to delete
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.bulk_delete_messages(conn, 439093409304934, [32902930920932,3290239832023,237727828932])</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="create_invite/3">
+  <div class="detail-header">
+    <a href="#create_invite/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">create_invite(conn, channel_id, options)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L270" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">create_invite(pid, number, map) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Create channel invites</p>
+<p>Requires the CREATE_INSTANT_INVITE permission.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>options: Invite creation options which include (max_age [default 24 hours], max_uses, temporary, xkcdpass)
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.create_invite(conn, 3290293092093, %{max_age: 86400, max_uses: 1, temporary: false, xkcdpass: false})</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="delete/2">
   <div class="detail-header">
     <a href="#delete/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -213,6 +354,125 @@
 
   </section>
 </div>
+<div class="detail" id="delete_message/3">
+  <div class="detail-header">
+    <a href="#delete_message/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">delete_message(conn, channel_id, message_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L158" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">delete_message(pid, number, number) :: atom</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Delete a previously sent message</p>
+<p>This endpoint can only be used on guild channels and requires the ‘MANAGE_MESSAGES’ permission. </p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>message_id: The message id that you want to edit
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.delete_message(conn, 439093409304934, 32892398238)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="delete_permissions/3">
+  <div class="detail-header">
+    <a href="#delete_permissions/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">delete_permissions(conn, channel_id, overwrite_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L227" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">delete_permissions(pid, number, number) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Delete channel permissions</p>
+<p>Delete a channel permission overwrite for a user or role in a channel. Only usable for guild channels. Requires the ‘MANAGE_ROLES’ permission. </p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>overwrite_id: The role or user to override permissions in channel for
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.delete_permissions(conn, 9999999999383, 3279283989823)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="edit_permissions/4">
+  <div class="detail-header">
+    <a href="#edit_permissions/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">edit_permissions(conn, channel_id, overwrite_id, options)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L207" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">edit_permissions(pid, number, number, map) :: map</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Edit channel permissions</p>
+<p>Edit the channel permission overwrites for a user or role in a channel. Only usable for guild channels. Requires the ‘MANAGE_ROLES’ permission.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+<li>overwrite_id: The role or user to override permissions in channel for
+</li>
+<li>options: The permissions to allow or deny
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.edit_permissions(conn, 9999999999383, 2382830923, %{allow: 66321471})</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="get/2">
   <div class="detail-header">
     <a href="#get/2" class="detail-link" title="Link to this function">
@@ -246,6 +506,43 @@
 </ul>
 <h2>Examples</h2>
 <pre><code class="elixir">Channel.get(conn, 99999999993832)</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="get_invites/2">
+  <div class="detail-header">
+    <a href="#get_invites/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">get_invites(conn, channel_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L250" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">get_invites(pid, number) :: list</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Get channel invites</p>
+<p>Requires the ‘MANAGE_CHANNELS’ permission.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.get_invites(conn, 9999999999383)</code></pre>
 
   </section>
 </div>
@@ -403,6 +700,45 @@
 
   </section>
 </div>
+<div class="detail" id="trigger_typing/2">
+  <div class="detail-header">
+    <a href="#trigger_typing/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">trigger_typing(conn, channel_id)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L291" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">trigger_typing(pid, number) :: atom</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Trigger typing indicator</p>
+<p>Post a typing indicator for the specified channel. Generally bots should not implement this route.
+However, if a bot is responding to a command and expects the computation to take a few seconds, this
+endpoint may be called to let the user know that the bot is processing their message.</p>
+<h2>Parameters</h2>
+<ul>
+<li>conn: User connection for REST holding auth info
+</li>
+<li>channel_id: Channel id
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">Channel.trigger_typing(conn, 3290293092093)</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="update_message/4">
   <div class="detail-header">
     <a href="#update_message/4" class="detail-link" title="Link to this function">
@@ -410,7 +746,7 @@
     </a>
     <span class="signature">update_message(conn, channel_id, message_id, message)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L137" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/resources/channel.ex#L138" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

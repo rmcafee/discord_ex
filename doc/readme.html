@@ -106,32 +106,51 @@ DiscordElixir.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordElixir.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
 <p><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></p>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
+<hr class="thin"/>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Channel
 
-Image.avatar_url
-Image.icon_url</code></pre>
+Channel.bulk_delete_messages/3
+Channel.create_invite/3
+Channel.delete/2
+Channel.delete_message/3
+Channel.delete_permissions/3
+Channel.edit_permissions/4
+Channel.get/2
+Channel.get_invites/2
+Channel.messages/2
+Channel.modify/3
+Channel.send_file/3
+Channel.send_message/3
+Channel.trigger_typing/2
+Channel.update_message/4</code></pre>
+<p><a href="DiscordElixir.RestClient.Resources.Channel.html">channel-resource-doc</a></p>
+<hr class="thin"/>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Image
+
+Image.avatar_url/2
+Image.icon_url/2</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.Image.html">image-resource-doc</a></p>
 <hr class="thin"/>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Invite
 
-Invite.accept
-Invite.delete
-Invite.get</code></pre>
+Invite.accept/2
+Invite.delete/2
+Invite.get/2</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.Invite.html">invite-resource-doc</a></p>
 <hr class="thin"/>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
 
-User.login
-User.logout
-User.query
-User.current
-User.get
-User.modify
-User.guilds
-User.leave_guild
-User.create_dm_channel
-User.dm_channels
-User.connections</code></pre>
+User.connections/1
+User.create_dm_channel/2
+User.current/1
+User.dm_channels/1
+User.get/2
+User.guilds/1
+User.leave_guild/2
+User.login/2
+User.logout/1
+User.modify/2
+User.query/3</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
 
     <footer class="footer">

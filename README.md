@@ -4,6 +4,8 @@ Discord library for Elixir. I needed it and figured I'd share.
 
 This library is useful for making calls and implementing a bot as well.
 
+Please always use [Discord Developer Docs](https://discordapp.com/developers/docs) as a reference.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
@@ -80,6 +82,42 @@ The 'resource' function makes it a lot easier to use the library. The following 
 	Channel.update_message/4
 	
 [channel-resource-doc](DiscordElixir.RestClient.Resources.Channel.html)
+
+  ----
+  
+  	alias DiscordElixir.RestClient.Resources.Guild
+
+	Guild.ban_member/4
+	Guild.bans/2
+	Guild.batch_modify_roles/3
+	Guild.begin_prune/3
+	Guild.channels/2
+	Guild.create/2
+	Guild.create_channel/3
+	Guild.create_empty_role/2
+	Guild.create_integration/3
+	Guild.delete/2
+	Guild.delete_integration/3
+	Guild.delete_role/3
+	Guild.embed/2
+	Guild.get/2
+	Guild.integrations/2
+	Guild.invites/2
+	Guild.kick_member/3
+	Guild.member/3
+	Guild.members/3
+	Guild.modify/3
+	Guild.modify_embed/2
+	Guild.modify_integration/4
+	Guild.modify_member/4
+	Guild.modify_role/4
+	Guild.prune_count/3
+	Guild.roles/2
+	Guild.sync_integration/3
+	Guild.unban_member/3
+	Guild.voice_regions/2
+
+[guild-resource-doc](DiscordElixir.RestClient.Resources.Guild.html)
 
   ----
 

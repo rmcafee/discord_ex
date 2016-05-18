@@ -62,6 +62,7 @@
 <h1>Discord Elixir</h1>
 <p>Discord library for Elixir. I needed it and figured I’d share.</p>
 <p>This library is useful for making calls and implementing a bot as well.</p>
+<p>Please always use <a href="https://discordapp.com/developers/docs">Discord Developer Docs</a> as a reference.</p>
 <h2 id="installation"> Installation</h2><p>If <a href="https://hex.pm/docs/publish">available in Hex</a>, the package can be installed as:</p>
 <ol>
 <li><p>Add discord_elixir to your list of dependencies in <code class="inline">mix.exs</code>:</p>
@@ -124,6 +125,39 @@ Channel.send_message/3
 Channel.trigger_typing/2
 Channel.update_message/4</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.Channel.html">channel-resource-doc</a></p>
+<hr class="thin"/>
+<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Guild
+
+Guild.ban_member/4
+Guild.bans/2
+Guild.batch_modify_roles/3
+Guild.begin_prune/3
+Guild.channels/2
+Guild.create/2
+Guild.create_channel/3
+Guild.create_empty_role/2
+Guild.create_integration/3
+Guild.delete/2
+Guild.delete_integration/3
+Guild.delete_role/3
+Guild.embed/2
+Guild.get/2
+Guild.integrations/2
+Guild.invites/2
+Guild.kick_member/3
+Guild.member/3
+Guild.members/3
+Guild.modify/3
+Guild.modify_embed/2
+Guild.modify_integration/4
+Guild.modify_member/4
+Guild.modify_role/4
+Guild.prune_count/3
+Guild.roles/2
+Guild.sync_integration/3
+Guild.unban_member/3
+Guild.voice_regions/2</code></pre>
+<p><a href="DiscordElixir.RestClient.Resources.Guild.html">guild-resource-doc</a></p>
 <hr class="thin"/>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Image
 

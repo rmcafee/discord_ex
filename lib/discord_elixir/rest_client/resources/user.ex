@@ -119,7 +119,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
     password  = options[:password]
     username  = options[:username]
     avatar    = options[:avatar]
-    DiscordElixir.RestClient.resource(conn, :patch, "users/@me", %{username: username, avatar: avatar, email: email, password: password})
+    DiscordElixir.RestClient.resource(conn, :patch_form, "users/@me", %{username: username, avatar: avatar, email: email, password: password})
   end
 
   @doc """

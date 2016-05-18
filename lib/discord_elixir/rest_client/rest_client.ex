@@ -67,8 +67,13 @@ defmodule DiscordElixir.RestClient do
     {:reply, response.body, opts}
   end
 
-  def handle_call({:resource, :patch, path, payload}, _from, opts) do
+  def handle_call({:resource, :patch_form, path, payload}, _from, opts) do
     response = REST.patch!("/#{path}", {:form, Enum.into(payload, Keyword.new)}, %{"Authorization" => opts.token, "Content-type" => "application/x-www-form-urlencoded"})
+    {:reply, response.body, opts}
+  end
+
+  def handle_call({:resource, :patch, path, payload}, _from, opts) do
+    response = REST.patch!("/#{path}", payload, %{"Authorization" => opts.token, "Content-type" => "application/json"})
     {:reply, response.body, opts}
   end
 

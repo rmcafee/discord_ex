@@ -12,12 +12,7 @@ defmodule DiscordElixir.EchoBot do
   def handle_event({:message_create, payload}, state) do
     spawn fn ->
       if actionable_message_for?("bk-tester-bot", payload, state) do
-        case msg_command_parse(payload) do
-          { "echo", msg } ->
-            execute_command({"echo", msg}, payload, state)
-          { nil, _ } ->
-            Logger.info("do nothing for message")
-        end
+        command_parser(payload, state)
       end
     end
     {:ok, state}
@@ -27,6 +22,16 @@ defmodule DiscordElixir.EchoBot do
   def handle_event({event, _payload}, state) do
     Logger.info "Received Event: #{event}"
     {:ok, state}
+  end
+
+  # Select command to execute based off message payload
+  def command_parser(payload, state) do
+    case msg_command_parse(payload) do
+      {"echo", msg} ->
+        execute_command({"echo", msg}, payload, state)
+      {nil, _} ->
+        Logger.info("do nothing for message")
+    end
   end
 
   # Echo response back to user or channel

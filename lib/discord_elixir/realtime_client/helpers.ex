@@ -35,13 +35,14 @@ defmodule DiscordElixir.RealtimeClient.Helpers do
   @spec current_channels(map, String.t) :: list
   def current_channels(state, type \\ "private") do
     private = (type == "private")
-    RestClient.resource(state[:rest_client], :get, "users/@me/channels")
-    |> Enum.filter(fn(c) -> c["is_private"] == private end)
-    |> Enum.map(fn(c) -> c["id"] end)
+    channels = RestClient.resource(state[:rest_client], :get, "users/@me/channels")
+    channels
+      |> Enum.filter(fn(c) -> c["is_private"] == private end)
+      |> Enum.map(fn(c) -> c["id"] end)
   end
 
   @doc "Parses a message command from payload which is content leading with '!'"
-  @spec msg_command_parse(map) :: { String.t, String.t }
+  @spec msg_command_parse(map) :: {String.t, String.t}
   def msg_command_parse(payload) do
     cmd = case Regex.scan(~r/!(.\w*){1}\s/,payload.data["content"]) do
             []     -> nil

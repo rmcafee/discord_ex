@@ -91,7 +91,7 @@ defmodule DiscordElixir.RestClient do
     filename_full = file_path |> String.split("/") |> List.last
     filename = filename_full |> String.split(".") |> List.first
     [
-      {:file, file_path, { ["form-data"], [name: filename, filename: filename_full]},[]}
+      {:file, file_path, {["form-data"], [name: filename, filename: filename_full]},[]}
     ]
   end
 

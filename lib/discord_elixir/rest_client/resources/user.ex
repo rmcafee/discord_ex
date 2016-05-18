@@ -21,9 +21,10 @@ defmodule DiscordElixir.RestClient.Resources.User do
     HTTPoison.start
     response = HTTPoison.post!("#{DiscordElixir.discord_url}/auth/login", {:form, [email: email, password: password]}, %{"Content-type" => "application/x-www-form-urlencoded"})
     data = response.body |> Poison.decode!
-    cond do
-      data["token"] -> DiscordElixir.RestClient.start_link(%{token: data["token"]})
-               true -> {:error, data}
+    if data["token"] do
+      DiscordElixir.RestClient.start_link(%{token: data["token"]})
+    else
+      {:error, data}
     end
   end
 

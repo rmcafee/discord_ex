@@ -114,7 +114,7 @@ defmodule DiscordElixir.RealtimeClient do
 
   @spec opcode(integer) :: atom
   def opcode(value) when is_integer(value) do
-    { k, _value } = Enum.find @opcodes, fn({_key, v}) -> v == value end
+    {k, _value} = Enum.find @opcodes, fn({_key, v}) -> v == value end
     k
   end
 
@@ -152,8 +152,8 @@ defmodule DiscordElixir.RealtimeClient do
     atom |> Atom.to_string |> String.downcase |> String.to_atom
   end
 
-  def payload_build(opcode, data, seq_num \\ nil, event_name \\ nil) do
-    load = %{ "op" => opcode, "d" => data }
+  def payload_build(op, data, seq_num \\ nil, event_name \\ nil) do
+    load = %{"op" => op, "d" => data}
     if seq_num, do: load = Map.put(load, "s", seq_num)
     if event_name, do: load = Map.put(load, "t", event_name)
     load |> :erlang.term_to_binary

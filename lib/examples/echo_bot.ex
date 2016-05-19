@@ -29,7 +29,7 @@ defmodule DiscordElixir.EchoBot do
       {nil, msg} ->
         Logger.info("do nothing for message #{msg}")
       {cmd, msg} ->
-        execute_command({cmd, msg}, payload, state)
+        _execute_command({cmd, msg}, payload, state)
     end
   end
 

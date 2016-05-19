@@ -6,7 +6,7 @@ defmodule DiscordElixir.Client do
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.RealtimeClient.start_link(%{token: token, handler: DiscordElixir.EchoBot})
+      DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
       #=> {:ok, #PID<0.178.0>}
   """
   require Logger

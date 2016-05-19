@@ -16,7 +16,7 @@ defmodule DiscordElixir.Client do
     :heartbeat              => 1,
     :identify               => 2,
     :status_update          => 3,
-    :voice_status_udpate    => 4,
+    :voice_state_update     => 4,
     :voice_server_ping      => 5,
     :resume                 => 6,
     :reconnect              => 7,
@@ -30,6 +30,7 @@ defmodule DiscordElixir.Client do
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def start_link(opts) do
+    # We go ahead and add this to the state early as we use it to get the websocket gateway to start.
     {:ok, rest_client} = DiscordElixir.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)
 
@@ -39,9 +40,14 @@ defmodule DiscordElixir.Client do
   end
 
   def init(state, _socket) do
+    # State sequence management process and set it's state
     {:ok, agent_seq_num} = Agent.start_link fn -> 0 end
     state = Map.put state, :agent_seq_num, agent_seq_num
+
+    # Send identifier to discord gateway
     identify(state)
+
+    # Return state
     {:ok, state}
   end
 
@@ -77,7 +83,8 @@ defmodule DiscordElixir.Client do
 
   def handle_event({:ready, payload}, state) do
     heartbeat_loop(state, payload.data.heartbeat_interval, self)
-    {:ok, state}
+    new_state = Map.put(state, :session_id, payload.data[:session_id])
+    {:ok, new_state}
   end
 
   def handle_event({event, payload}, state) do
@@ -99,7 +106,6 @@ defmodule DiscordElixir.Client do
       "compress" => false,
       "large_threshold" => 250
     }
-
     payload = payload_build(opcode(:identify), data)
     :websocket_client.cast(self, {:binary, payload})
   end

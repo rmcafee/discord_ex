@@ -49,7 +49,7 @@ So you want to create a bot huh? Easy peezy.
 
 3) Now to start your client it is as easy as:
 
-	{:ok, bot_client } = DiscordElixir.RealtimeClient.start_link(%{
+	{:ok, bot_client } = DiscordElixir.Client.start_link(%{
 		token: <token>,
 		handler: YourBotNameHere
 	})

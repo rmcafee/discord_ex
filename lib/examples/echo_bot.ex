@@ -4,7 +4,7 @@ defmodule DiscordElixir.EchoBot do
   """
   require Logger
 
-  alias DiscordElixir.RealtimeClient.Helpers.MessageHelper
+  alias DiscordElixir.Client.Helpers.MessageHelper
   alias DiscordElixir.RestClient.Resources.Channel
 
   # Message Handler

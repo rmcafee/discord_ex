@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RealtimeClient.Helpers.MessageHelper do
+defmodule DiscordElixir.Client.Helpers.MessageHelper do
   @moduledoc """
   Bot Message Helpers
   """

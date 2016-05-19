@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RealtimeClient do
+defmodule DiscordElixir.Client do
   @moduledoc """
   Connect to Discord to recieve and send data in realtime
   You shouldn't be using this directly. You should shold pass it to a handler.

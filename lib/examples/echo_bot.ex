@@ -1,6 +1,8 @@
 defmodule DiscordElixir.EchoBot do
   @moduledoc """
-  An all so original echo bot!
+  An all so original echo and ping bot!
+
+  Type "!example:echo hello!" or "!example:ping" to get a reply back.
   """
   require Logger
 

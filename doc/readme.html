@@ -95,7 +95,7 @@ end</code></pre>
   {:ok, state}
 end</code></pre>
 <p>3) Now to start your client it is as easy as:</p>
-<pre><code class="elixir">{:ok, bot_client } = DiscordElixir.RealtimeClient.start_link(%{
+<pre><code class="elixir">{:ok, bot_client } = DiscordElixir.Client.start_link(%{
     token: &lt;token&gt;,
     handler: YourBotNameHere
 })</code></pre>

@@ -4,14 +4,13 @@ defmodule DiscordElixir.EchoBot do
   """
   require Logger
 
-  import DiscordElixir.RealtimeClient.Helpers
-
-  alias DiscordElixir.RestClient
+  alias DiscordElixir.RealtimeClient.Helpers.MessageHelper
+  alias DiscordElixir.RestClient.Resources.Channel
 
   # Message Handler
   def handle_event({:message_create, payload}, state) do
     spawn fn ->
-      if actionable_message_for?("bk-tester-bot", payload, state) do
+      if MessageHelper.actionable_message_for?("bk-tester-bot", payload, state) do
         command_parser(payload, state)
       end
     end
@@ -26,18 +25,22 @@ defmodule DiscordElixir.EchoBot do
 
   # Select command to execute based off message payload
   def command_parser(payload, state) do
-    case msg_command_parse(payload) do
-      {"echo", msg} ->
-        execute_command({"echo", msg}, payload, state)
-      {nil, _} ->
-        Logger.info("do nothing for message")
+    case MessageHelper.msg_command_parse(payload) do
+      {nil, msg} ->
+        Logger.info("do nothing for message #{msg}")
+      {cmd, msg} ->
+        execute_command({cmd, msg}, payload, state)
     end
   end
 
   # Echo response back to user or channel
-  defp execute_command({"echo", message}, payload, state) do
+  defp execute_command({"example:echo", message}, payload, state) do
     msg = String.upcase(message)
-    # Knowing you can do this should be all you need.
-    RestClient.resource(state[:rest_client], :post, "channels/#{payload.data["channel_id"]}/messages", %{content: "#{msg} yourself!"})
+    Channel.send_message(state[:rest_client], payload.data["channel_id"], %{content: "#{msg} yourself!"})
+  end
+
+  # Pong response to ping
+  defp execute_command({"example:ping", _message}, payload, state) do
+    Channel.send_message(state[:rest_client], payload.data["channel_id"], %{content: "Pong!"})
   end
 end

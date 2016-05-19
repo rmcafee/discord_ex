@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>DiscordElixir.RealtimeClient.Helpers – Discord Elixir v1.0.0</title>
+    <title>DiscordElixir.RealtimeClient.Helpers.MessageHelper – Discord Elixir v1.0.0</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">Discord Elixir v1.0.0</small>
-        DiscordElixir.RealtimeClient.Helpers
+        DiscordElixir.RealtimeClient.Helpers.MessageHelper
         
         
-          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers/message_helper.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,7 +72,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Writing a Bot? These helpers should help make it easier.</p>
+          <p>Bot Message Helpers</p>
 
         </section>
       
@@ -94,19 +94,10 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#actionable_message_for?/3">actionable_message_for?(username, payload, state)</a>
+    <a href="#actionable_message_for?/3">actionable_message_for?(bot_name, payload, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>This checks that an incoming message is private or is a mention to the defined user</p>
-</div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#current_channels/2">current_channels(state, type \\ &quot;private&quot;)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Get the current channels of a specific type for a client</p>
+    <div class="summary-synopsis"><p>Actionable Mention and DM Message</p>
 </div>
   
 </div>
@@ -115,7 +106,8 @@
     <a href="#msg_command_parse/1">msg_command_parse(payload)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Parses a message command from payload which is content leading with ‘!’</p>
+    <div class="summary-synopsis"><p>Parses a message payload which is content leading with ‘!’.
+Returns a tuple with the command and the message</p>
 </div>
   
 </div>
@@ -145,9 +137,9 @@
     <a href="#actionable_message_for?/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">actionable_message_for?(username, payload, state)</span>
+    <span class="signature">actionable_message_for?(bot_name, payload, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers.ex#L9" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers/message_helper.ex#L26" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -163,34 +155,20 @@
     </div>
   
   <section class="docstring">
-    <p>This checks that an incoming message is private or is a mention to the defined user</p>
-
-  </section>
-</div>
-<div class="detail" id="current_channels/2">
-  <div class="detail-header">
-    <a href="#current_channels/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">current_channels(state, type \\ &quot;private&quot;)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers.ex#L36" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
-        
-          <pre><code class="elixir">current_channels(map, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: list</code></pre>
-        
-      </div>
-    </div>
-  
-  <section class="docstring">
-    <p>Get the current channels of a specific type for a client.</p>
+    <p>Actionable Mention and DM Message</p>
+<p>This checks that an incoming message is private or is a mention to the defined user.</p>
+<h2>Parameters</h2>
+<ul>
+<li>bot_name: Name of the bot you are using.
+</li>
+<li>payload: Data from the triggered event.
+</li>
+<li>state: Current state of bot.
+</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="elixir">MessageHelper.actionable_message_for?(&quot;Mr.Botman&quot;, payload, state)
+#=&gt; true</code></pre>
 
   </section>
 </div>
@@ -201,7 +179,7 @@
     </a>
     <span class="signature">msg_command_parse(payload)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers.ex#L46" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/realtime_client/helpers/message_helper.ex#L52" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -217,7 +195,16 @@
     </div>
   
   <section class="docstring">
-    <p>Parses a message command from payload which is content leading with ‘!’</p>
+    <p>Parses a message payload which is content leading with ‘!’.
+Returns a tuple with the command and the message.</p>
+<h2>Parameters</h2>
+<ul>
+<li>payload: Data from the triggered event.
+</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="elixir">MessageHelper.msg_command_parse(payload)
+#=&gt; {&quot;ping&quot;, &quot;me please!&quot;}</code></pre>
 
   </section>
 </div>

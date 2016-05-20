@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.11.5">
-    <title>DiscordElixir.Client – Discord Elixir v1.0.0</title>
+    <title>DiscordElixir.Voice.Client – Discord Elixir v1.0.0</title>
     <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -61,10 +61,10 @@
 
       <h1>
         <small class="visible-xs">Discord Elixir v1.0.0</small>
-        DiscordElixir.Client
+        DiscordElixir.Voice.Client
         
         
-          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -72,12 +72,12 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Connect to Discord to recieve and send data in realtime
-You shouldn’t be using this directly. You should shold pass it to a handler.</p>
+          <p>This client is for specifically working with voice. You can pass this process
+to your regular client if you wish to use it with your bot.</p>
 <h2>Examples</h2>
 <pre><code class="elixir">token = &quot;&lt;your-token&gt;&quot;
-DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
-#=&gt; {:ok, #PID&lt;0.178.0&gt;}</code></pre>
+DiscordElixir.Voice.start_link(%{token: token, guild_id: 392090239})
+#=&gt; {:ok, #PID&lt;0.180.0&gt;}</code></pre>
 
         </section>
       
@@ -99,7 +99,31 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#agent_update/2">agent_update(agent, n)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#agent_value/1">agent_value(agent)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#handle_event/2">handle_event(arg, state)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#heartbeat/3">heartbeat(state, interval, socket_process)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#heartbeat_loop/3">heartbeat_loop(state, interval, socket_process)</a>
   </div>
   
 </div>
@@ -120,7 +144,25 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#socket_url/1">socket_url(opts)</a>
+    <a href="#normalize_atom/1">normalize_atom(atom)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#opcode/1">opcode(value)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#payload_build/4">payload_build(op, data, seq_num \\ nil, event_name \\ nil)</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#payload_decode/1">payload_decode(arg)</a>
   </div>
   
 </div>
@@ -141,7 +183,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#websocket_info/3">websocket_info(atom, connection, state)</a>
+    <a href="#websocket_info/3">websocket_info(atom, conn_state, state)</a>
   </div>
   
     <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_info/3</code></p>
@@ -178,14 +220,82 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
             </a>
             Functions
           </h1>
-          <div class="detail" id="handle_event/2">
+          <div class="detail" id="agent_update/2">
+  <div class="detail-header">
+    <a href="#agent_update/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">agent_update(agent, n)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L98" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="agent_value/1">
+  <div class="detail-header">
+    <a href="#agent_value/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">agent_value(agent)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L94" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="handle_event/2">
   <div class="detail-header">
     <a href="#handle_event/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">handle_event(arg, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L52" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="heartbeat/3">
+  <div class="detail-header">
+    <a href="#heartbeat/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">heartbeat(state, interval, socket_process)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L110" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="heartbeat_loop/3">
+  <div class="detail-header">
+    <a href="#heartbeat_loop/3" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">heartbeat_loop(state, interval, socket_process)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L105" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -202,7 +312,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">identify(state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L98" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L63" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -219,7 +329,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">init(state, socket)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L44" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L31" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -230,14 +340,31 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 
   </section>
 </div>
-<div class="detail" id="socket_url/1">
+<div class="detail" id="normalize_atom/1">
   <div class="detail-header">
-    <a href="#socket_url/1" class="detail-link" title="Link to this function">
+    <a href="#normalize_atom/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">socket_url(opts)</span>
+    <span class="signature">normalize_atom(atom)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L116" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L119" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="opcode/1">
+  <div class="detail-header">
+    <a href="#opcode/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">opcode(value)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L83" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -247,10 +374,46 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">socket_url(map) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+          <pre><code class="elixir">opcode(atom) :: integer</code></pre>
+        
+          <pre><code class="elixir">opcode(integer) :: atom</code></pre>
         
       </div>
     </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="payload_build/4">
+  <div class="detail-header">
+    <a href="#payload_build/4" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">payload_build(op, data, seq_num \\ nil, event_name \\ nil)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L123" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="payload_decode/1">
+  <div class="detail-header">
+    <a href="#payload_decode/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">payload_decode(arg)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L130" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
   
   <section class="docstring">
     
@@ -263,7 +426,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">start_link(opts)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L25" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -280,7 +443,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L46" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -296,9 +459,9 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     <a href="#websocket_info/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">websocket_info(atom, connection, state)</span>
+    <span class="signature">websocket_info(atom, conn_state, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L83" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L36" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -316,7 +479,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L73" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L40" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

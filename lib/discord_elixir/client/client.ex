@@ -11,6 +11,10 @@ defmodule DiscordElixir.Client do
   """
   require Logger
 
+  import DiscordElixir.Client.Utility
+
+  @behaviour :websocket_client_handler
+
   @opcodes %{
     :dispatch               => 0,
     :heartbeat              => 1,
@@ -25,8 +29,6 @@ defmodule DiscordElixir.Client do
   }
 
   @static_events [:ready]
-
-  @behaviour :websocket_client_handler
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def start_link(opts) do
@@ -51,8 +53,21 @@ defmodule DiscordElixir.Client do
     {:ok, state}
   end
 
-  def websocket_info(:start, _conn_state, state) do
-    {:reply, {:text, "message received"}, state}
+  def websocket_handle({:binary, payload}, _socket, state) do
+    data  = payload_decode(@opcodes, {:binary, payload})
+    event = normalize_atom(data.event_name)
+
+    # Update agent sequence to track state
+    if state[:agent_seq_num] && data.seq_num do
+      _agent_update(state[:agent_seq_num], data.seq_num)
+    end
+
+    # Call handler unless it is a static event
+    if state[:handler] && !_static_event?(event) do
+      state[:handler].handle_event({event, data}, state)
+    else
+      handle_event({event, data}, state)
+    end
   end
 
   def websocket_terminate(reason, _conn_state, state) do
@@ -64,32 +79,19 @@ defmodule DiscordElixir.Client do
     :ok
   end
 
-  def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode({:binary, payload})
-    event = normalize_atom(data.event_name)
-
-    # Update agent sequence to track state
-    if state[:agent_seq_num] && data.seq_num do
-      agent_update(state[:agent_seq_num], data.seq_num)
-    end
-
-    # Call handler unless it is a static event
-    if state[:handler] && !static_event?(event) do
-      state[:handler].handle_event({event, data}, state)
-    else
-      handle_event({event, data}, state)
-    end
+  # Behavioural placeholder
+  def websocket_info(:start, _connection, state) do
+    {:ok, state}
   end
 
   def handle_event({:ready, payload}, state) do
-    heartbeat_loop(state, payload.data.heartbeat_interval, self)
+    _heartbeat_loop(state, payload.data.heartbeat_interval, self)
     new_state = Map.put(state, :session_id, payload.data[:session_id])
     {:ok, new_state}
   end
 
-  def handle_event({event, payload}, state) do
+  def handle_event({event, _payload}, state) do
     Logger.info "Received Event: #{event}"
-    agent_update(state[:agent_seq_num], payload.seq_num)
     {:ok, state}
   end
 
@@ -106,73 +108,45 @@ defmodule DiscordElixir.Client do
       "compress" => false,
       "large_threshold" => 250
     }
-    payload = payload_build(opcode(:identify), data)
+    payload = payload_build(opcode(@opcodes, :identify), data)
     :websocket_client.cast(self, {:binary, payload})
   end
 
-  # Helper Functions
-  @spec opcode(atom) :: integer
-  def opcode(value) when is_atom(value) do
-    @opcodes[value]
-  end
-
-  @spec opcode(integer) :: atom
-  def opcode(value) when is_integer(value) do
-    {k, _value} = Enum.find @opcodes, fn({_key, v}) -> v == value end
-    k
-  end
-
-  def static_event?(event) do
-    Enum.find(@static_events, fn(e) -> e == event end) 
-  end
-
-  # Sequence Tracking for Resuming and Heartbeat Tracking
-  def agent_value(agent) do
-    Agent.get(agent, fn a -> a end)
-  end
-
-  def agent_update(agent, n) do
-    if n != nil do
-      Agent.update(agent, fn _a -> n end)
-    end
-  end
-
-  # Connection Heartbeat
-  def heartbeat_loop(state, interval, socket_process) do
-    spawn_link(fn -> heartbeat(state, interval, socket_process) end)
-    :ok
-  end
-
-  def heartbeat(state, interval, socket_process) do
-    value = agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(:heartbeat), value)
-    :websocket_client.cast(socket_process, {:binary, payload})
-    :timer.sleep(interval)
-    heartbeat_loop(state, interval, socket_process)
-  end
-
-  # Normalizers, Encoders, and Decoders
-  def normalize_atom(atom) do
-    atom |> Atom.to_string |> String.downcase |> String.to_atom
-  end
-
-  def payload_build(op, data, seq_num \\ nil, event_name \\ nil) do
-    load = %{"op" => op, "d" => data}
-    if seq_num, do: load = Map.put(load, "s", seq_num)
-    if event_name, do: load = Map.put(load, "t", event_name)
-    load |> :erlang.term_to_binary
-  end
-
-  def payload_decode({:binary, payload}) do
-    payload = :erlang.binary_to_term(payload)
-    %{op: opcode(payload[:op] || payload["op"]), data: (payload[:d] || payload["d"]), seq_num: (payload[:s] || payload["s"]), event_name: (payload[:t] || payload["t"])}
-  end
-
+  @spec socket_url(map) :: String.t
   def socket_url(opts) do
     version  = opts[:version] || 4
     url = DiscordElixir.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
     url = String.replace(url, "gg/", "")
     url = url <> "?v=#{version}&encoding=etf"
     url
+  end
+
+  defp _static_event?(event) do
+    Enum.find(@static_events, fn(e) -> e == event end)
+  end
+
+  # Sequence Tracking for Resuming and Heartbeat Tracking
+  defp _agent_value(agent) do
+    Agent.get(agent, fn a -> a end)
+  end
+
+  defp _agent_update(agent, n) do
+    if n != nil do
+      Agent.update(agent, fn _a -> n end)
+    end
+  end
+
+  # Connection Heartbeat
+  defp _heartbeat_loop(state, interval, socket_process) do
+    spawn_link(fn -> _heartbeat(state, interval, socket_process) end)
+    :ok
+  end
+
+  defp _heartbeat(state, interval, socket_process) do
+    value = _agent_value(state[:agent_seq_num])
+    payload = payload_build(opcode(@opcodes, :heartbeat), value)
+    :websocket_client.cast(socket_process, {:binary, payload})
+    :timer.sleep(interval)
+    _heartbeat_loop(state, interval, socket_process)
   end
 end

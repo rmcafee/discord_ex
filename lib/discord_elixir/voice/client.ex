@@ -6,8 +6,7 @@ defmodule DiscordElixir.Voice.Client do
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.Voice.start_link(%{token: token,
-                                       guild_id: 392090239,
+      DiscordElixir.Voice.start_link(%{guild_id: 392090239,
                                        user_id: 48304803480,
                                        session_id: 328083029,
                                        token: "e403f8330"})

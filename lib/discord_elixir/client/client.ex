@@ -15,18 +15,20 @@ defmodule DiscordElixir.Client do
 
   @behaviour :websocket_client_handler
 
-  @opcodes %{
-    :dispatch               => 0,
-    :heartbeat              => 1,
-    :identify               => 2,
-    :status_update          => 3,
-    :voice_state_update     => 4,
-    :voice_server_ping      => 5,
-    :resume                 => 6,
-    :reconnect              => 7,
-    :request_guild_members  => 8,
-    :invalid_session        => 9
-  }
+  def opcodes do
+    %{
+      :dispatch               => 0,
+      :heartbeat              => 1,
+      :identify               => 2,
+      :status_update          => 3,
+      :voice_state_update     => 4,
+      :voice_server_ping      => 5,
+      :resume                 => 6,
+      :reconnect              => 7,
+      :request_guild_members  => 8,
+      :invalid_session        => 9
+    }
+  end
 
   @static_events [:ready]
 
@@ -54,12 +56,15 @@ defmodule DiscordElixir.Client do
   end
 
   def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode(@opcodes, {:binary, payload})
+    data  = payload_decode(opcodes, {:binary, payload})
     event = normalize_atom(data.event_name)
 
-    # Update agent sequence to track state
-    if state[:agent_seq_num] && data.seq_num do
-      _agent_update(state[:agent_seq_num], data.seq_num)
+    # Keeps the sequence tracker process updated
+    _update_agent_sequence(data, state)
+
+    # This will setup the voice_client if it is not already setup
+    if state[:voice] && state[:voice_client] == nil do
+      _setup_voice(event, data, state)
     end
 
     # Call handler unless it is a static event
@@ -82,6 +87,23 @@ defmodule DiscordElixir.Client do
   # Behavioural placeholder
   def websocket_info(:start, _connection, state) do
     {:ok, state}
+  end
+
+  # Ability to get state
+  def websocket_info(:inspect_state, _connection, state) do
+    IO.inspect state
+    {:ok, state}
+  end
+
+  # Ability to update state
+  def websocket_info({:update_state, update_values}, _connection, state) do
+    {:ok,  Map.merge(state, update_values)}
+  end
+
+  # Remove key from state
+  def websocket_info({:clear_from_state, keys}, _connection, state) do
+    new_state = Map.drop(state, keys)
+    {:ok, new_state}
   end
 
   def handle_event({:ready, payload}, state) do
@@ -108,7 +130,7 @@ defmodule DiscordElixir.Client do
       "compress" => false,
       "large_threshold" => 250
     }
-    payload = payload_build(opcode(@opcodes, :identify), data)
+    payload = payload_build(opcode(opcodes, :identify), data)
     :websocket_client.cast(self, {:binary, payload})
   end
 
@@ -121,19 +143,35 @@ defmodule DiscordElixir.Client do
     url
   end
 
+  # Spin off a process to make a voice call and handle setup
+  # You have to receive 2 event types before starting voice client
+  defp _setup_voice(event, data, state) do
+    setup_process = unless state[:voice_setup_process] do
+                      setup_pid = spawn(DiscordElixir.Voice.Client, :setup, [])
+                      send(self, {:update_state, %{voice_setup_process: setup_pid}})
+                      _init_voice_call(state)
+                      setup_pid
+                    else
+                      state[:voice_setup_process]
+                    end
+    valid_event = Enum.find([:voice_server_update, :voice_state_update], fn(e) -> e == event end)
+    if valid_event, do: send(setup_process, {self, event, data})
+  end
+
+  defp _init_voice_call(state) do
+    data = %{ "channel_id" => state[:voice][:channel_id], "guild_id" => state[:voice][:guild_id], "self_mute" => false, "self_deaf" => true}
+	  payload = payload_build(opcode(opcodes, :voice_state_update), data)
+	  :websocket_client.cast(self, {:binary, payload})
+  end
+
+  defp _update_agent_sequence(data, state) do
+    if state[:agent_seq_num] && data.seq_num do
+      agent_update(state[:agent_seq_num], data.seq_num)
+    end
+  end
+
   defp _static_event?(event) do
     Enum.find(@static_events, fn(e) -> e == event end)
-  end
-
-  # Sequence Tracking for Resuming and Heartbeat Tracking
-  defp _agent_value(agent) do
-    Agent.get(agent, fn a -> a end)
-  end
-
-  defp _agent_update(agent, n) do
-    if n != nil do
-      Agent.update(agent, fn _a -> n end)
-    end
   end
 
   # Connection Heartbeat
@@ -143,8 +181,9 @@ defmodule DiscordElixir.Client do
   end
 
   defp _heartbeat(state, interval, socket_process) do
-    value = _agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(@opcodes, :heartbeat), value)
+    value = agent_value(state[:agent_seq_num])
+    IO.puts value
+    payload = payload_build(opcode(opcodes, :heartbeat), value)
     :websocket_client.cast(socket_process, {:binary, payload})
     :timer.sleep(interval)
     _heartbeat_loop(state, interval, socket_process)

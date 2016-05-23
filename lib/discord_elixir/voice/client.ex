@@ -2,30 +2,62 @@ defmodule DiscordElixir.Voice.Client do
   @moduledoc """
   This client is for specifically working with voice. You can pass this process
   to your regular client if you wish to use it with your bot.
+
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.Voice.start_link(%{token: token, guild_id: 392090239})
+      DiscordElixir.Voice.start_link(%{token: token,
+                                       guild_id: 392090239,
+                                       user_id: 48304803480,
+                                       session_id: 328083029,
+                                       token: "e403f8330"})
       #=> {:ok, #PID<0.180.0>}
   """
+  import DiscordElixir.Client.Utility
+
   require Logger
 
-  @opcodes %{
-    :identify             => 0,
-    :select_protocol      => 1,
-    :ready                => 2,
-    :heartbeat            => 3,
-    :session_description  => 4,
-    :speaking             => 5,
-  }
+  def opcodes do
+    %{
+      :identify             => 0,
+      :select_protocol      => 1,
+      :ready                => 2,
+      :heartbeat            => 3,
+      :session_description  => 4,
+      :speaking             => 5,
+    }
+  end
 
   @behaviour :websocket_client_handler
 
+  def setup(setup_data \\ %{}) do
+    new_data = receive do
+      {from, :voice_state_update, data} ->
+        Logger.info "Setup Voice State Update ..."
+        Map.merge(data, %{voice_state_update: data[:data], from: from})
+      {from, :voice_server_update, data} ->
+        Logger.info "Setup Voice Server Update ..."
+        Map.merge(data, %{voice_server_update: data[:data], from: from})
+    end
+
+    merge_data = if new_data, do: new_data, else: %{}
+    merged_data = Map.merge(setup_data, merge_data)
+
+    if merged_data[:voice_state_update] && merged_data[:voice_server_update] do
+      Logger.info("All Setup Voice Data Received!")
+      init_data = Map.merge(merged_data[:voice_state_update], merged_data[:voice_server_update])
+      spawn(fn -> start_link(Map.merge(init_data, %{parent_pid: merged_data[:from]})) end)
+    else
+      setup(merged_data)
+    end
+  end
+
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def start_link(opts) do
+    url = socket_url(opts[:endpoint])
     :crypto.start()
     :ssl.start()
-    :websocket_client.start_link(opts[:gateway], __MODULE__,opts)
+    :websocket_client.start_link(url, __MODULE__, opts)
   end
 
   def init(state, _socket) do
@@ -37,98 +69,64 @@ defmodule DiscordElixir.Voice.Client do
     {:reply, {:text, "message received"}, state}
   end
 
+  # Ability to get state
+  def websocket_info(:inspect_state, _connection, state) do
+    IO.inspect state
+    {:ok, state}
+  end
+
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
     #Process.exit(state[:udp_connection], :kill)
     :ok
   end
 
-  def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode({:binary, payload})
-    event = normalize_atom(data.event_name)
+  def websocket_handle({:text, payload}, _socket, state) do
+    data  = payload_decode(opcodes, {:text, payload})
+    event = data.op
     handle_event({event, data}, state)
   end
 
   def handle_event({:ready, payload}, state) do
-    heartbeat_loop(state, payload.data.heartbeat_interval, self)
+    _heartbeat_loop(state, payload.data["heartbeat_interval"], self)
+    send(state[:parent_pid], {:update_state, %{voice_client: self}})
     {:ok, state}
   end
 
-  def handle_event({event, payload}, state) do
-    Logger.info "Voice Connection Received Event: #{event}"
-    agent_update(state[:agent_seq_num], payload.seq_num)
+  def handle_event({event, _payload}, state) do
+    # Just because it will destroy log
+    unless event == :heartbeat do
+      Logger.info "Voice Connection Received Event: #{event}"
+    end
     {:ok, state}
+  end
+
+  @spec socket_url(map) :: String.t
+  def socket_url(url) do
+    "wss://" <> url |> String.replace(":80","")
   end
 
   def identify(state) do
     data = %{
-      "token" => state[:token],
-      "properties" => %{
-        "$os" => "erlang-vm",
-        "$browser" => "discord-elixir",
-        "$device" => "discord-elixir",
-        "$referrer" => "",
-        "$referring_domain" => ""
-      },
-      "compress" => false,
-      "large_threshold" => 250
+      "server_id" => state[:guild_id],
+      "user_id" => state[:user_id],
+      "session_id" => state[:session_id],
+      "token" => state[:token]
     }
-
-    payload = payload_build(opcode(:identify), data)
-    :websocket_client.cast(self, {:binary, payload})
-  end
-
-  # Helper Functions
-  @spec opcode(atom) :: integer
-  def opcode(value) when is_atom(value) do
-    @opcodes[value]
-  end
-
-  @spec opcode(integer) :: atom
-  def opcode(value) when is_integer(value) do
-    {k, _value} = Enum.find @opcodes, fn({_key, v}) -> v == value end
-    k
-  end
-
-  # Sequence Tracking for Resuming and Heartbeat Tracking
-  def agent_value(agent) do
-    Agent.get(agent, fn a -> a end)
-  end
-
-  def agent_update(agent, n) do
-    if n != nil do
-      Agent.update(agent, fn _a -> n end)
-    end
+    payload = payload_build_json(opcode(opcodes, :identify), data)
+    :websocket_client.cast(self, {:text, payload})
   end
 
   # Connection Heartbeat
-  def heartbeat_loop(state, interval, socket_process) do
-    spawn_link(fn -> heartbeat(state, interval, socket_process) end)
+  defp _heartbeat_loop(state, interval, socket_process) do
+    spawn_link(fn -> _heartbeat(state, interval, socket_process) end)
     :ok
   end
 
-  def heartbeat(state, interval, socket_process) do
-    value = agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(:heartbeat), value)
-    :websocket_client.cast(socket_process, {:binary, payload})
+  defp _heartbeat(state, interval, socket_process) do
+    payload = payload_build_json(opcode(opcodes, :heartbeat), nil)
+    :websocket_client.cast(socket_process, {:text, payload})
     :timer.sleep(interval)
-    heartbeat_loop(state, interval, socket_process)
-  end
-
-  # Normalizers, Encoders, and Decoders
-  def normalize_atom(atom) do
-    atom |> Atom.to_string |> String.downcase |> String.to_atom
-  end
-
-  def payload_build(op, data, seq_num \\ nil, event_name \\ nil) do
-    load = %{"op" => op, "d" => data}
-    if seq_num, do: load = Map.put(load, "s", seq_num)
-    if event_name, do: load = Map.put(load, "t", event_name)
-    load |> :erlang.term_to_binary
-  end
-
-  def payload_decode({:binary, payload}) do
-    payload = :erlang.binary_to_term(payload)
-    %{op: opcode(payload[:op] || payload["op"]), data: (payload[:d] || payload["d"]), seq_num: (payload[:s] || payload["s"]), event_name: (payload[:t] || payload["t"])}
+    _heartbeat_loop(state, interval, socket_process)
   end
 end

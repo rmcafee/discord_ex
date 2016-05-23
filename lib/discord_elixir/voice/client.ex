@@ -71,7 +71,7 @@ defmodule DiscordElixir.Voice.Client do
 
   @doc "Ability to output state information"
   def websocket_info(:inspect_state, _connection, state) do
-    IO.inspect state
+    IO.inspect(state)
     {:ok, state}
   end
 
@@ -94,7 +94,7 @@ defmodule DiscordElixir.Voice.Client do
   end
 
   def handle_event({event, _payload}, state) do
-    # Just because it will destroy log
+  # Just because it will destroy log
     unless event == :heartbeat do
       Logger.info "Voice Connection Received Event: #{event}"
     end
@@ -103,7 +103,8 @@ defmodule DiscordElixir.Voice.Client do
 
   @spec socket_url(map) :: String.t
   def socket_url(url) do
-    "wss://" <> url |> String.replace(":80","")
+    full_url = "wss://" <> url
+    full_url |> String.replace(":80","")
   end
 
   def identify(state) do

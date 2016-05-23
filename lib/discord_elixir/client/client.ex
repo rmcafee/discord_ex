@@ -82,7 +82,7 @@ defmodule DiscordElixir.Client do
 
   @doc "Ability to output state information"
   def websocket_info(:inspect_state, _connection, state) do
-    IO.inspect state
+    IO.inspect(state)
     {:ok, state}
   end
 
@@ -160,8 +160,8 @@ defmodule DiscordElixir.Client do
 
   defp _init_voice_call(state) do
     data = %{ "channel_id" => state[:voice][:channel_id], "guild_id" => state[:voice][:guild_id], "self_mute" => false, "self_deaf" => true}
-	  payload = payload_build(opcode(opcodes, :voice_state_update), data)
-	  :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes, :voice_state_update), data)
+    :websocket_client.cast(self, {:binary, payload})
   end
 
   defp _update_agent_sequence(data, state) do

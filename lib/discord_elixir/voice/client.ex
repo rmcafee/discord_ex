@@ -69,22 +69,22 @@ defmodule DiscordElixir.Voice.Client do
     {:reply, {:text, "message received"}, state}
   end
 
-  # Ability to get state
+  @doc "Ability to output state information"
   def websocket_info(:inspect_state, _connection, state) do
     IO.inspect state
     {:ok, state}
-  end
-
-  def websocket_terminate(reason, _conn_state, state) do
-    Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
-    #Process.exit(state[:udp_connection], :kill)
-    :ok
   end
 
   def websocket_handle({:text, payload}, _socket, state) do
     data  = payload_decode(opcodes, {:text, payload})
     event = data.op
     handle_event({event, data}, state)
+  end
+
+  def websocket_terminate(reason, _conn_state, state) do
+    Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
+    #Process.exit(state[:udp_connection], :kill)
+    :ok
   end
 
   def handle_event({:ready, payload}, state) do

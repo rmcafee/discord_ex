@@ -95,6 +95,24 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
+    <a href="#agent_update/2">agent_update(agent, n)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Generic function for updating the value of an agent process</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#agent_value/1">agent_value(agent)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Generic function for getting the value from an agent process</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#normalize_atom/1">normalize_atom(atom)</a>
   </div>
   
@@ -116,7 +134,16 @@
     <a href="#payload_build/4">payload_build(op, data, seq_num \\ nil, event_name \\ nil)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Build a pinary payload for discord communication</p>
+    <div class="summary-synopsis"><p>Build a binary payload for discord communication</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#payload_build_json/4">payload_build_json(op, data, seq_num \\ nil, event_name \\ nil)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Build a json  payload for discord communication</p>
 </div>
   
 </div>
@@ -125,7 +152,7 @@
     <a href="#payload_decode/2">payload_decode(codes, arg)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Decode binary payload received from discord into a map</p>
+    <div class="summary-synopsis"><p>Decode json payload received from discord into a map</p>
 </div>
   
 </div>
@@ -150,7 +177,61 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="normalize_atom/1">
+          <div class="detail" id="agent_update/2">
+  <div class="detail-header">
+    <a href="#agent_update/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">agent_update(agent, n)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L67" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">agent_update(pid, any) :: nil</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Generic function for updating the value of an agent process</p>
+
+  </section>
+</div>
+<div class="detail" id="agent_value/1">
+  <div class="detail-header">
+    <a href="#agent_value/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">agent_value(agent)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L61" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">agent_value(pid) :: any</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Generic function for getting the value from an agent process</p>
+
+  </section>
+</div>
+<div class="detail" id="normalize_atom/1">
   <div class="detail-header">
     <a href="#normalize_atom/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
@@ -184,7 +265,7 @@
     </a>
     <span class="signature">opcode(codes, value)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L48" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -229,16 +310,16 @@
     </div>
   
   <section class="docstring">
-    <p>Build a pinary payload for discord communication</p>
+    <p>Build a binary payload for discord communication</p>
 
   </section>
 </div>
-<div class="detail" id="payload_decode/2">
+<div class="detail" id="payload_build_json/4">
   <div class="detail-header">
-    <a href="#payload_decode/2" class="detail-link" title="Link to this function">
+    <a href="#payload_build_json/4" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">payload_decode(codes, arg)</span>
+    <span class="signature">payload_build_json(op, data, seq_num \\ nil, event_name \\ nil)</span>
       
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L25" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
@@ -250,13 +331,42 @@
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
+          <pre><code class="elixir">payload_build_json(number, map, number, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: binary</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Build a json  payload for discord communication</p>
+
+  </section>
+</div>
+<div class="detail" id="payload_decode/2">
+  <div class="detail-header">
+    <a href="#payload_decode/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">payload_decode(codes, arg)</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/utility.ex#L34" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">payload_decode(list, {atom, binary}) :: map</code></pre>
+        
           <pre><code class="elixir">payload_decode(list, {atom, binary}) :: map</code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    <p>Decode binary payload received from discord into a map</p>
+    <p>Decode json payload received from discord into a map</p>
 
   </section>
 </div>

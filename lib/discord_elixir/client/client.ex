@@ -75,6 +75,28 @@ defmodule DiscordElixir.Client do
     end
   end
 
+  # Behavioural placeholder
+  def websocket_info(:start, _connection, state) do
+    {:ok, state}
+  end
+
+  @doc "Ability to output state information"
+  def websocket_info(:inspect_state, _connection, state) do
+    IO.inspect state
+    {:ok, state}
+  end
+
+  @doc "Ability to update state"
+  def websocket_info({:update_state, update_values}, _connection, state) do
+    {:ok,  Map.merge(state, update_values)}
+  end
+
+  @doc "Remove key from state"
+  def websocket_info({:clear_from_state, keys}, _connection, state) do
+    new_state = Map.drop(state, keys)
+    {:ok, new_state}
+  end
+
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
     Logger.info "Killing seq_num process!"
@@ -82,28 +104,6 @@ defmodule DiscordElixir.Client do
     Logger.info "Killing rest_client process!"
     Process.exit(state[:rest_client], :kill)
     :ok
-  end
-
-  # Behavioural placeholder
-  def websocket_info(:start, _connection, state) do
-    {:ok, state}
-  end
-
-  # Ability to get state
-  def websocket_info(:inspect_state, _connection, state) do
-    IO.inspect state
-    {:ok, state}
-  end
-
-  # Ability to update state
-  def websocket_info({:update_state, update_values}, _connection, state) do
-    {:ok,  Map.merge(state, update_values)}
-  end
-
-  # Remove key from state
-  def websocket_info({:clear_from_state, keys}, _connection, state) do
-    new_state = Map.drop(state, keys)
-    {:ok, new_state}
   end
 
   def handle_event({:ready, payload}, state) do

@@ -64,6 +64,29 @@ Alright you are done. Go forth and prosper!
 	
 	User.current(state[:rest_client])
 
+## Voice Client Usage
+
+To create a voice room just connect voice information to your bot.
+
+1) Create the bot with connection preferences.
+
+	{:ok, client} = DiscordElixir.Client.start_link(%{token: <token>, 
+												       voice: %{
+												         guild_id: <guild_id>,
+												         channel_id: <channel_id>
+												       }})
+												       
+This will move your bot into the proper channel and attach the "voice_client" pid to the client's state.
+
+2) You can also create the connection with a bot attachment.
+
+	{:ok, client} = DiscordElixir.Client.start_link(%{token: <token>,
+											           handler: YourBotNameHere,
+												       voice: %{
+												         guild_id: <guild_id>,
+												         channel_id: <channel_id>
+												       }})
+
 
 ## REST Client Usage
 

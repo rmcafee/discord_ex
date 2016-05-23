@@ -120,6 +120,12 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#opcodes/0">opcodes()</a>
+  </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#socket_url/1">socket_url(opts)</a>
   </div>
   
@@ -141,10 +147,10 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#websocket_info/3">websocket_info(atom, connection, state)</a>
+    <a href="#websocket_info/3">websocket_info(arg1, connection, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_info/3</code></p>
+    <div class="summary-synopsis"><p>Remove key from state</p>
 </div>
   
 </div>
@@ -185,7 +191,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">handle_event(arg, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L109" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -202,7 +208,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">identify(state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L98" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L120" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -219,7 +225,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">init(state, socket)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L44" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L46" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -230,6 +236,23 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
 
   </section>
 </div>
+<div class="detail" id="opcodes/0">
+  <div class="detail-header">
+    <a href="#opcodes/0" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">opcodes()</span>
+      
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L18" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+  </div>
+  
+  <section class="docstring">
+    
+  </section>
+</div>
 <div class="detail" id="socket_url/1">
   <div class="detail-header">
     <a href="#socket_url/1" class="detail-link" title="Link to this function">
@@ -237,7 +260,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">socket_url(opts)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L116" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L138" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -263,7 +286,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">start_link(opts)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L36" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -280,7 +303,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L58" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -296,16 +319,16 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     <a href="#websocket_info/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">websocket_info(atom, connection, state)</span>
+    <span class="signature">websocket_info(arg1, connection, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L83" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L79" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
   </div>
   
   <section class="docstring">
-    <p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_info/3</code>.</p>
+    <p>Remove key from state</p>
 
   </section>
 </div>
@@ -316,7 +339,7 @@ DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
       
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L73" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/client/client.ex#L100" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

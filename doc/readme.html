@@ -105,6 +105,21 @@ end</code></pre>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
 
 User.current(state[:rest_client])</code></pre>
+<h2 id="voice-client-usage"> Voice Client Usage</h2><p>To create a voice room just connect voice information to your bot.</p>
+<p>1) Create the bot with connection preferences.</p>
+<pre><code class="elixir">{:ok, client} = DiscordElixir.Client.start_link(%{token: &lt;token&gt;, 
+                                                   voice: %{
+                                                     guild_id: &lt;guild_id&gt;,
+                                                     channel_id: &lt;channel_id&gt;
+                                                   }})</code></pre>
+<p>This will move your bot into the proper channel and attach the “voice_client” pid to the client’s state.</p>
+<p>2) You can also create the connection with a bot attachment.</p>
+<pre><code class="elixir">{:ok, client} = DiscordElixir.Client.start_link(%{token: &lt;token&gt;,
+                                                   handler: YourBotNameHere,
+                                                   voice: %{
+                                                     guild_id: &lt;guild_id&gt;,
+                                                     channel_id: &lt;channel_id&gt;
+                                                   }})</code></pre>
 <h2 id="rest-client-usage"> REST Client Usage</h2><p>The easy way to use discord resources is by doing the following.</p>
 <pre><code class="elixir"># alias the resource you wish to use to make it easy on yourself
 

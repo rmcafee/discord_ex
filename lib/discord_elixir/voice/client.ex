@@ -55,14 +55,14 @@ defmodule DiscordElixir.Voice.Client do
     {:ok, state}
   end
 
-  # Accessbility Functions
-  def update_state(voice_client, opts) do
-    send(voice_client, {:voice_state_update, opts})
-  end
-
   def websocket_info({:voice_state_update, options}, _connection, state) do
     send(state[:client_pid], {:voice_state_update, options})
     {:ok, Map.merge(state, options)}
+  end
+
+  # Accessbility Functions
+  def update_state(voice_client, opts) do
+    send(voice_client, {:voice_state_update, opts})
   end
 
   def websocket_handle({:text, payload}, _socket, state) do

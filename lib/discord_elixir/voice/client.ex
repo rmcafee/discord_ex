@@ -6,10 +6,7 @@ defmodule DiscordElixir.Voice.Client do
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.Voice.start_link(%{guild_id: 392090239,
-                                       user_id: 48304803480,
-                                       session_id: 328083029,
-                                       token: "e403f8330"})
+      DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 23208203092390)
       #=> {:ok, #PID<0.180.0>}
   """
   import DiscordElixir.Client.Utility
@@ -29,29 +26,18 @@ defmodule DiscordElixir.Voice.Client do
 
   @behaviour :websocket_client_handler
 
-  def setup(setup_data \\ %{}) do
-    new_data = receive do
-      {from, :voice_state_update, data} ->
-        Logger.info "Setup Voice State Update ..."
-        Map.merge(data, %{voice_state_update: data[:data], from: from})
-      {from, :voice_server_update, data} ->
-        Logger.info "Setup Voice Server Update ..."
-        Map.merge(data, %{voice_server_update: data[:data], from: from})
+  @doc "Initialize a voice connection"
+  @spec connect(pid, map) :: {:ok, pid}
+  def connect(base_client, opts) do
+    task = Task.async fn ->
+      send(base_client, {:start_voice_connection_listener, self})
+      send(base_client, {:start_voice_connection, opts})
+      receive do opts -> opts end
     end
-
-    merge_data = if new_data, do: new_data, else: %{}
-    merged_data = Map.merge(setup_data, merge_data)
-
-    if merged_data[:voice_state_update] && merged_data[:voice_server_update] do
-      Logger.info("All Setup Voice Data Received!")
-      init_data = Map.merge(merged_data[:voice_state_update], merged_data[:voice_server_update])
-      spawn(fn -> start_link(Map.merge(init_data, %{parent_pid: merged_data[:from]})) end)
-    else
-      setup(merged_data)
-    end
+    response  = Task.await(task, 10000)
+    start_link(response)
   end
 
-  # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def start_link(opts) do
     url = socket_url(opts[:endpoint])
     :crypto.start()
@@ -59,18 +45,13 @@ defmodule DiscordElixir.Voice.Client do
     :websocket_client.start_link(url, __MODULE__, opts)
   end
 
+  # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def init(state, _socket) do
     identify(state)
     {:ok, state}
   end
 
   def websocket_info(:start, _conn_state, state) do
-    {:reply, {:text, "message received"}, state}
-  end
-
-  @doc "Ability to output state information"
-  def websocket_info(:inspect_state, _connection, state) do
-    IO.inspect(state)
     {:ok, state}
   end
 
@@ -88,7 +69,7 @@ defmodule DiscordElixir.Voice.Client do
 
   def handle_event({:ready, payload}, state) do
     _heartbeat_loop(state, payload.data["heartbeat_interval"], self)
-    send(state[:parent_pid], {:update_state, %{voice_client: self}})
+    _establish_udp_connect(state, payload)
     {:ok, state}
   end
 
@@ -115,6 +96,10 @@ defmodule DiscordElixir.Voice.Client do
     }
     payload = payload_build_json(opcode(opcodes, :identify), data)
     :websocket_client.cast(self, {:text, payload})
+  end
+
+  # Establish UDP Connection
+  defp _establish_udp_connect(state, ready_payload) do
   end
 
   # Connection Heartbeat

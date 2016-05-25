@@ -25,7 +25,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   3. Look at the examples/echo_bot.ex file and you should honestly be
      good to go.
 
-## Realtime/Bot Client Usage
+## Realtime and Bot Client Usage
 
 So you want to create a bot huh? Easy peezy.
 
@@ -66,26 +66,15 @@ Alright you are done. Go forth and prosper!
 
 ## Voice Client Usage
 
-To create a voice room just connect voice information to your bot.
+To create a voice connection you will need to piggy back off your regular client.
 
-1) Create the bot with connection preferences.
+1) Create a connection like before. You can attach a bot handler if you wish.
 
-	{:ok, client} = DiscordElixir.Client.start_link(%{token: <token>, 
-												       voice: %{
-												         guild_id: <guild_id>,
-												         channel_id: <channel_id>
-												       }})
-												       
-This will move your bot into the proper channel and attach the "voice_client" pid to the client's state.
+	{:ok, client } = DiscordElixir.Client.start_link(%{token: <token>})												       
 
-2) You can also create the connection with a bot attachment.
+2) Now create a voice client as you piggy back off the bot.
 
-	{:ok, client} = DiscordElixir.Client.start_link(%{token: <token>,
-											           handler: YourBotNameHere,
-												       voice: %{
-												         guild_id: <guild_id>,
-												         channel_id: <channel_id>
-												       }})
+	{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{guild_id: <guild_id>, channel_id: <channel_id>})
 
 
 ## REST Client Usage

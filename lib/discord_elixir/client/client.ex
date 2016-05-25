@@ -105,6 +105,13 @@ defmodule DiscordElixir.Client do
     :websocket_client.cast(self, {:binary, payload})
     {:ok, state}
   end
+ 
+  def websocket_info({:start_voice_connection_listener, caller}, _connection, state) do
+    setup_pid = spawn(fn -> _voice_setup_gather_data(caller) end)
+    updated_state = Map.merge(state, %{voice_setup: setup_pid})
+    {:ok, updated_state}
+  end
+
 
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
@@ -178,12 +185,6 @@ defmodule DiscordElixir.Client do
 
   ### VOICE SETUP FUNCTIONS ###
   @doc "Start a voice connection listener process"
-  def websocket_info({:start_voice_connection_listener, caller}, _connection, state) do
-    setup_pid = spawn(fn -> _voice_setup_gather_data(caller) end)
-    updated_state = Map.merge(state, %{voice_setup: setup_pid})
-    {:ok, updated_state}
-  end
-
   def _voice_setup_gather_data(caller_pid, data \\ %{}) do
     new_data = receive do
       {client_pid, received_data} ->

@@ -105,13 +105,19 @@ defmodule DiscordElixir.Client do
     :websocket_client.cast(self, {:binary, payload})
     {:ok, state}
   end
- 
+
   def websocket_info({:start_voice_connection_listener, caller}, _connection, state) do
     setup_pid = spawn(fn -> _voice_setup_gather_data(caller) end)
     updated_state = Map.merge(state, %{voice_setup: setup_pid})
     {:ok, updated_state}
   end
 
+  def websocket_info({:voice_state_update, opts}, _connection, state) do
+    data = for {key, val} <- opts, into: %{}, do: {Atom.to_string(key), val}
+    payload = payload_build(opcode(opcodes, :voice_state_update), data)
+    :websocket_client.cast(self, {:binary, payload})
+    {:ok, state}
+  end
 
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
@@ -128,7 +134,7 @@ defmodule DiscordElixir.Client do
     {:ok, new_state}
   end
 
-  def handle_event({event, _payload}, state) do
+  def handle_event({event, payload}, state) do
     Logger.info "Received Event: #{event}"
     {:ok, state}
   end

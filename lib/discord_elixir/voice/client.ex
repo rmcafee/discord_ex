@@ -55,6 +55,16 @@ defmodule DiscordElixir.Voice.Client do
     {:ok, state}
   end
 
+  # Accessbility Functions
+  def update_state(voice_client, opts) do
+    send(voice_client, {:voice_state_update, opts})
+  end
+
+  def websocket_info({:voice_state_update, options}, _connection, state) do
+    send(state[:client_pid], {:voice_state_update, options})
+    {:ok, Map.merge(state, options)}
+  end
+
   def websocket_handle({:text, payload}, _socket, state) do
     data  = payload_decode(opcodes, {:text, payload})
     event = data.op
@@ -68,13 +78,13 @@ defmodule DiscordElixir.Voice.Client do
   end
 
   def handle_event({:ready, payload}, state) do
+    new_state = Map.merge(state, payload)
     _heartbeat_loop(state, payload.data["heartbeat_interval"], self)
     _establish_udp_connect(state, payload)
-    {:ok, state}
+    {:ok, new_state}
   end
 
   def handle_event({event, _payload}, state) do
-  # Just because it will destroy log
     unless event == :heartbeat do
       Logger.info "Voice Connection Received Event: #{event}"
     end

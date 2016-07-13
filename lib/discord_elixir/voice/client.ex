@@ -11,6 +11,8 @@ defmodule DiscordElixir.Voice.Client do
   """
   import DiscordElixir.Client.Utility
 
+  alias DiscordElixir.Voice.UDP
+
   require Logger
 
   def opcodes do
@@ -55,14 +57,33 @@ defmodule DiscordElixir.Voice.Client do
     {:ok, state}
   end
 
+  @doc "Look into state - grab key value and pass it back to calling process"
+  def websocket_info({:get_state, key, pid}, _connection, state) do
+    value = if state[key], do: state[key], else: state.data[Atom.to_string(key)]
+    send(pid, {key, value})
+    {:ok, state}
+  end
+
+  @doc "Ability to update state"
+  def websocket_info({:update_state, update_values}, _connection, state) do
+    {:ok,  Map.merge(state, update_values)}
+  end
+
+  @doc "This send as message to the base client to update voice state"
   def websocket_info({:voice_state_update, options}, _connection, state) do
     send(state[:client_pid], {:voice_state_update, options})
     {:ok, Map.merge(state, options)}
   end
 
-  # Accessbility Functions
-  def update_state(voice_client, opts) do
-    send(voice_client, {:voice_state_update, opts})
+  @doc "Ability to update speaking state"
+  def websocket_info({:speaking, value}, _connection, state) do
+    data = %{
+      "delay" => 0,
+      "speaking" => value
+    }
+    payload = payload_build_json(opcode(opcodes, :speaking), data)
+    :websocket_client.cast(self, {:text, payload})
+    {:ok, state}
   end
 
   def websocket_handle({:text, payload}, _socket, state) do
@@ -73,14 +94,21 @@ defmodule DiscordElixir.Voice.Client do
 
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
-    #Process.exit(state[:udp_connection], :kill)
+    if state[:udp_send_socket], do: :gen_udp.close(state[:udp_send_socket])
+    if state[:udp_recv_socket], do: :gen_udp.close(state[:udp_recv_socket])
     :ok
   end
 
   def handle_event({:ready, payload}, state) do
-    new_state = Map.merge(state, payload)
+    new_state = Map.merge(state, payload.data)
     _heartbeat_loop(state, payload.data["heartbeat_interval"], self)
     _establish_udp_connect(state, payload)
+    {:ok, new_state}
+  end
+
+  def handle_event({:session_description, payload}, state) do
+    new_state = Map.merge(state, payload)
+    IO.inspect new_state
     {:ok, new_state}
   end
 
@@ -110,6 +138,25 @@ defmodule DiscordElixir.Voice.Client do
 
   # Establish UDP Connection
   defp _establish_udp_connect(state, ready_payload) do
+    {my_ip, my_port, discord_ip, discord_port, send_socket} = UDP.self_discovery(state.endpoint, ready_payload.data["port"], ready_payload.data["ssrc"])
+    Logger.warn "Make sure you open '#{my_ip}:#{my_port}' in your firewall to receive messages!"
+
+    # Set UDP Sockets on state for reuse
+    _update_udp_connection_state(my_port, discord_ip, discord_port, send_socket)
+
+    # Send payload to client on local udp information
+    load = %{"protocol" => "udp", "data" => %{"address" => my_ip, "port" => my_port, "mode" => "xsalsa20_poly1305"}}
+    payload = payload_build_json(opcode(DiscordElixir.Voice.Client.opcodes, :select_protocol), load)
+    :websocket_client.cast(self, {:text, payload})
+  end
+
+  defp _update_udp_connection_state(my_port, discord_ip, discord_port, send_socket) do
+    udp_recv_options = [:binary, active: false, reuseaddr: true]
+    {:ok, recv_socket} = :gen_udp.open(my_port, udp_recv_options)
+    send(self, {:update_state, %{udp_ip_send: discord_ip,
+                                 udp_port_send: discord_port,
+                                 udp_socket_send: send_socket,
+                                 udp_socket_recv: recv_socket}})
   end
 
   # Connection Heartbeat

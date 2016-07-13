@@ -17,7 +17,7 @@ defmodule DiscordElixir.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison]]
+    [applications: [:logger, :httpoison, :porcelain]]
   end
 
   # Dependencies can be Hex packages:
@@ -34,6 +34,11 @@ defmodule DiscordElixir.Mixfile do
       {:poison, "~> 2.0"},
       {:websocket_client, github: "jeremyong/websocket_client"},
       {:httpoison, "~> 0.8.0"},
+      {:kcl, "~> 0.6.2"},
+      {:socket, "~> 0.3.4"},
+      {:dns, "~> 0.0.3"},
+      {:porcelain, "~> 2.0"},
+      {:temp, "~> 0.4"},
       {:credo, "~> 0.3", only: [:dev, :test]},
 
       # Docs dependencies

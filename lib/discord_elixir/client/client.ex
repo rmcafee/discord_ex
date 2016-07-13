@@ -82,6 +82,12 @@ defmodule DiscordElixir.Client do
     {:ok, state}
   end
 
+  @doc "Look into state - grab key value and pass it back to calling process"
+  def websocket_info({:get_state, key, pid}, _connection, state) do
+    send(pid, {key, state[key]})
+    {:ok, state}
+  end
+
   @doc "Ability to update state"
   def websocket_info({:update_state, update_values}, _connection, state) do
     {:ok,  Map.merge(state, update_values)}
@@ -95,11 +101,13 @@ defmodule DiscordElixir.Client do
 
   @doc "Initiate voice connection call"
   def websocket_info({:start_voice_connection, options}, _connection, state) do
+    self_mute = if (options[:self_mute] == nil), do: false, else: options[:self_mute]
+    self_deaf = if (options[:self_deaf] == nil), do: true, else: options[:self_mute]
     data = %{
       "channel_id" => options[:channel_id],
       "guild_id"   => options[:guild_id],
-      "self_mute"  => (options[:self_mute] || false),
-      "self_deaf"  => (options[:self_deaf] || true)
+      "self_mute"  => self_mute,
+      "self_deaf"  => self_deaf
     }
     payload = payload_build(opcode(opcodes, :voice_state_update), data)
     :websocket_client.cast(self, {:binary, payload})
@@ -134,7 +142,7 @@ defmodule DiscordElixir.Client do
     {:ok, new_state}
   end
 
-  def handle_event({event, payload}, state) do
+  def handle_event({event, _payload}, state) do
     Logger.info "Received Event: #{event}"
     {:ok, state}
   end

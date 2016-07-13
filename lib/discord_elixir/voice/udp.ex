@@ -26,6 +26,7 @@ defmodule DiscordElixir.Voice.UDP do
     {my_ip, my_port, discord_ip, discord_port, send_socket}
   end
 
+  @spec send_audio(binary, pid, number, number) :: atom
   def send_audio(data, voice_client, sequence, time) do
     settings = _extract_voice_settings(voice_client)
     header = _header(sequence, time, settings[:ssrc])

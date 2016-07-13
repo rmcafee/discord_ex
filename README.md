@@ -79,6 +79,8 @@ To create a voice connection you will need to piggy back off your regular client
 
 ## Voice Client w/ Audio Usage
 
+Keep in mind you will need to have [dca-rs](https://github.com/nstafie/dca-rs) installed and accessible from /usr/local/bin to use the audio feature.
+
 Do everything above and just do this afterwards:
 
 1) You need a controller for the audio so just set it up like so.

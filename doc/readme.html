@@ -110,7 +110,8 @@ User.current(state[:rest_client])</code></pre>
 <pre><code class="elixir">{:ok, client } = DiscordElixir.Client.start_link(%{token: &lt;token&gt;})                                                    </code></pre>
 <p>2) Now create a voice client as you piggy back off the bot.</p>
 <pre><code class="elixir">{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{guild_id: &lt;guild_id&gt;, channel_id: &lt;channel_id&gt;})</code></pre>
-<h2 id="voice-client-w-audio-usage"> Voice Client w/ Audio Usage</h2><p>Do everything above and just do this afterwards:</p>
+<h2 id="voice-client-w-audio-usage"> Voice Client w/ Audio Usage</h2><p>Keep in mind you will need to have <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed and accessible from /usr/local/bin to use the audio feature.</p>
+<p>Do everything above and just do this afterwards:</p>
 <p>1) You need a controller for the audio so just set it up like so.</p>
 <pre><code class="elixir">controller = DiscordElixir.Voice.Control.start(voice_client)</code></pre>
 <p>2) Now just pick the audio file you want to use and play it.</p>

@@ -113,7 +113,8 @@ defmodule DiscordElixir.Voice.Client do
   end
 
   def handle_event({event, _payload}, state) do
-    unless event == :heartbeat do
+    # Heartbeat and Speaking will destroy logs :)
+    unless event == :heartbeat || event == :speaking do
       Logger.info "Voice Connection Received Event: #{event}"
     end
     {:ok, state}

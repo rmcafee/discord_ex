@@ -6,11 +6,6 @@ defmodule DiscordElixir.Voice.Control do
   alias DiscordElixir.Voice.Encoder
   alias DiscordElixir.Voice.UDP
 
-  @ideal_length 20
-  @data_length 1920 * 2
-  @adjust_interval 100
-  @adjust_offset 10
-
   def listen_socket(voice_client) do
     task = Task.async fn ->
       send(voice_client, {:get_state, :udp_socket_recv, self})
@@ -45,13 +40,14 @@ defmodule DiscordElixir.Voice.Control do
 
     send(controls.voice_client, {:speaking, true})
     Buffer.drain_opus controls.buffer, fn(data, time) ->
+      last_time = :os.system_time(:milli_seconds)
       UDP.send_audio(data,
                      controls.voice_client,
                      _read_agent(controls.sequence),
                      _read_agent(controls.time))
       _increment_agent(controls.sequence, 1)
       _increment_agent(controls.time, 960)
-      :timer.sleep 20
+      :timer.sleep _sleep_timer(:os.system_time(:milli_seconds), last_time)
     end
 
     # Send 5 frames of silence
@@ -67,6 +63,14 @@ defmodule DiscordElixir.Voice.Control do
     end
 
     send(controls.voice_client, {:speaking, false})
+  end
+
+  defp _sleep_timer(now_time, last_time, delay_time \\ 17) do
+    if (now_time - last_time) < delay_time do
+      delay_time - (now_time - last_time)
+    else
+      0
+    end
   end
 
   defp _read_agent(pid) do

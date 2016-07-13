@@ -77,6 +77,19 @@ To create a voice connection you will need to piggy back off your regular client
 	{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{guild_id: <guild_id>, channel_id: <channel_id>})
 
 
+## Voice Client w/ Audio Usage
+
+Do everything above and just do this afterwards:
+
+1) You need a controller for the audio so just set it up like so.
+	
+	controller = DiscordElixir.Voice.Control.start(voice_client)
+
+2) Now just pick the audio file you want to use and play it.
+
+	DiscordElixir.Voice.Control.play(controller,"/path/to/your/audio.wav")
+
+
 ## REST Client Usage
 
 The easy way to use discord resources is by doing the following.

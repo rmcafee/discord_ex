@@ -48,13 +48,16 @@ defmodule DiscordElixir.Client do
   def init(state, _socket) do
     # State sequence management process and set it's state
     {:ok, agent_seq_num} = Agent.start_link fn -> 0 end
-    state = Map.put state, :agent_seq_num, agent_seq_num
+
+    new_state = state
+      |> Map.put(:client_pid, self()) # Pass the client state to use it
+      |> Map.put(:agent_seq_num, agent_seq_num) # Pass agent sequence num
 
     # Send identifier to discord gateway
-    identify(state)
+    identify(new_state)
 
     # Return state
-    {:ok, state}
+    {:ok, new_state}
   end
 
   def websocket_handle({:binary, payload}, _socket, state) do

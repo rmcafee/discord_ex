@@ -3,7 +3,7 @@ defmodule DiscordElixir.Mixfile do
 
   def project do
     [app: :discord_elixir,
-     version: "1.0.1",
+     version: "1.0.2",
      elixir: "~> 1.3",
      name: "Discord Elixir",
      source_url: "https://github.com/rmcafee/discord_elixir",

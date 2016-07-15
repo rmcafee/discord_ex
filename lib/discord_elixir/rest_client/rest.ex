@@ -4,8 +4,8 @@ defmodule DiscordElixir.Connections.REST do
   """
   use HTTPoison.Base
 
-  def process_url(url) do
-    DiscordElixir.discord_url <> url
+  def process_url(target_url) do
+    DiscordElixir.discord_url <> target_url
   end
 
   #Overrides

@@ -108,7 +108,6 @@ defmodule DiscordElixir.Voice.Client do
 
   def handle_event({:session_description, payload}, state) do
     new_state = Map.merge(state, payload)
-    IO.inspect new_state
     {:ok, new_state}
   end
 

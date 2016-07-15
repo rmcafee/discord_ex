@@ -15,18 +15,20 @@ defmodule DiscordElixir.Client.Utility do
   @spec payload_build(number, map, number, String.t) :: binary
   def payload_build(op, data, seq_num \\ nil, event_name \\ nil) do
     load = %{"op" => op, "d" => data}
-    if seq_num, do: load = Map.put(load, "s", seq_num)
-    if event_name, do: load = Map.put(load, "t", event_name)
-    load |> :erlang.term_to_binary
+    load
+      |> _update_payload(seq_num, "s", seq_num)
+      |> _update_payload(event_name, "t", seq_num)
+      |> :erlang.term_to_binary
   end
 
   @doc "Build a json  payload for discord communication"
   @spec payload_build_json(number, map, number, String.t) :: binary
   def payload_build_json(op, data, seq_num \\ nil, event_name \\ nil) do
     load = %{"op" => op, "d" => data}
-    if seq_num, do: load = Map.put(load, "s", seq_num)
-    if event_name, do: load = Map.put(load, "t", event_name)
-    load |> Poison.encode!
+    load
+      |> _update_payload(seq_num, "s", seq_num)
+      |> _update_payload(event_name, "t", seq_num)
+      |> Poison.encode!
   end
 
   @doc "Decode binary payload received from discord into a map"
@@ -69,4 +71,14 @@ defmodule DiscordElixir.Client.Utility do
       Agent.update(agent, fn _a -> n end)
     end
   end
+
+  # Makes it easy to just update and pipe a payload
+  defp _update_payload(load, var, key, value) do
+    if var do
+      Map.put(load, key, value)
+    else
+      load
+    end
+  end
+
 end

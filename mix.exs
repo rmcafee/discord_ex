@@ -33,14 +33,14 @@ defmodule DiscordElixir.Mixfile do
     [
       {:poison, "~> 2.0"},
       {:websocket_client, github: "jeremyong/websocket_client"},
-      {:httpoison, "~> 0.8.0"},
+      {:httpoison, "~> 0.9.0"},
       {:kcl, "~> 0.6.3"},
       {:poly1305, "~> 0.4.2"},
-      {:socket, "~> 0.3.4"},
+      {:socket, "~> 0.3.5"},
       {:dns, "~> 0.0.3"},
-      {:porcelain, "~> 2.0"},
+      {:porcelain, "~> 2.0.1"},
       {:temp, "~> 0.4"},
-      {:credo, "~> 0.3", only: [:dev, :test]},
+      {:credo, "~> 0.4.5", only: [:dev, :test]},
 
       # Docs dependencies
       {:earmark, "~> 0.1", only: :docs},

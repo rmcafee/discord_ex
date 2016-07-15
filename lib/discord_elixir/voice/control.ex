@@ -30,16 +30,18 @@ defmodule DiscordElixir.Voice.Control do
       time: time}
   end
 
-  def play(controls, path) when is_bitstring(path) do
-    play(controls, Encoder.encode_file(path))
+  def play(controls, path, opts \\ %{}) when is_bitstring(path) do
+    options = %{volume: 128}
+    complete_options = Map.merge(options, opts)
+    play_io(controls, Encoder.encode_file(path, complete_options))
   end
 
-  def play(controls, io_data) do
+  def play_io(controls, io_data) do
     # Fill Buffer
     Enum.each io_data, fn(d) -> Buffer.write(controls.buffer, d) end
 
     send(controls.voice_client, {:speaking, true})
-    Buffer.drain_opus controls.buffer, fn(data, time) ->
+    Buffer.drain_opus controls.buffer, fn(data, _time) ->
       last_time = :os.system_time(:milli_seconds)
       UDP.send_audio(data,
                      controls.voice_client,
@@ -79,13 +81,5 @@ defmodule DiscordElixir.Voice.Control do
 
   defp _increment_agent(pid, incr) do
     Agent.update(pid, fn(current_number) -> (current_number + incr) end)
-  end
-
-  defp _reset_agent(pid) do
-    Agent.update(pid, fn(current_number) -> 0 end)
-  end
-
-  defp _reset_agent_random(pid) do
-    Agent.update(pid, fn(current_number) -> :random.uniform(99999999) end)
   end
 end

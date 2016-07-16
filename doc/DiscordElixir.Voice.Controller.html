@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.5">
-    <title>DiscordElixir.Voice.Control – Discord Elixir v1.0.0</title>
-    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    <meta name="generator" content="ExDoc v0.12.0">
+    <title>DiscordElixir.Voice.Controller – Discord Elixir v1.1.0</title>
+    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -17,9 +17,6 @@
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -28,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.0.0
+        v1.1.0
       </h2>
     </div>
     
@@ -56,15 +53,16 @@
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.0.0</small>
-        DiscordElixir.Voice.Control
+        <small class="visible-xs">Discord Elixir v1.1.0</small>
+        DiscordElixir.Voice.Controller
         
         
-          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -94,25 +92,22 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#disconnect/1">disconnect(voice_client)</a>
-  </div>
-  
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
     <a href="#listen_socket/1">listen_socket(voice_client)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#play/3">play(controls, path, opts \\ %{})</a>
+    <a href="#play/3">play(voice_client, path, opts \\ %{})</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Play some audio to a channel</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#play_io/2">play_io(controls, io_data)</a>
+    <a href="#play_io/2">play_io(controller, io_data)</a>
   </div>
   
 </div>
@@ -143,33 +138,17 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="disconnect/1">
-  <div class="detail-header">
-    <a href="#disconnect/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">disconnect(voice_client)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L19" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="listen_socket/1">
+          <div class="detail" id="listen_socket/1">
   <div class="detail-header">
     <a href="#listen_socket/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">listen_socket(voice_client)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L9" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L11" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -182,16 +161,29 @@
     <a href="#play/3" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">play(controls, path, opts \\ %{})</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L33" class="view-source" rel="help" title="View Source">
+    <span class="signature">play(voice_client, path, opts \\ %{})</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L44" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
   <section class="docstring">
-    
+    <p>Play some audio to a channel</p>
+<h2>Parameters</h2>
+<ul>
+<li>voice_client: The voice client so the library knows how to play it and where to
+</li>
+<li>path: The path where your audio file lives
+</li>
+<li>opts: Options like volume
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">DiscordElixir.Controller.play(voice_client, &quot;/my/awesome/audio.wav&quot;, %{volume: 128})</code></pre>
+
   </section>
 </div>
 <div class="detail" id="play_io/2">
@@ -199,11 +191,12 @@
     <a href="#play_io/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">play_io(controls, io_data)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L39" class="view-source" rel="help" title="View Source">
+    <span class="signature">play_io(controller, io_data)</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L56" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -217,10 +210,11 @@
       <i class="icon-link"></i>
     </a>
     <span class="signature">start(voice_client)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/control.ex#L23" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L21" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -235,23 +229,24 @@
       
 
       
-        <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-918614602f.js"></script>
+  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
 

@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.5">
-    <title>DiscordElixir.Connections.REST – Discord Elixir v1.0.0</title>
-    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    <meta name="generator" content="ExDoc v0.12.0">
+    <title>DiscordElixir.Connections.REST – Discord Elixir v1.1.0</title>
+    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -17,9 +17,6 @@
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -28,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.0.0
+        v1.1.0
       </h2>
     </div>
     
@@ -56,11 +53,12 @@
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.0.0</small>
+        <small class="visible-xs">Discord Elixir v1.1.0</small>
         DiscordElixir.Connections.REST
         
         
@@ -227,7 +225,7 @@ failure</p>
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#process_url/1">process_url(url)</a>
+    <a href="#process_url/1">process_url(target_url)</a>
   </div>
   
 </div>
@@ -308,7 +306,7 @@ exception in case of failure</p>
 <div id="t:headers/0" class="type-detail">
   <pre><code class="elixir"><a href="#t:headers/0">headers</a> ::
   [{binary, binary}] |
-  %{binary => binary}</code></pre>
+  %{optional(binary) => binary}</code></pre>
   
 </div>
 
@@ -330,10 +328,11 @@ exception in case of failure</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">delete(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -362,10 +361,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">delete!(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -394,10 +394,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">get(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -426,10 +427,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">get!(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -458,10 +460,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">head(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -490,10 +493,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">head!(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -522,10 +526,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">options(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -554,10 +559,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">options!(url, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -586,10 +592,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">patch(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -618,10 +625,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">patch!(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -650,10 +658,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">post(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -682,10 +691,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">post!(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -713,11 +723,12 @@ failure.</p>
     <a href="#process_url/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">process_url(url)</span>
-      
+    <span class="signature">process_url(target_url)</span>
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L7" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -731,10 +742,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">put(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -763,10 +775,11 @@ otherwise.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">put!(url, body, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -795,10 +808,11 @@ failure.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">request(method, url, body \\ &quot;&quot;, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -875,10 +889,11 @@ request is successful, <code class="inline">{:error, reason}</code> otherwise.</
       <i class="icon-link"></i>
     </a>
     <span class="signature">request!(method, url, body \\ &quot;&quot;, headers \\ [], options \\ [])</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -906,10 +921,11 @@ request fails.</p>
       <i class="icon-link"></i>
     </a>
     <span class="signature">start()</span>
-      
+    
       <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -925,23 +941,24 @@ request fails.</p>
       
 
       
-        <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-918614602f.js"></script>
+  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
 

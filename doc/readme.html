@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.5">
-    <title>Discord Elixir – Discord Elixir v1.0.0</title>
-    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    <meta name="generator" content="ExDoc v0.12.0">
+    <title>Discord Elixir – Discord Elixir v1.1.0</title>
+    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -17,9 +17,6 @@
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -28,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.0.0
+        v1.1.0
       </h2>
     </div>
     
@@ -56,7 +53,8 @@
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
 <h1>Discord Elixir</h1>
@@ -105,17 +103,32 @@ end</code></pre>
 <pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
 
 User.current(state[:rest_client])</code></pre>
-<h2 id="voice-client-usage"> Voice Client Usage</h2><p>To create a voice connection you will need to piggy back off your regular client.</p>
+<h2 id="voice-client-usage"> Voice Client Usage</h2><p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed and accessible from /usr/local/bin to use the audio feature.</p>
+<p><strong>For best results that include easy accessibility and efficient process management include voice information whenoy create your client.</strong></p>
+<p>1) Create a connection with initial voice channel information and voice options:</p>
+<pre><code class="elixir">{:ok, client} = DiscordElixir.Client.start_link(%{
+    token: token,
+    handler: YourHandler, 
+    voice: %{
+        guild_id: &lt;guild_id&gt;, 
+        channel_id: &lt;initial_channel_id&gt;, 
+        self_deaf: false}
+})</code></pre>
+<p>2) Now in your handler you can access the voice client in your handlers state.</p>
+<ul>
+<li>state[:voice_client]
+</li>
+</ul>
+<p><strong>If you want to seperate your voice client from the general client:</strong></p>
 <p>1) Create a connection like before. You can attach a bot handler if you wish.</p>
 <pre><code class="elixir">{:ok, client } = DiscordElixir.Client.start_link(%{token: &lt;token&gt;})                                                    </code></pre>
 <p>2) Now create a voice client as you piggy back off the bot.</p>
-<pre><code class="elixir">{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{guild_id: &lt;guild_id&gt;, channel_id: &lt;channel_id&gt;})</code></pre>
-<h2 id="voice-client-w-audio-usage"> Voice Client w/ Audio Usage</h2><p>Keep in mind you will need to have <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed and accessible from /usr/local/bin to use the audio feature.</p>
-<p>Do everything above and just do this afterwards:</p>
-<p>1) You need a controller for the audio so just set it up like so.</p>
-<pre><code class="elixir">controller = DiscordElixir.Voice.Control.start(voice_client)</code></pre>
-<p>2) Now just pick the audio file you want to use and play it.</p>
-<pre><code class="elixir">DiscordElixir.Voice.Control.play(controller,&quot;/path/to/your/audio.wav&quot;)</code></pre>
+<pre><code class="elixir">{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{
+    guild_id: &lt;guild_id&gt;,
+    channel_id: &lt;channel_id&gt;
+})</code></pre>
+<p>3) Now just pick the audio file you want to use and play it.</p>
+<pre><code class="elixir">DiscordElixir.Voice.Controller.play(voice_client,&quot;/path/to/your/audio.wav&quot;, %{volumne: 128})</code></pre>
 <h2 id="rest-client-usage"> REST Client Usage</h2><p>The easy way to use discord resources is by doing the following.</p>
 <pre><code class="elixir"># alias the resource you wish to use to make it easy on yourself
 
@@ -224,23 +237,24 @@ User.modify/2
 User.query/3</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
 
-    <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+      <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-918614602f.js"></script>
+  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
 

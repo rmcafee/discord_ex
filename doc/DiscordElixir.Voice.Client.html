@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.11.5">
-    <title>DiscordElixir.Voice.Client – Discord Elixir v1.0.0</title>
-    <link rel="stylesheet" href="dist/app-ddd9717ad9.css" />
+    <meta name="generator" content="ExDoc v0.12.0">
+    <title>DiscordElixir.Voice.Client – Discord Elixir v1.1.0</title>
+    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
   </head>
@@ -17,9 +17,6 @@
   <i class="icon-menu"></i>
 </button>
 <section class="sidebar">
-  <button class="sidebar-toggle">
-    <i class="icon-menu"></i>
-  </button>
 
   
   <a href="api-reference.html" class="sidebar-projectLink">
@@ -28,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.0.0
+        v1.1.0
       </h2>
     </div>
     
@@ -56,11 +53,12 @@
 </section>
 
 <section class="content">
-  <div id="content" class="content-inner">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.0.0</small>
+        <small class="visible-xs">Discord Elixir v1.1.0</small>
         DiscordElixir.Voice.Client
         
         
@@ -99,10 +97,19 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#connect/2">connect(base_client, opts)</a>
+    <a href="#connect/2">connect(base_client, options \\ %{})</a>
   </div>
   
     <div class="summary-synopsis"><p>Initialize a voice connection</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#disconnect/1">disconnect(voice_client)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Kill a voice connection</p>
 </div>
   
 </div>
@@ -131,6 +138,15 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
   <div class="summary-signature">
     <a href="#opcodes/0">opcodes()</a>
   </div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#reconnect/2">reconnect(client_pid, options)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Reconnect or initiate voice connection</p>
+</div>
   
 </div>
 <div class="summary-row">
@@ -198,11 +214,12 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
     <a href="#connect/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">connect(base_client, opts)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L33" class="view-source" rel="help" title="View Source">
+    <span class="signature">connect(base_client, options \\ %{})</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L34" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -220,16 +237,45 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
 
   </section>
 </div>
+<div class="detail" id="disconnect/1">
+  <div class="detail-header">
+    <a href="#disconnect/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">disconnect(voice_client)</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L46" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">disconnect(pid) :: atom</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Kill a voice connection</p>
+
+  </section>
+</div>
 <div class="detail" id="handle_event/2">
   <div class="detail-header">
     <a href="#handle_event/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
     <span class="signature">handle_event(arg, state)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L102" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L149" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -243,10 +289,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">identify(state)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L129" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L175" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -260,10 +307,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">init(state, socket)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L51" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L70" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -278,15 +326,44 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">opcodes()</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L18" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L19" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
   <section class="docstring">
     
+  </section>
+</div>
+<div class="detail" id="reconnect/2">
+  <div class="detail-header">
+    <a href="#reconnect/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">reconnect(client_pid, options)</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L53" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">reconnect(pid, map) :: {:ok, pid}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Reconnect or initiate voice connection</p>
+
   </section>
 </div>
 <div class="detail" id="socket_url/1">
@@ -295,10 +372,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">socket_url(url)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L124" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L170" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -321,10 +399,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">start_link(opts)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L43" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L59" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -338,10 +417,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L89" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L136" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -356,10 +436,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">websocket_info(arg1, arg2, state)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L56" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L77" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -374,10 +455,11 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       <i class="icon-link"></i>
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
-      
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L95" class="view-source" rel="help" title="View Source">
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/client.ex#L142" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
+    
     
   </div>
   
@@ -393,23 +475,24 @@ DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_i
       
 
       
-        <footer class="footer">
-      <p>
-        <span class="line">
-          Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.11.5),
-        </span>
-        <span class="line">
-          designed by
-          <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          <footer class="footer">
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
           </span>
-      </p>
-      <button class="night-mode-toggle" />
-    </footer>
+          <span class="line">
+            designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            </span>
+        </p>
+        <button class="night-mode-toggle" />
+      </footer>
+    </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-918614602f.js"></script>
+  <script src="dist/app-21f1a20b9e.js"></script>
   </body>
 </html>
 

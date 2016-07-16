@@ -66,7 +66,7 @@ defmodule DiscordElixir.Voice.UDP do
         {:secret_key, value} -> :erlang.list_to_binary(value)
       end
     end
-    Task.await(task, 10000)
+    Task.await(task, 10_000)
   end
 
   defp _port(voice_client) do
@@ -76,7 +76,7 @@ defmodule DiscordElixir.Voice.UDP do
         {"port", value} -> value
       end
     end
-    Task.await(task, 10000)
+    Task.await(task, 10_000)
   end
 
   defp _address(voice_client) do
@@ -86,7 +86,7 @@ defmodule DiscordElixir.Voice.UDP do
         {:udp_ip_send, value} -> Socket.Address.parse(value)
       end
     end
-    Task.await(task, 10000)
+    Task.await(task, 10_000)
   end
 
   defp _ssrc(voice_client) do
@@ -96,7 +96,7 @@ defmodule DiscordElixir.Voice.UDP do
         {"ssrc", value} -> value
       end
     end
-    Task.await(task, 10000)
+    Task.await(task, 10_000)
   end
 
   def _send_socket(voice_client) do

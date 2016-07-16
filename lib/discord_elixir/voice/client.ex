@@ -37,7 +37,7 @@ defmodule DiscordElixir.Voice.Client do
       send(base_client, {:start_voice_connection, options})
       receive do opts -> opts end
     end
-    results = Task.await(task, 10000)
+    results = Task.await(task, 10_000)
     start_link(results)
   end
 
@@ -63,7 +63,7 @@ defmodule DiscordElixir.Voice.Client do
       :ssl.start()
       :websocket_client.start_link(url, __MODULE__, opts)
     end
-    Task.await(task, 10000)
+    Task.await(task, 10_000)
   end
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)

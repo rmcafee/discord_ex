@@ -19,8 +19,8 @@ defmodule DiscordElixir.Voice.Controller do
   end
 
   def start(voice_client) do
-    {:ok, seq} = Agent.start_link(fn -> :random.uniform(93920290) end)
-    {:ok, time} = Agent.start_link(fn -> :random.uniform(83290239) end)
+    {:ok, seq} = Agent.start_link(fn -> :random.uniform(93_920_290) end)
+    {:ok, time} = Agent.start_link(fn -> :random.uniform(83_290_239) end)
 
     %{buffer: Buffer.start(),
       voice_client: voice_client,

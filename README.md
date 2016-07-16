@@ -13,7 +13,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add discord_elixir to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:discord_elixir, "~> 1.0.0"}]
+          [{:discord_elixir, "~> 1.1.0"}]
         end
 
   2. Ensure discord_elixir is started before your application:
@@ -99,7 +99,7 @@ Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](htt
 		channel_id: <channel_id>
 	})
 
-3) Now just pick the audio file you want to use and play it.
+**Now just pick the audio file you want to use and play it.**
 
 	DiscordElixir.Voice.Controller.play(voice_client,"/path/to/your/audio.wav", %{volumne: 128})
 

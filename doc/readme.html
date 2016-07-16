@@ -65,7 +65,7 @@
 <ol>
 <li><p>Add discord_elixir to your list of dependencies in <code class="inline">mix.exs</code>:</p>
 <pre><code class="elixir">def deps do
-  [{:discord_elixir, &quot;~&gt; 1.0.0&quot;}]
+  [{:discord_elixir, &quot;~&gt; 1.1.0&quot;}]
 end</code></pre>
 </li>
 <li><p>Ensure discord_elixir is started before your application:</p>
@@ -127,7 +127,7 @@ User.current(state[:rest_client])</code></pre>
     guild_id: &lt;guild_id&gt;,
     channel_id: &lt;channel_id&gt;
 })</code></pre>
-<p>3) Now just pick the audio file you want to use and play it.</p>
+<p><strong>Now just pick the audio file you want to use and play it.</strong></p>
 <pre><code class="elixir">DiscordElixir.Voice.Controller.play(voice_client,&quot;/path/to/your/audio.wav&quot;, %{volumne: 128})</code></pre>
 <h2 id="rest-client-usage"> REST Client Usage</h2><p>The easy way to use discord resources is by doing the following.</p>
 <pre><code class="elixir"># alias the resource you wish to use to make it easy on yourself

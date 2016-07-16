@@ -32,7 +32,7 @@ defmodule DiscordElixir.Client do
     }
   end
 
-  @static_events [:ready]
+  @static_events [:ready, :guild_create, :voice_state_update]
 
   def start_link(opts) do
     # We go ahead and add this to the state early as we use it to get the websocket gateway to start.
@@ -172,6 +172,20 @@ defmodule DiscordElixir.Client do
     {:ok, new_state}
   end
 
+  def handle_event({:guild_create, payload}, state) do
+    new_state = Map.merge(state, %{guild_id: payload.data[:id],
+                               voice_states: payload.data[:voice_states]})
+    {:ok, new_state}
+  end
+
+  def handle_event({:voice_state_update, payload}, state) do
+    new_voice_states = state[:voice_states]
+                      |> Enum.filter(fn(m) -> m.user_id != payload.data.user_id end)
+                      |> List.insert_at(-1, payload.data)
+    new_state = Map.merge(state, %{voice_states: new_voice_states})
+    {:ok, new_state}
+  end
+
   def handle_event({event, _payload}, state) do
     Logger.info "Received Event: #{event}"
     {:ok, state}
@@ -232,7 +246,6 @@ defmodule DiscordElixir.Client do
       :timer.sleep 2000
       # Setup voice - this makes it easier to access voice in a handler
       {:ok, voice_client} = DiscordElixir.Voice.Client.connect(client_pid, state[:voice])
-      controller = DiscordElixir.Voice.Controller.start(voice_client)
       send(client_pid, {:clear_from_state, [:voice]})
       send(client_pid, {:update_state, %{voice_client: voice_client}})
     end

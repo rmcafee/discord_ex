@@ -99,13 +99,9 @@ Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](htt
 		channel_id: <channel_id>
 	})
 
-3) You need a controller for the audio so just set it up like so.
-	
-	controller = DiscordElixir.Voice.Controller.start(voice_client)
+3) Now just pick the audio file you want to use and play it.
 
-4) Now just pick the audio file you want to use and play it.
-
-	DiscordElixir.Voice.Controller.play(controller,"/path/to/your/audio.wav")
+	DiscordElixir.Voice.Controller.play(voice_client,"/path/to/your/audio.wav", %{volumne: 128})
 
 
 ## REST Client Usage

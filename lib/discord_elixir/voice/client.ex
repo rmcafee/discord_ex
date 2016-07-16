@@ -11,6 +11,7 @@ defmodule DiscordElixir.Voice.Client do
   """
   import DiscordElixir.Client.Utility
 
+  alias DiscordElixir.Voice.Controller
   alias DiscordElixir.Voice.UDP
 
   require Logger
@@ -68,8 +69,9 @@ defmodule DiscordElixir.Voice.Client do
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def init(state, _socket) do
     identify(state)
-    IO.inspect state
-    {:ok, state}
+    controller = Controller.start(self)
+    new_state = Map.merge(state, %{controller: controller})
+    {:ok, new_state}
   end
 
   def websocket_info(:start, _conn_state, state) do
@@ -104,8 +106,20 @@ defmodule DiscordElixir.Voice.Client do
                                                   :voice_token,
                                                   :start_voice_connection]})
 
+    # Get rid of any controller process that feel they want to go rogue
+    Process.exit(state[:controller][:buffer], :kill)
+    Process.exit(state[:controller][:sequence], :kill)
+    Process.exit(state[:controller][:time], :kill)
+
+    # Kill thyself
     Process.exit(self(), "Killing voice client process ...")
     :ok
+  end
+
+  @doc "Send all the information over to base client in order to kill this client"
+  def websocket_info({:get_controller, calling_pid}, _connection, state) do
+    send(calling_pid, state[:controller])
+    {:ok, state}
   end
 
   @doc "Ability to update speaking state"

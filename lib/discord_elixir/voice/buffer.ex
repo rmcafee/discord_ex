@@ -5,7 +5,7 @@ defmodule DiscordElixir.Voice.Buffer do
   @doc "Create a new queue"
   @spec start :: pid
   def start do
-    {:ok, queue} = Agent.start fn -> <<>> end
+    {:ok, queue} = Agent.start_link fn -> <<>> end
     queue
   end
 
@@ -61,7 +61,7 @@ defmodule DiscordElixir.Voice.Buffer do
         drain_opus(queue, function, time)
       end
     else
-      data = read(queue, 9999999999999)
+      data = read(queue, 9_999_999_999_999)
       function.(data, time)
     end
   end

@@ -12,7 +12,7 @@ defmodule DiscordElixir.Connections.REST do
 
   defp standard_headers do
     %{
-      "User-Agent" => "DiscordBot (discord-elixir, 1.0)"
+      "User-Agent" => "DiscordBot (discord-elixir, 1.1.0)"
     }
   end
 

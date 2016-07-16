@@ -6,6 +6,8 @@ defmodule DiscordElixir.Voice.Controller do
   alias DiscordElixir.Voice.Encoder
   alias DiscordElixir.Voice.UDP
 
+  require Logger
+
   def listen_socket(voice_client) do
     task = Task.async fn ->
       send(voice_client, {:get_state, :udp_socket_recv, self})
@@ -17,8 +19,8 @@ defmodule DiscordElixir.Voice.Controller do
   end
 
   def start(voice_client) do
-    {:ok, seq} = Agent.start(fn -> :random.uniform(93920290) end)
-    {:ok, time} = Agent.start(fn -> :random.uniform(83290239) end)
+    {:ok, seq} = Agent.start_link(fn -> :random.uniform(93920290) end)
+    {:ok, time} = Agent.start_link(fn -> :random.uniform(83290239) end)
 
     %{buffer: Buffer.start(),
       voice_client: voice_client,
@@ -26,25 +28,44 @@ defmodule DiscordElixir.Voice.Controller do
       time: time}
   end
 
-  def play(controls, path, opts \\ %{}) when is_bitstring(path) do
-    options = %{volume: 128}
-    complete_options = Map.merge(options, opts)
-    play_io(controls, Encoder.encode_file(path, complete_options))
+  @doc """
+  Play some audio to a channel
+
+  ## Parameters
+
+    - voice_client: The voice client so the library knows how to play it and where to
+    - path: The path where your audio file lives
+    - opts: Options like volume
+
+  ## Examples
+
+      DiscordElixir.Controller.play(voice_client, "/my/awesome/audio.wav", %{volume: 128})
+  """
+  def play(voice_client, path, opts \\ %{}) when is_bitstring(path) do
+    controller = _get_controller(voice_client)
+
+    if Buffer.size(controller.buffer) == 0 do
+      options = %{volume: 128}
+      complete_options = Map.merge(options, opts)
+      play_io(controller, Encoder.encode_file(path, complete_options))
+    else
+      Logger.info "Tried to play audio but audio already playing."
+    end
   end
 
-  def play_io(controls, io_data) do
+  def play_io(controller, io_data) do
     # Fill Buffer
-    Enum.each io_data, fn(d) -> Buffer.write(controls.buffer, d) end
+    Enum.each io_data, fn(d) -> Buffer.write(controller.buffer, d) end
 
-    send(controls.voice_client, {:speaking, true})
-    Buffer.drain_opus controls.buffer, fn(data, _time) ->
+    send(controller.voice_client, {:speaking, true})
+    Buffer.drain_opus controller.buffer, fn(data, _time) ->
       last_time = :os.system_time(:milli_seconds)
       UDP.send_audio(data,
-                     controls.voice_client,
-                     _read_agent(controls.sequence),
-                     _read_agent(controls.time))
-      _increment_agent(controls.sequence, 1)
-      _increment_agent(controls.time, 960)
+                     controller.voice_client,
+                     _read_agent(controller.sequence),
+                     _read_agent(controller.time))
+      _increment_agent(controller.sequence, 1)
+      _increment_agent(controller.time, 960)
       :timer.sleep _sleep_timer(:os.system_time(:milli_seconds), last_time)
     end
 
@@ -52,15 +73,15 @@ defmodule DiscordElixir.Voice.Controller do
     Enum.each (0..5), fn(_) ->
       silence = <<0xF8, 0xFF, 0xFE>>
       UDP.send_audio(silence,
-                     controls.voice_client,
-                     _read_agent(controls.sequence),
-                     _read_agent(controls.time))
-      _increment_agent(controls.sequence, 1)
-      _increment_agent(controls.time, 960)
+                     controller.voice_client,
+                     _read_agent(controller.sequence),
+                     _read_agent(controller.time))
+      _increment_agent(controller.sequence, 1)
+      _increment_agent(controller.time, 960)
       :timer.sleep 20
     end
 
-    send(controls.voice_client, {:speaking, false})
+    send(controller.voice_client, {:speaking, false})
   end
 
   defp _sleep_timer(now_time, last_time, delay_time \\ 17) do
@@ -77,5 +98,13 @@ defmodule DiscordElixir.Voice.Controller do
 
   defp _increment_agent(pid, incr) do
     Agent.update(pid, fn(current_number) -> (current_number + incr) end)
+  end
+
+  defp _get_controller(vc) do
+    task = Task.async fn ->
+      send(vc, {:get_controller, self()})
+      receive do controller -> controller end
+    end
+    Task.await(task, 5000)
   end
 end

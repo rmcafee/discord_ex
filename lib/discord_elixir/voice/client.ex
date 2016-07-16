@@ -37,35 +37,20 @@ defmodule DiscordElixir.Voice.Client do
       receive do opts -> opts end
     end
     results = Task.await(task, 10000)
-    response  = if options[:reconnection] do
-                  Map.merge(results, %{reconnection: options[:reconnection]})
-                else
-                  results
-                end
-    IO.inspect response
-    start_link(response)
+    start_link(results)
   end
 
   @doc "Kill a voice connection"
-  @spec disconnect(pid, pid, pid) :: atom
-  def disconnect(base_client, voice_client, controller_pid \\ nil) do
-    Process.exit(voice_client, "voice client stopped ...")
-    send(base_client, {:clear_from_state, [:voice,
-                                           :voice_client,
-                                           :start_voice_connection_listener,
-                                           :start_voice_connection]})
-
-    if controller_pid do
-      Process.exit(controller_pid, "kill the voice controller pid ...")
-      send(base_client, {:clear_from_state, [:voice_controller]})
-    end
+  @spec disconnect(pid) :: atom
+  def disconnect(voice_client) do
+    send(voice_client, :disconnect)
     :ok
   end
 
-  @doc "Reconnect a voice connection - if you need to reconnecto to a base client."
+  @doc "Reconnect or initiate voice connection"
   @spec reconnect(pid, map) :: {:ok, pid}
   def reconnect(client_pid, options) do
-    {:ok, voice_client} = connect(client_pid, Map.merge(options, %{reconnection: true}))
+    {:ok, voice_client} = connect(client_pid, options)
     send(client_pid, {:update_state, %{voice_client: voice_client}})
     {:ok, voice_client}
   end
@@ -83,6 +68,7 @@ defmodule DiscordElixir.Voice.Client do
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def init(state, _socket) do
     identify(state)
+    IO.inspect state
     {:ok, state}
   end
 
@@ -102,10 +88,24 @@ defmodule DiscordElixir.Voice.Client do
     {:ok,  Map.merge(state, update_values)}
   end
 
-  @doc "This send as message to the base client to update voice state"
-  def websocket_info({:voice_state_update, options}, _connection, state) do
-    send(state[:client_pid], {:voice_state_update, options})
-    {:ok, Map.merge(state, options)}
+  @doc "Send all the information over to base client in order to kill this client"
+  def websocket_info(:disconnect, _connection, state) do
+    # Disconnect form Server
+    DiscordElixir.Client.voice_state_update(state[:client_pid],
+                                            state[:guild_id],
+                                            nil,
+                                            state[:user_id],
+                                            %{self_deaf: true, self_mute: false})
+
+    # Make sure the state for the base client is cleared
+    send(state[:client_pid], {:clear_from_state, [:voice,
+                                                  :voice_client,
+                                                  :start_voice_connection_listener,
+                                                  :voice_token,
+                                                  :start_voice_connection]})
+
+    Process.exit(self(), "Killing voice client process ...")
+    :ok
   end
 
   @doc "Ability to update speaking state"

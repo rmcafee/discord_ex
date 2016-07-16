@@ -60,6 +60,28 @@ defmodule DiscordElixir.Client do
     {:ok, new_state}
   end
 
+  @doc """
+  Voice State Update for Users ( move users around voice channels )
+
+  ## Parameters
+
+    - client_pid: Base client process
+    - guild_id: Which guild to move this user in
+    - channel_id: Which channel the user is in or you want to move them to
+    - user_id: User to manipulate
+    - options: Options to set on the user
+
+  ## Examples
+
+      DiscordElixir.Client.voice_state_update(client, guild_id, user_id, channel_id, %{self_deaf: true, self_mute: false})
+  """
+  @spec voice_state_update(pid, String.t, String.t, String.t, map) :: atom
+  def voice_state_update(client_pid, guild_id, channel_id, user_id, options \\ %{}) do
+    data = options |> Map.merge(%{guild_id: guild_id, channel_id: channel_id, user_id: user_id})
+    send(client_pid, {:voice_state_update, data})
+    :ok
+  end
+
   def websocket_handle({:binary, payload}, _socket, state) do
     data  = payload_decode(opcodes, {:binary, payload})
     event = normalize_atom(data.event_name)
@@ -91,7 +113,7 @@ defmodule DiscordElixir.Client do
     {:ok, state}
   end
 
-  @doc "Ability to update state"
+  @doc "Ability to update websocket client state"
   def websocket_info({:update_state, update_values}, _connection, state) do
     {:ok,  Map.merge(state, update_values)}
   end
@@ -102,7 +124,7 @@ defmodule DiscordElixir.Client do
     {:ok, new_state}
   end
 
-  @doc "Initiate voice connection call"
+  @doc "Initiate voice connection update state call"
   def websocket_info({:start_voice_connection, options}, _connection, state) do
     self_mute = if (options[:self_mute] == nil), do: false, else: options[:self_mute]
     self_deaf = if (options[:self_deaf] == nil), do: true, else: options[:self_mute]
@@ -211,9 +233,8 @@ defmodule DiscordElixir.Client do
       # Setup voice - this makes it easier to access voice in a handler
       {:ok, voice_client} = DiscordElixir.Voice.Client.connect(client_pid, state[:voice])
       controller = DiscordElixir.Voice.Controller.start(voice_client)
-      gid = state[:voice][:guild_id]
       send(client_pid, {:clear_from_state, [:voice]})
-      send(client_pid, {:update_state, %{voice_client: voice_client, voice_controller: controller, guild_id: gid}})
+      send(client_pid, {:update_state, %{voice_client: voice_client}})
     end
   end
 

@@ -82,11 +82,9 @@ Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](htt
 			self_deaf: false}
 	})
 
-2) Now in your handler you can access the voice client and voice controller in your handlers state. You also ge the side effect of having the bot's guild_id in your state as well:
+2) Now in your handler you can access the voice client in your handlers state.
 	
 * state[:voice_client]
-* state[:voice_controller]
-* state[:guild_id]
 
 
 **If you want to seperate your voice client from the general client:**

@@ -30,21 +30,54 @@ defmodule DiscordElixir.Voice.Client do
 
   @doc "Initialize a voice connection"
   @spec connect(pid, map) :: {:ok, pid}
-  def connect(base_client, opts) do
+  def connect(base_client, options \\ %{}) do
     task = Task.async fn ->
       send(base_client, {:start_voice_connection_listener, self})
-      send(base_client, {:start_voice_connection, opts})
+      send(base_client, {:start_voice_connection, options})
       receive do opts -> opts end
     end
-    response  = Task.await(task, 10000)
+    results = Task.await(task, 10000)
+    response  = if options[:reconnection] do
+                  Map.merge(results, %{reconnection: options[:reconnection]})
+                else
+                  results
+                end
+    IO.inspect response
     start_link(response)
   end
 
+  @doc "Kill a voice connection"
+  @spec disconnect(pid, pid, pid) :: atom
+  def disconnect(base_client, voice_client, controller_pid \\ nil) do
+    Process.exit(voice_client, "voice client stopped ...")
+    send(base_client, {:clear_from_state, [:voice,
+                                           :voice_client,
+                                           :start_voice_connection_listener,
+                                           :start_voice_connection]})
+
+    if controller_pid do
+      Process.exit(controller_pid, "kill the voice controller pid ...")
+      send(base_client, {:clear_from_state, [:voice_controller]})
+    end
+    :ok
+  end
+
+  @doc "Reconnect a voice connection - if you need to reconnecto to a base client."
+  @spec reconnect(pid, map) :: {:ok, pid}
+  def reconnect(client_pid, options) do
+    {:ok, voice_client} = connect(client_pid, Map.merge(options, %{reconnection: true}))
+    send(client_pid, {:update_state, %{voice_client: voice_client}})
+    {:ok, voice_client}
+  end
+
   def start_link(opts) do
-    url = socket_url(opts[:endpoint])
-    :crypto.start()
-    :ssl.start()
-    :websocket_client.start_link(url, __MODULE__, opts)
+    task = Task.async fn ->
+      url = socket_url(opts[:endpoint])
+      :crypto.start()
+      :ssl.start()
+      :websocket_client.start_link(url, __MODULE__, opts)
+    end
+    Task.await(task, 10000)
   end
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)

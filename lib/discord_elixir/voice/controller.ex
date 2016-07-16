@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Voice.Control do
+defmodule DiscordElixir.Voice.Controller do
   @moduledoc """
   Voice control to make voice interaction a lot easier.
   """
@@ -14,10 +14,6 @@ defmodule DiscordElixir.Voice.Control do
       end
     end
     Task.await(task, 5000)
-  end
-
-  def disconnect(voice_client) do
-    Process.exit(voice_client, "voice client stopped ...")
   end
 
   def start(voice_client) do

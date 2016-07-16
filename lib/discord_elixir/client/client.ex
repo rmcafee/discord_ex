@@ -69,7 +69,7 @@ defmodule DiscordElixir.Client do
 
     # This will setup the voice_client if it is not already setup
     if state[:voice_setup] && _voice_valid_event(event, data, state) do
-      send(state[:voice_setup], {self(), data})
+      send(state[:voice_setup], {self(), data, state})
     end
 
     # Call handler unless it is a static event
@@ -118,7 +118,7 @@ defmodule DiscordElixir.Client do
   end
 
   def websocket_info({:start_voice_connection_listener, caller}, _connection, state) do
-    setup_pid = spawn(fn -> _voice_setup_gather_data(caller) end)
+    setup_pid = spawn(fn -> _voice_setup_gather_data(caller, %{}, state) end)
     updated_state = Map.merge(state, %{voice_setup: setup_pid})
     {:ok, updated_state}
   end
@@ -142,6 +142,11 @@ defmodule DiscordElixir.Client do
   def handle_event({:ready, payload}, state) do
     _heartbeat_loop(state, payload.data.heartbeat_interval, self)
     new_state = Map.put(state, :session_id, payload.data[:session_id])
+
+    if state[:voice] do
+      _connect_voice_to_client(self(), state)
+    end
+
     {:ok, new_state}
   end
 
@@ -200,21 +205,37 @@ defmodule DiscordElixir.Client do
     _heartbeat_loop(state, interval, socket_process)
   end
 
+  defp _connect_voice_to_client(client_pid, state) do
+    spawn fn ->
+      :timer.sleep 2000
+      # Setup voice - this makes it easier to access voice in a handler
+      {:ok, voice_client} = DiscordElixir.Voice.Client.connect(client_pid, state[:voice])
+      controller = DiscordElixir.Voice.Controller.start(voice_client)
+      gid = state[:voice][:guild_id]
+      send(client_pid, {:clear_from_state, [:voice]})
+      send(client_pid, {:update_state, %{voice_client: voice_client, voice_controller: controller, guild_id: gid}})
+    end
+  end
+
   ### VOICE SETUP FUNCTIONS ###
   @doc "Start a voice connection listener process"
-  def _voice_setup_gather_data(caller_pid, data \\ %{}) do
+  def _voice_setup_gather_data(caller_pid, data \\ %{}, state) do
     new_data = receive do
-      {client_pid, received_data} ->
+      {client_pid, received_data, _state} ->
         data
           |> Map.merge(received_data[:data])
           |> Map.merge(%{client_pid: client_pid})
     end
 
-    if new_data[:token] && new_data[:session_id] && new_data[:endpoint] do
+    voice_token = new_data[:token] || state[:voice_token]
+    endpoint = new_data[:endpoint] || state[:endpoint]
+
+    if voice_token && new_data[:session_id] && endpoint do
+      send(new_data[:client_pid], {:update_state, %{endpoint: endpoint, voice_token: voice_token}})
       send(new_data[:client_pid], {:clear_from_state, [:voice_setup]})
-      send(caller_pid, new_data)
+      send(caller_pid, Map.merge(new_data, %{endpoint: endpoint, token: voice_token}))
     else
-      _voice_setup_gather_data(caller_pid, new_data)
+      _voice_setup_gather_data(caller_pid, new_data, state)
     end
   end
 

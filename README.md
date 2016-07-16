@@ -64,32 +64,50 @@ Alright you are done. Go forth and prosper!
 	
 	User.current(state[:rest_client])
 
+
 ## Voice Client Usage
 
-To create a voice connection you will need to piggy back off your regular client.
+Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](https://github.com/nstafie/dca-rs) installed and accessible from /usr/local/bin to use the audio feature.
+
+**For best results that include easy accessibility and efficient process management include voice information whenoy create your client.**
+
+1) Create a connection with initial voice channel information and voice options:
+
+	{:ok, client} = DiscordElixir.Client.start_link(%{
+		token: token,
+		handler: YourHandler, 
+		voice: %{
+			guild_id: <guild_id>, 
+			channel_id: <initial_channel_id>, 
+			self_deaf: false}
+	})
+
+2) Now in your handler you can access the voice client and voice controller in your handlers state. You also ge the side effect of having the bot's guild_id in your state as well:
+	
+* state[:voice_client]
+* state[:voice_controller]
+* state[:guild_id]
+
+
+**If you want to seperate your voice client from the general client:**
 
 1) Create a connection like before. You can attach a bot handler if you wish.
 
 	{:ok, client } = DiscordElixir.Client.start_link(%{token: <token>})												       
-
 2) Now create a voice client as you piggy back off the bot.
 
-	{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{guild_id: <guild_id>, channel_id: <channel_id>})
+	{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{
+		guild_id: <guild_id>,
+		channel_id: <channel_id>
+	})
 
-
-## Voice Client w/ Audio Usage
-
-Keep in mind you will need to have [dca-rs](https://github.com/nstafie/dca-rs) installed and accessible from /usr/local/bin to use the audio feature.
-
-Do everything above and just do this afterwards:
-
-1) You need a controller for the audio so just set it up like so.
+3) You need a controller for the audio so just set it up like so.
 	
-	controller = DiscordElixir.Voice.Control.start(voice_client)
+	controller = DiscordElixir.Voice.Controller.start(voice_client)
 
-2) Now just pick the audio file you want to use and play it.
+4) Now just pick the audio file you want to use and play it.
 
-	DiscordElixir.Voice.Control.play(controller,"/path/to/your/audio.wav")
+	DiscordElixir.Voice.Controller.play(controller,"/path/to/your/audio.wav")
 
 
 ## REST Client Usage

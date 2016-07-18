@@ -117,6 +117,15 @@
   </div>
   
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#stop/1">stop(voice_client)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Stop audio from playing in channel and clear buffer</p>
+</div>
+  
+</div>
 
   </div>
 
@@ -163,7 +172,7 @@
     </a>
     <span class="signature">play(voice_client, path, opts \\ %{})</span>
     
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L44" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L61" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -193,7 +202,7 @@
     </a>
     <span class="signature">play_io(controller, io_data)</span>
     
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L73" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -220,6 +229,32 @@
   
   <section class="docstring">
     
+  </section>
+</div>
+<div class="detail" id="stop/1">
+  <div class="detail-header">
+    <a href="#stop/1" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">stop(voice_client)</span>
+    
+      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/voice/controller.ex#L42" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+  <section class="docstring">
+    <p>Stop audio from playing in channel and clear buffer</p>
+<h2>Parameters</h2>
+<ul>
+<li>voice_client: The voice client so the library knows how to play it and where to
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">DiscordElixir.Controller.stop(voice_client)</code></pre>
+
   </section>
 </div>
 

@@ -29,6 +29,23 @@ defmodule DiscordElixir.Voice.Controller do
   end
 
   @doc """
+  Stop audio from playing in channel and clear buffer
+
+  ## Parameters
+
+    - voice_client: The voice client so the library knows how to play it and where to
+
+  ## Examples
+
+      DiscordElixir.Controller.stop(voice_client)
+  """
+  def stop(voice_client) do
+    controller = _get_controller(voice_client)
+    Buffer.dump(controller.buffer)
+    send(controller.voice_client, {:speaking, false})
+  end
+
+  @doc """
   Play some audio to a channel
 
   ## Parameters
@@ -57,31 +74,38 @@ defmodule DiscordElixir.Voice.Controller do
     # Fill Buffer
     Enum.each io_data, fn(d) -> Buffer.write(controller.buffer, d) end
 
-    send(controller.voice_client, {:speaking, true})
-    Buffer.drain_opus controller.buffer, fn(data, _time) ->
-      last_time = :os.system_time(:milli_seconds)
-      UDP.send_audio(data,
-                     controller.voice_client,
-                     _read_agent(controller.sequence),
-                     _read_agent(controller.time))
-      _increment_agent(controller.sequence, 1)
-      _increment_agent(controller.time, 960)
-      :timer.sleep _sleep_timer(:os.system_time(:milli_seconds), last_time)
-    end
+    try do
+      send(controller.voice_client, {:speaking, true})
 
-    # Send 5 frames of silence
-    Enum.each (0..5), fn(_) ->
-      silence = <<0xF8, 0xFF, 0xFE>>
-      UDP.send_audio(silence,
-                     controller.voice_client,
-                     _read_agent(controller.sequence),
-                     _read_agent(controller.time))
-      _increment_agent(controller.sequence, 1)
-      _increment_agent(controller.time, 960)
-      :timer.sleep 20
-    end
+      Buffer.drain_opus controller.buffer, fn(data, _time) ->
+        last_time = :os.system_time(:milli_seconds)
+        UDP.send_audio(data,
+                       controller.voice_client,
+                       _read_agent(controller.sequence),
+                       _read_agent(controller.time))
+        _increment_agent(controller.sequence, 1)
+        _increment_agent(controller.time, 960)
+        :timer.sleep _sleep_timer(:os.system_time(:milli_seconds), last_time)
+      end
 
-    send(controller.voice_client, {:speaking, false})
+      # Send 5 frames of silence
+      Enum.each (0..5), fn(_) ->
+        silence = <<0xF8, 0xFF, 0xFE>>
+        UDP.send_audio(silence,
+                       controller.voice_client,
+                       _read_agent(controller.sequence),
+                       _read_agent(controller.time))
+        _increment_agent(controller.sequence, 1)
+        _increment_agent(controller.time, 960)
+        :timer.sleep 20
+      end
+
+      send(controller.voice_client, {:speaking, false})
+    rescue
+      Error ->
+        Logger.error("Something went wrong while playing audio!")
+        send(controller.voice_client, {:speaking, false})
+    end
   end
 
   defp _sleep_timer(now_time, last_time, delay_time \\ 17) do

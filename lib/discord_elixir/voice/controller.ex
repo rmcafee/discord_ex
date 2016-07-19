@@ -77,7 +77,7 @@ defmodule DiscordElixir.Voice.Controller do
     try do
       send(controller.voice_client, {:speaking, true})
 
-      Buffer.drain_opus controller.buffer, fn(data, _time) ->
+      Buffer.drain_dca controller.buffer, fn(data, _time) ->
         last_time = :os.system_time(:milli_seconds)
         UDP.send_audio(data,
                        controller.voice_client,

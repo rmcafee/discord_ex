@@ -49,16 +49,16 @@ defmodule DiscordElixir.Voice.Buffer do
     end
   end
 
-  @doc "Drain the buffer which is assumed to contain just opus packets which have a header that dictate the size of a frame and the packet is passed to the function"
-  @spec drain_opus(pid, function, integer) :: binary
-  def drain_opus(queue, function, time \\ 0) do
+  @doc "Drain the buffer which is assumed to contain just a DCA file with opus packets which have a header that dictate the size of a frame and the packets passed to the function"
+  @spec drain_dca(pid, function, integer) :: binary
+  def drain_dca(queue, function, time \\ 0) do
     packet_size_in_bytes = read(queue, 16, :integer)
 
     if packet_size_in_bytes != "" && packet_size_in_bytes != 0 do
       data = read(queue, packet_size_in_bytes * 8)
       unless data == <<>> do
         function.(data, time)
-        drain_opus(queue, function, time)
+        drain_dca(queue, function, time)
       end
     else
       data = read(queue, 9_999_999_999_999)

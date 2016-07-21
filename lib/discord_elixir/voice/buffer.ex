@@ -53,7 +53,6 @@ defmodule DiscordElixir.Voice.Buffer do
   @spec drain_dca(pid, function, integer) :: binary
   def drain_dca(queue, function, time \\ 0) do
     packet_size_in_bytes = read(queue, 16, :integer)
-
     if packet_size_in_bytes != "" && packet_size_in_bytes != 0 do
       data = read(queue, packet_size_in_bytes * 8)
       unless data == <<>> do
@@ -94,7 +93,9 @@ defmodule DiscordElixir.Voice.Buffer do
   # For packet size information specifically using opus packets
   defp _slice_data_in_bits(data, limit_in_bits, :integer) do
     top_size = bit_size(data) - limit_in_bits
-    << remaining_data::bitstring-size(top_size), capture_data::signed-integer-size(limit_in_bits) >> = data
+    # somehow this is coming in as a big unsigned integer instead of a little one
+    # this may be happening in DCA conversion
+    << remaining_data::bitstring-size(top_size), capture_data::big-unsigned-integer-size(limit_in_bits) >> = data
     {remaining_data, capture_data}
   end
 end

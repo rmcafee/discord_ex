@@ -5,7 +5,7 @@ defmodule DiscordEx.Voice.ControllerTest do
   alias DiscordEx.Voice.Controller
 
   test "start controller with a buffer, sequence, and agent process" do
-    controller = Controller.start(spawn fn -> end)
+    controller = Controller.start(spawn fn -> IO.puts "mock voice_client" end)
 
     refute controller.buffer == nil
     refute controller.sequence == nil

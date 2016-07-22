@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordEx.Voice.Client – Discord Elixir v1.1.3</title>
+    <title>DiscordEx.Voice.Client – Discord Elixir v1.1.4</title>
     <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -25,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.3
+        v1.1.4
       </h2>
     </div>
     
@@ -58,7 +58,7 @@
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.1.3</small>
+        <small class="visible-xs">Discord Elixir v1.1.4</small>
         DiscordEx.Voice.Client
         
         
@@ -127,10 +127,28 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#init/2">init(state, socket)</a>
+    <a href="#init/1">init(state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client_handler.init/2</code></p>
+    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.init/1</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#onconnect/2">onconnect(WSReq, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.onconnect/2</code></p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#ondisconnect/2">ondisconnect(arg, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.ondisconnect/2</code></p>
 </div>
   
 </div>
@@ -166,7 +184,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     <a href="#websocket_handle/3">websocket_handle(arg, socket, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_handle/3</code></p>
+    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.websocket_handle/3</code></p>
 </div>
   
 </div>
@@ -184,7 +202,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     <a href="#websocket_terminate/3">websocket_terminate(reason, conn_state, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_terminate/3</code></p>
+    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.websocket_terminate/3</code></p>
 </div>
   
 </div>
@@ -272,7 +290,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">handle_event(arg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L149" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L157" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -290,7 +308,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">identify(state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L175" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L183" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -301,12 +319,12 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     
   </section>
 </div>
-<div class="detail" id="init/2">
+<div class="detail" id="init/1">
   <div class="detail-header">
-    <a href="#init/2" class="detail-link" title="Link to this function">
+    <a href="#init/1" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">init(state, socket)</span>
+    <span class="signature">init(state)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L70" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
@@ -316,7 +334,45 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
   </div>
   
   <section class="docstring">
-    <p>Callback implementation for <code class="inline">c::websocket_client_handler.init/2</code>.</p>
+    <p>Callback implementation for <code class="inline">c::websocket_client.init/1</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="onconnect/2">
+  <div class="detail-header">
+    <a href="#onconnect/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">onconnect(WSReq, state)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L76" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+  <section class="docstring">
+    <p>Callback implementation for <code class="inline">c::websocket_client.onconnect/2</code>.</p>
+
+  </section>
+</div>
+<div class="detail" id="ondisconnect/2">
+  <div class="detail-header">
+    <a href="#ondisconnect/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">ondisconnect(arg, state)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L81" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+  <section class="docstring">
+    <p>Callback implementation for <code class="inline">c::websocket_client.ondisconnect/2</code>.</p>
 
   </section>
 </div>
@@ -373,7 +429,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">socket_url(url)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L170" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L178" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -418,7 +474,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L136" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L144" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -426,7 +482,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
   </div>
   
   <section class="docstring">
-    <p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_handle/3</code>.</p>
+    <p>Callback implementation for <code class="inline">c::websocket_client.websocket_handle/3</code>.</p>
 
   </section>
 </div>
@@ -437,7 +493,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">websocket_info(arg1, arg2, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L77" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L85" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -456,7 +512,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L142" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/client.ex#L150" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -464,7 +520,7 @@ DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 2
   </div>
   
   <section class="docstring">
-    <p>Callback implementation for <code class="inline">c::websocket_client_handler.websocket_terminate/3</code>.</p>
+    <p>Callback implementation for <code class="inline">c::websocket_client.websocket_terminate/3</code>.</p>
 
   </section>
 </div>

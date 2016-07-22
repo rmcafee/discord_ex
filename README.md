@@ -12,12 +12,12 @@ Please always use [Discord Developer Docs](https://discordapp.com/developers/doc
         
         # From Hex
         def deps do
-          [{:discord_ex, "~> 1.1.3"}]
+          [{:discord_ex, "~> 1.1.4"}]
         end
 
         # From Github
         def deps do
-          [{:discord_ex, git: "git@github.com:rmcafee/discord_ex.git", tag: "1.1.3"}]
+          [{:discord_ex, git: "git@github.com:rmcafee/discord_ex.git", tag: "1.1.4"}]
         end
 
   2. Ensure discord_ex is started before your application:

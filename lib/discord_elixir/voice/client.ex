@@ -106,7 +106,7 @@ defmodule DiscordElixir.Voice.Client do
                                                   :voice_token,
                                                   :start_voice_connection]})
 
-    # Get rid of any controller process that feel they want to go rogue
+    # Get rid of any controller process that feels it wants to go rogue
     Process.exit(state[:controller][:buffer], :kill)
     Process.exit(state[:controller][:sequence], :kill)
     Process.exit(state[:controller][:time], :kill)

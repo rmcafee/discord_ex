@@ -13,7 +13,7 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
   1. Add discord_elixir to your list of dependencies in `mix.exs`:
 
         def deps do
-          [{:discord_elixir, "~> 1.1.0"}]
+          [{:discord_elixir, git: "git@github.com:rmcafee/discord_elixir.git", tag: "1.1.3"}]
         end
 
   2. Ensure discord_elixir is started before your application:
@@ -238,4 +238,8 @@ The 'resource' function makes it a lot easier to use the library. The following 
 
 [user-resource-doc](DiscordElixir.RestClient.Resources.User.html)
 
-
+## TODOS
+ 
+  * Would love more tests!
+  * DRY up some similar behaviour.
+  * Use it more and more - to see where developer usability can be made better

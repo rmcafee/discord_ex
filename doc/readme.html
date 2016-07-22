@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.12.0">
-    <title>Discord Elixir – Discord Elixir v1.1.1</title>
+    <title>Discord Elixir – Discord Elixir v1.1.3</title>
     <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -25,7 +25,7 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.1
+        v1.1.3
       </h2>
     </div>
     
@@ -65,7 +65,7 @@
 <ol>
 <li><p>Add discord_elixir to your list of dependencies in <code class="inline">mix.exs</code>:</p>
 <pre><code class="elixir">def deps do
-  [{:discord_elixir, &quot;~&gt; 1.1.0&quot;}]
+  [{:discord_elixir, git: &quot;git@github.com:rmcafee/discord_elixir.git&quot;, tag: &quot;1.1.3&quot;}]
 end</code></pre>
 </li>
 <li><p>Ensure discord_elixir is started before your application:</p>
@@ -238,6 +238,15 @@ User.logout/1
 User.modify/2
 User.query/3</code></pre>
 <p><a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
+<h2>TODOS</h2>
+<ul>
+<li>Would love more tests!
+</li>
+<li>DRY up some similar behaviour.
+</li>
+<li>Use it more and more - to see where developer usability can be made better
+</li>
+</ul>
 
       <footer class="footer">
         <p>

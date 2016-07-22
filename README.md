@@ -7,11 +7,15 @@ This library is useful for making calls and implementing a bot as well.
 Please always use [Discord Developer Docs](https://discordapp.com/developers/docs) as a reference.
 
 ## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
-
+  
   1. Add discord_ex to your list of dependencies in `mix.exs`:
+        
+        # From Hex
+        def deps do
+          [{:discord_ex, "~> 1.1.3"}]
+        end
 
+        # From Github
         def deps do
           [{:discord_ex, git: "git@github.com:rmcafee/discord_ex.git", tag: "1.1.3"}]
         end

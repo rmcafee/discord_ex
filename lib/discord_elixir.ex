@@ -1,6 +1,6 @@
 defmodule DiscordEx do
   @moduledoc """
-  Base Discord Elixir Module
+  Base Discord Ex Module
   """
 
   @doc "Discord API URL"

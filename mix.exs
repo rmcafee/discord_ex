@@ -9,6 +9,7 @@ defmodule DiscordElixir.Mixfile do
      source_url: "https://github.com/rmcafee/discord_elixir",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     package: package,
      deps: deps,
      docs: [extras: ["README.md"]]]
   end
@@ -47,5 +48,14 @@ defmodule DiscordElixir.Mixfile do
       {:ex_doc, "~> 0.11", only: :docs},
       {:inch_ex, "~> 0.2", only: :docs}
     ]
+  end
+
+  defp package do
+     [name: :discord_elixir,
+     description: "Library for use with the Discord API",
+     files: ["lib", "mix.exs", "README*", "LICENSE*"],
+     maintainers: ["Rahsun McAfee"],
+     licenses: ["MIT"],
+     links: %{"GitHub" => "https://github.com/rmcafee/discord_elixir"}]
   end
 end

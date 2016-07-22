@@ -1,4 +1,4 @@
-# Discord Elixir
+# Discord Ex - Discord Elixir Library
 
 Discord library for Elixir. I needed it and figured I'd share.
 

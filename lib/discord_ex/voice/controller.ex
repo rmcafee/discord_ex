@@ -60,7 +60,6 @@ defmodule DiscordEx.Voice.Controller do
   """
   def play(voice_client, path, opts \\ %{}) when is_bitstring(path) do
     controller = _get_controller(voice_client)
-
     if Buffer.size(controller.buffer) == 0 do
       options = %{volume: 128}
       merged_options = Map.merge(options, opts)

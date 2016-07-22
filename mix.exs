@@ -33,7 +33,7 @@ defmodule DiscordEx.Mixfile do
   defp deps do
     [
       {:poison, "~> 2.0"},
-      {:websocket_client, github: "jeremyong/websocket_client"},
+      {:websocket_client, "~> 1.1.0"},
       {:httpoison, "~> 0.9.0"},
       {:kcl, "~> 0.6.3"},
       {:poly1305, "~> 0.4.2"},

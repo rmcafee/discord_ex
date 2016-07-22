@@ -27,7 +27,7 @@ defmodule DiscordEx.Voice.Client do
     }
   end
 
-  @behaviour :websocket_client_handler
+  @behaviour :websocket_client
 
   @doc "Initialize a voice connection"
   @spec connect(pid, map) :: {:ok, pid}
@@ -67,11 +67,19 @@ defmodule DiscordEx.Voice.Client do
   end
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
-  def init(state, _socket) do
-    identify(state)
+  def init(state) do
     controller = Controller.start(self)
     new_state = Map.merge(state, %{controller: controller})
-    {:ok, new_state}
+    {:once, new_state}
+  end
+
+  def onconnect(_WSReq, state) do
+    identify(state)
+    {:ok, state}
+  end
+
+  def ondisconnect({:remote, :closed}, _state) do
+    # Stub for beter actions later
   end
 
   def websocket_info(:start, _conn_state, state) do
@@ -169,7 +177,7 @@ defmodule DiscordEx.Voice.Client do
   @spec socket_url(map) :: String.t
   def socket_url(url) do
     full_url = "wss://" <> url
-    full_url |> String.replace(":80","")
+    full_url |> String.replace(":80","") |> String.to_charlist
   end
 
   def identify(state) do

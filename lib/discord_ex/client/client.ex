@@ -15,7 +15,7 @@ defmodule DiscordEx.Client do
 
   alias DiscordEx.RestClient.Resources.User
 
-  @behaviour :websocket_client_handler
+  @behaviour :websocket_client
 
   def opcodes do
     %{
@@ -45,7 +45,7 @@ defmodule DiscordEx.Client do
   end
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
-  def init(state, _socket) do
+  def init(state) do
     # State sequence management process and set it's state
     {:ok, agent_seq_num} = Agent.start_link fn -> 0 end
 
@@ -53,11 +53,17 @@ defmodule DiscordEx.Client do
       |> Map.put(:client_pid, self()) # Pass the client state to use it
       |> Map.put(:agent_seq_num, agent_seq_num) # Pass agent sequence num
 
-    # Send identifier to discord gateway
-    identify(new_state)
+    {:once, new_state}
+  end
 
-    # Return state
-    {:ok, new_state}
+  def onconnect(_WSReq, state) do
+    # Send identifier to discord gateway
+    identify(state)
+    {:ok, state}
+  end
+
+  def ondisconnect({:remote, :closed}, _state) do
+    # Stub for beter actions later
   end
 
   @doc """
@@ -212,9 +218,8 @@ defmodule DiscordEx.Client do
   def socket_url(opts) do
     version  = opts[:version] || 4
     url = DiscordEx.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
-    url = String.replace(url, "gg/", "")
-    url = url <> "?v=#{version}&encoding=etf"
-    url
+      |> String.replace("gg/", "")
+    url <> "?v=#{version}&encoding=etf" |> String.to_char_list
   end
 
   defp _update_agent_sequence(data, state) do

@@ -63,14 +63,14 @@ defmodule DiscordElixir.Voice.Controller do
 
     if Buffer.size(controller.buffer) == 0 do
       options = %{volume: 128}
-      complete_options = Map.merge(options, opts)
-      play_io(controller, Encoder.encode_file(path, complete_options))
+      merged_options = Map.merge(options, opts)
+      _play_io(controller, Encoder.encode_file(path, merged_options))
     else
       Logger.info "Tried to play audio but audio already playing."
     end
   end
 
-  def play_io(controller, io_data) do
+  defp _play_io(controller, io_data) do
     # Fill Buffer
     Enum.each io_data, fn(d) -> Buffer.write(controller.buffer, d) end
 

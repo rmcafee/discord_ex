@@ -1,18 +1,18 @@
-defmodule DiscordElixir.Connections.REST do
+defmodule DiscordEx.Connections.REST do
   @moduledoc """
   Discord uses a REST interface to send data to the API.
   """
   use HTTPoison.Base
 
   def process_url(target_url) do
-    DiscordElixir.discord_url <> target_url
+    DiscordEx.discord_url <> target_url
   end
 
   #Overrides
 
   defp standard_headers do
     %{
-      "User-Agent" => "DiscordBot (discord-elixir, 1.1.0)"
+      "User-Agent" => "DiscordBot (discord-ex, 1.1.3)"
     }
   end
 

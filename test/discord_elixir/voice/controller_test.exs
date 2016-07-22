@@ -1,8 +1,8 @@
-defmodule DiscordElixir.Voice.ControllerTest do
+defmodule DiscordEx.Voice.ControllerTest do
   use ExUnit.Case
-  doctest DiscordElixir.Voice.Controller
+  doctest DiscordEx.Voice.Controller
 
-  alias DiscordElixir.Voice.Controller
+  alias DiscordEx.Voice.Controller
 
   test "start controller with a buffer, sequence, and agent process" do
     controller = Controller.start(spawn fn -> end)

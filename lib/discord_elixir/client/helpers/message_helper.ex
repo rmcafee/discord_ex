@@ -1,8 +1,8 @@
-defmodule DiscordElixir.Client.Helpers.MessageHelper do
+defmodule DiscordEx.Client.Helpers.MessageHelper do
   @moduledoc """
   Bot Message Helpers
   """
-  alias DiscordElixir.RestClient.Resources.User
+  alias DiscordEx.RestClient.Resources.User
 
   # Message Helper Functions
 

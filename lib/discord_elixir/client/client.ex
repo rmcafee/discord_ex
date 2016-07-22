@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Client do
+defmodule DiscordEx.Client do
   @moduledoc """
   Connect to Discord to recieve and send data in realtime
   You shouldn't be using this directly. You should shold pass it to a handler.
@@ -6,14 +6,14 @@ defmodule DiscordElixir.Client do
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.Client.start_link(%{token: token, handler: DiscordElixir.EchoBot})
+      DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
       #=> {:ok, #PID<0.178.0>}
   """
   require Logger
 
-  import DiscordElixir.Client.Utility
+  import DiscordEx.Client.Utility
 
-  alias DiscordElixir.RestClient.Resources.User
+  alias DiscordEx.RestClient.Resources.User
 
   @behaviour :websocket_client_handler
 
@@ -36,7 +36,7 @@ defmodule DiscordElixir.Client do
 
   def start_link(opts) do
     # We go ahead and add this to the state early as we use it to get the websocket gateway to start.
-    {:ok, rest_client} = DiscordElixir.RestClient.start_link(%{token: opts[:token]})
+    {:ok, rest_client} = DiscordEx.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)
 
     :crypto.start()
@@ -73,7 +73,7 @@ defmodule DiscordElixir.Client do
 
   ## Examples
 
-      DiscordElixir.Client.voice_state_update(client, guild_id, user_id, channel_id, %{self_deaf: true, self_mute: false})
+      DiscordEx.Client.voice_state_update(client, guild_id, user_id, channel_id, %{self_deaf: true, self_mute: false})
   """
   @spec voice_state_update(pid, String.t, String.t, String.t, map) :: atom
   def voice_state_update(client_pid, guild_id, channel_id, user_id, options \\ %{}) do
@@ -196,8 +196,8 @@ defmodule DiscordElixir.Client do
       "token" => state[:token],
       "properties" => %{
         "$os" => "erlang-vm",
-        "$browser" => "discord-elixir",
-        "$device" => "discord-elixir",
+        "$browser" => "discord-ex",
+        "$device" => "discord-ex",
         "$referrer" => "",
         "$referring_domain" => ""
       },
@@ -211,7 +211,7 @@ defmodule DiscordElixir.Client do
   @spec socket_url(map) :: String.t
   def socket_url(opts) do
     version  = opts[:version] || 4
-    url = DiscordElixir.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
+    url = DiscordEx.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
     url = String.replace(url, "gg/", "")
     url = url <> "?v=#{version}&encoding=etf"
     url
@@ -245,7 +245,7 @@ defmodule DiscordElixir.Client do
     spawn fn ->
       :timer.sleep 2000
       # Setup voice - this makes it easier to access voice in a handler
-      {:ok, voice_client} = DiscordElixir.Voice.Client.connect(client_pid, state[:voice])
+      {:ok, voice_client} = DiscordEx.Voice.Client.connect(client_pid, state[:voice])
       send(client_pid, {:clear_from_state, [:voice]})
       send(client_pid, {:update_state, %{voice_client: voice_client}})
     end

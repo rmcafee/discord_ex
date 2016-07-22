@@ -63,14 +63,14 @@
 <p>Please always use <a href="https://discordapp.com/developers/docs">Discord Developer Docs</a> as a reference.</p>
 <h2 id="installation"> Installation</h2><p>If <a href="https://hex.pm/docs/publish">available in Hex</a>, the package can be installed as:</p>
 <ol>
-<li><p>Add discord_elixir to your list of dependencies in <code class="inline">mix.exs</code>:</p>
+<li><p>Add discord_ex to your list of dependencies in <code class="inline">mix.exs</code>:</p>
 <pre><code class="elixir">def deps do
-  [{:discord_elixir, git: &quot;git@github.com:rmcafee/discord_elixir.git&quot;, tag: &quot;1.1.3&quot;}]
+  [{:discord_ex, git: &quot;git@github.com:rmcafee/discord_ex.git&quot;, tag: &quot;1.1.3&quot;}]
 end</code></pre>
 </li>
-<li><p>Ensure discord_elixir is started before your application:</p>
+<li><p>Ensure discord_ex is started before your application:</p>
 <pre><code class="elixir">def application do
-  [applications: [:discord_elixir]]
+  [applications: [:discord_ex]]
 end</code></pre>
 </li>
 <li>Look at the examples/echo_bot.ex file and you should honestly be
@@ -93,20 +93,20 @@ end</code></pre>
   {:ok, state}
 end</code></pre>
 <p>3) Now to start your client it is as easy as:</p>
-<pre><code class="elixir">{:ok, bot_client } = DiscordElixir.Client.start_link(%{
+<pre><code class="elixir">{:ok, bot_client } = DiscordEx.Client.start_link(%{
     token: &lt;token&gt;,
     handler: YourBotNameHere
 })</code></pre>
 <p>Alright you are done. Go forth and prosper!</p>
 <p><strong>As a note your bot_client is a gen_server that will have state properties that contain:</strong></p>
 <p><strong>:rest_client</strong> - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:</p>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.User
 
 User.current(state[:rest_client])</code></pre>
 <h2 id="voice-client-usage"> Voice Client Usage</h2><p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed and accessible from /usr/local/bin to use the audio feature.</p>
 <p><strong>For best results that include easy accessibility and efficient process management include voice information whenoy create your client.</strong></p>
 <p>1) Create a connection with initial voice channel information and voice options:</p>
-<pre><code class="elixir">{:ok, client} = DiscordElixir.Client.start_link(%{
+<pre><code class="elixir">{:ok, client} = DiscordEx.Client.start_link(%{
     token: token,
     handler: YourHandler, 
     voice: %{
@@ -121,20 +121,20 @@ User.current(state[:rest_client])</code></pre>
 </ul>
 <p><strong>If you want to seperate your voice client from the general client:</strong></p>
 <p>1) Create a connection like before. You can attach a bot handler if you wish.</p>
-<pre><code class="elixir">{:ok, client } = DiscordElixir.Client.start_link(%{token: &lt;token&gt;})                                                    </code></pre>
+<pre><code class="elixir">{:ok, client } = DiscordEx.Client.start_link(%{token: &lt;token&gt;})                                                    </code></pre>
 <p>2) Now create a voice client as you piggy back off the bot.</p>
-<pre><code class="elixir">{:ok, voice_client} = DiscordElixir.Voice.Client.connect(client, %{
+<pre><code class="elixir">{:ok, voice_client} = DiscordEx.Voice.Client.connect(client, %{
     guild_id: &lt;guild_id&gt;,
     channel_id: &lt;channel_id&gt;
 })</code></pre>
 <p><strong>Now just pick the audio file you want to use and play it:</strong></p>
-<pre><code class="elixir">DiscordElixir.Voice.Controller.play(voice_client,&quot;/path/to/your/audio.wav&quot;, %{volumne: 128})</code></pre>
+<pre><code class="elixir">DiscordEx.Voice.Controller.play(voice_client,&quot;/path/to/your/audio.wav&quot;, %{volumne: 128})</code></pre>
 <p><strong>If you want to stop it so you can play something else just stop it:</strong></p>
-<pre><code class="elixir">DiscordElixir.Voice.Controller.stop(voice_client)</code></pre>
+<pre><code class="elixir">DiscordEx.Voice.Controller.stop(voice_client)</code></pre>
 <h2 id="rest-client-usage"> REST Client Usage</h2><p>The easy way to use discord resources is by doing the following.</p>
 <pre><code class="elixir"># alias the resource you wish to use to make it easy on yourself
 
-alias DiscordElixir.RestClient.Resources.User
+alias DiscordEx.RestClient.Resources.User
 
 # Establish a connection
 {:ok, connection} = User.login(&quot;&lt;username&gt;&quot;,&quot;&lt;password&gt;&quot;)
@@ -145,22 +145,22 @@ User.guilds(connection)</code></pre>
 <p>If you like going the longer route and obtained your token already - you can use resources like this:</p>
 <pre><code class="elixir"># Create a connection
 token = &quot;&lt;your-token&gt;&quot;
-{:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})
+{:ok, conn} = DiscordEx.RestClient.start_link(%{token: token})
 
 # Get to using the resource function for the rest client
-DiscordElixir.RestClient.resource(conn, :get, &quot;users/@me/channels&quot;)
+DiscordEx.RestClient.resource(conn, :get, &quot;users/@me/channels&quot;)
 
 # You can also user other method resources like &#39;post&#39;:
-DiscordElixir.RestClient.resource(conn, :post, &quot;users/@me/channels&quot;, %{recipient_id: &lt;recipient_id&gt;})</code></pre>
+DiscordEx.RestClient.resource(conn, :post, &quot;users/@me/channels&quot;, %{recipient_id: &lt;recipient_id&gt;})</code></pre>
 <p>The ‘resource’ function makes it a lot easier to use the library. The following methods are supported.</p>
-<pre><code class="elixir">DiscordElixir.RestClient.resource(conn, :get, &lt;url&gt;)
-DiscordElixir.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
-DiscordElixir.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
-DiscordElixir.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
-DiscordElixir.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
+<pre><code class="elixir">DiscordEx.RestClient.resource(conn, :get, &lt;url&gt;)
+DiscordEx.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
+DiscordEx.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
+DiscordEx.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
+DiscordEx.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
 <p><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></p>
 <hr class="thin"/>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Channel
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.Channel
 
 Channel.bulk_delete_messages/3
 Channel.create_invite/3
@@ -176,9 +176,9 @@ Channel.send_file/3
 Channel.send_message/3
 Channel.trigger_typing/2
 Channel.update_message/4</code></pre>
-<p><a href="DiscordElixir.RestClient.Resources.Channel.html">channel-resource-doc</a></p>
+<p><a href="DiscordEx.RestClient.Resources.Channel.html">channel-resource-doc</a></p>
 <hr class="thin"/>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Guild
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.Guild
 
 Guild.ban_member/4
 Guild.bans/2
@@ -209,22 +209,22 @@ Guild.roles/2
 Guild.sync_integration/3
 Guild.unban_member/3
 Guild.voice_regions/2</code></pre>
-<p><a href="DiscordElixir.RestClient.Resources.Guild.html">guild-resource-doc</a></p>
+<p><a href="DiscordEx.RestClient.Resources.Guild.html">guild-resource-doc</a></p>
 <hr class="thin"/>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Image
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.Image
 
 Image.avatar_url/2
 Image.icon_url/2</code></pre>
-<p><a href="DiscordElixir.RestClient.Resources.Image.html">image-resource-doc</a></p>
+<p><a href="DiscordEx.RestClient.Resources.Image.html">image-resource-doc</a></p>
 <hr class="thin"/>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.Invite
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.Invite
 
 Invite.accept/2
 Invite.delete/2
 Invite.get/2</code></pre>
-<p><a href="DiscordElixir.RestClient.Resources.Invite.html">invite-resource-doc</a></p>
+<p><a href="DiscordEx.RestClient.Resources.Invite.html">invite-resource-doc</a></p>
 <hr class="thin"/>
-<pre><code class="elixir">alias DiscordElixir.RestClient.Resources.User
+<pre><code class="elixir">alias DiscordEx.RestClient.Resources.User
 
 User.connections/1
 User.create_dm_channel/2
@@ -237,7 +237,7 @@ User.login/2
 User.logout/1
 User.modify/2
 User.query/3</code></pre>
-<p><a href="DiscordElixir.RestClient.Resources.User.html">user-resource-doc</a></p>
+<p><a href="DiscordEx.RestClient.Resources.User.html">user-resource-doc</a></p>
 <h2>TODOS</h2>
 <ul>
 <li>Would love more tests!

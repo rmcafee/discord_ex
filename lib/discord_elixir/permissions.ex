@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Permissions do
+defmodule DiscordEx.Permissions do
   @moduledoc """
   Easily assign permissions with this helper module.
   """

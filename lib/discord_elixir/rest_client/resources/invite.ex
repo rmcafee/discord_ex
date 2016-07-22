@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RestClient.Resources.Invite do
+defmodule DiscordEx.RestClient.Resources.Invite do
   @moduledoc """
   Convience helper for invites
   """
@@ -17,7 +17,7 @@ defmodule DiscordElixir.RestClient.Resources.Invite do
   """
   @spec get(pid, String.t) :: map
   def get(conn, invite_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "invites/#{invite_id}")
+    DiscordEx.RestClient.resource(conn, :get, "invites/#{invite_id}")
   end
 
   @doc """
@@ -36,7 +36,7 @@ defmodule DiscordElixir.RestClient.Resources.Invite do
   """
   @spec delete(pid, String.t) :: map
   def delete(conn, invite_id) do
-    DiscordElixir.RestClient.resource(conn, :delete, "invites/#{invite_id}")
+    DiscordEx.RestClient.resource(conn, :delete, "invites/#{invite_id}")
   end
 
   @doc """
@@ -55,6 +55,6 @@ defmodule DiscordElixir.RestClient.Resources.Invite do
   """
   @spec accept(pid, String.t) :: map
   def accept(conn, invite_id) do
-    DiscordElixir.RestClient.resource(conn, :post, "invites/#{invite_id}")
+    DiscordEx.RestClient.resource(conn, :post, "invites/#{invite_id}")
   end
 end

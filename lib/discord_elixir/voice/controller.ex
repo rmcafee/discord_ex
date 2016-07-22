@@ -1,10 +1,10 @@
-defmodule DiscordElixir.Voice.Controller do
+defmodule DiscordEx.Voice.Controller do
   @moduledoc """
   Voice control to make voice interaction a lot easier.
   """
-  alias DiscordElixir.Voice.Buffer
-  alias DiscordElixir.Voice.Encoder
-  alias DiscordElixir.Voice.UDP
+  alias DiscordEx.Voice.Buffer
+  alias DiscordEx.Voice.Encoder
+  alias DiscordEx.Voice.UDP
 
   require Logger
 
@@ -37,7 +37,7 @@ defmodule DiscordElixir.Voice.Controller do
 
   ## Examples
 
-      DiscordElixir.Controller.stop(voice_client)
+      DiscordEx.Controller.stop(voice_client)
   """
   def stop(voice_client) do
     controller = _get_controller(voice_client)
@@ -56,7 +56,7 @@ defmodule DiscordElixir.Voice.Controller do
 
   ## Examples
 
-      DiscordElixir.Controller.play(voice_client, "/my/awesome/audio.wav", %{volume: 128})
+      DiscordEx.Controller.play(voice_client, "/my/awesome/audio.wav", %{volume: 128})
   """
   def play(voice_client, path, opts \\ %{}) when is_bitstring(path) do
     controller = _get_controller(voice_client)

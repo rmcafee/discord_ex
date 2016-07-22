@@ -1,4 +1,4 @@
-defmodule DiscordElixirTest do
+defmodule DiscordExTest do
   use ExUnit.Case
-  doctest DiscordElixir
+  doctest DiscordEx
 end

@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RestClient.Resources.Guild do
+defmodule DiscordEx.RestClient.Resources.Guild do
   @moduledoc """
   Convience helper for guild resource
   """
@@ -17,7 +17,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec get(pid, String.t) :: map
   def get(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}")
   end
 
   @doc """
@@ -38,7 +38,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec get(pid, map) :: map
   def create(conn, options) do
-    DiscordElixir.RestClient.resource(conn, :post, "guilds", _format_guild_options(options))
+    DiscordEx.RestClient.resource(conn, :post, "guilds", _format_guild_options(options))
   end
 
   @doc """
@@ -59,7 +59,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec modify(pid, number, map) :: map
   def modify(conn, guild_id, options) do
-    DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}", _format_guild_options(options))
+    DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}", _format_guild_options(options))
   end
 
   @doc """
@@ -78,7 +78,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec delete(pid, number) :: map
   def delete(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :delete, "guilds/#{guild_id}")
+    DiscordEx.RestClient.resource(conn, :delete, "guilds/#{guild_id}")
   end
 
   @doc """
@@ -95,7 +95,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec channels(pid, number) :: map
   def channels(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/channels")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/channels")
   end
 
   @doc """
@@ -115,7 +115,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec create_channel(pid, number, map) :: map
   def create_channel(conn, guild_id, options) do
-    DiscordElixir.RestClient.resource(conn, :post, "guilds/#{guild_id}/channels", options)
+    DiscordEx.RestClient.resource(conn, :post, "guilds/#{guild_id}/channels", options)
   end
 
   @doc """
@@ -133,7 +133,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec members(pid, number, map) :: map
   def members(conn, guild_id, options) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/members", options)
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/members", options)
   end
 
   @doc """
@@ -151,7 +151,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec member(pid, number, number) :: map
   def member(conn, guild_id, user_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/members/#{user_id}")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/members/#{user_id}")
   end
 
   @doc """
@@ -173,7 +173,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec modify_member(pid, number, number, map) :: atom
   def modify_member(conn, guild_id, user_id, options) do
-    response = DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}/members/#{user_id}", options)
+    response = DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}/members/#{user_id}", options)
     case response do
                  :invalid -> :ok
                      data -> data
@@ -197,7 +197,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec kick_member(pid, number, number) :: atom
   def kick_member(conn, guild_id, user_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "guilds/#{guild_id}/members/#{user_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "guilds/#{guild_id}/members/#{user_id}")
     case response do
                  :invalid -> :ok
                      data -> data
@@ -223,7 +223,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec ban_member(pid, number, number, map) :: atom
   def ban_member(conn, guild_id, user_id, options) do
-    response = DiscordElixir.RestClient.resource(conn, :put, "guilds/#{guild_id}/bans/#{user_id}", options)
+    response = DiscordEx.RestClient.resource(conn, :put, "guilds/#{guild_id}/bans/#{user_id}", options)
     case response do
                  :invalid -> :ok
                      data -> data
@@ -247,7 +247,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec unban_member(pid, number, number) :: atom
   def unban_member(conn, guild_id, user_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "guilds/#{guild_id}/bans/#{user_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "guilds/#{guild_id}/bans/#{user_id}")
     case response do
                  :invalid -> :ok
                      data -> data
@@ -268,7 +268,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec bans(pid, number) :: map
   def bans(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/bans")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/bans")
   end
 
   @doc """
@@ -287,7 +287,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec roles(pid, number) :: map
   def roles(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/roles")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/roles")
   end
 
   @doc """
@@ -306,7 +306,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec create_empty_role(pid, number) :: map
   def create_empty_role(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :post, "guilds/#{guild_id}/roles")
+    DiscordEx.RestClient.resource(conn, :post, "guilds/#{guild_id}/roles")
   end
 
   @doc """
@@ -331,7 +331,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec batch_modify_roles(pid, number, list) :: map
   def batch_modify_roles(conn, guild_id, role_option_array) do
-    DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}/roles", role_option_array)
+    DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}/roles", role_option_array)
   end
 
   @doc """
@@ -352,7 +352,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec modify_role(pid, number, number, map) :: map
   def modify_role(conn, guild_id, role_id, options) do
-    DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}/roles/#{role_id}", options)
+    DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}/roles/#{role_id}", options)
   end
 
 
@@ -373,7 +373,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec delete_role(pid, number, number) :: atom
   def delete_role(conn, guild_id, role_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "guilds/#{guild_id}/roles/#{role_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "guilds/#{guild_id}/roles/#{role_id}")
     case response do
                  :invalid -> :ok
                      data -> data
@@ -397,7 +397,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec begin_prune(pid, number, map) :: map
   def begin_prune(conn, guild_id, options) do
-    DiscordElixir.RestClient.resource(conn, :post, "guilds/#{guild_id}/prune", options)
+    DiscordEx.RestClient.resource(conn, :post, "guilds/#{guild_id}/prune", options)
   end
 
   @doc """
@@ -415,7 +415,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec prune_count(pid, number, map) :: map
   def prune_count(conn, guild_id, options) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/prune", options)
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/prune", options)
   end
 
   @doc """
@@ -435,7 +435,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec voice_regions(pid, number) :: map
   def voice_regions(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/regions")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/regions")
   end
 
   @doc """
@@ -455,7 +455,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec invites(pid, number) :: map
   def invites(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/invites")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/invites")
   end
 
   @doc """
@@ -475,7 +475,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec embed(pid, number) :: map
   def embed(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/embed")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/embed")
   end
 
   @doc """
@@ -495,7 +495,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec integrations(pid, number) :: map
   def integrations(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "guilds/#{guild_id}/integrations")
+    DiscordEx.RestClient.resource(conn, :get, "guilds/#{guild_id}/integrations")
   end
 
   @doc """
@@ -516,7 +516,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec create_integration(pid, number, map) :: atom
   def create_integration(conn, guild_id, options) do
-    response = DiscordElixir.RestClient.resource(conn, :post, "guilds/#{guild_id}/integrations", options)
+    response = DiscordEx.RestClient.resource(conn, :post, "guilds/#{guild_id}/integrations", options)
     case response do
       :invalid -> :ok
           data -> data
@@ -542,7 +542,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec modify_integration(pid, number, number, map) :: atom
   def modify_integration(conn, guild_id, integration_id, options) do
-    response = DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}/integrations/#{integration_id}", options)
+    response = DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}/integrations/#{integration_id}", options)
     case response do
       :invalid -> :ok
           data -> data
@@ -567,7 +567,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec delete_integration(pid, number, number) :: atom
   def delete_integration(conn, guild_id, integration_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "guilds/#{guild_id}/integrations/#{integration_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "guilds/#{guild_id}/integrations/#{integration_id}")
     case response do
       :invalid -> :ok
           data -> data
@@ -592,7 +592,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec sync_integration(pid, number, number) :: atom
   def sync_integration(conn, guild_id, integration_id) do
-    response = DiscordElixir.RestClient.resource(conn, :post, "guilds/#{guild_id}/integrations/#{integration_id}/sync")
+    response = DiscordEx.RestClient.resource(conn, :post, "guilds/#{guild_id}/integrations/#{integration_id}/sync")
     case response do
       :invalid -> :ok
           data -> data
@@ -616,7 +616,7 @@ defmodule DiscordElixir.RestClient.Resources.Guild do
   """
   @spec modify_embed(pid, number) :: map
   def modify_embed(conn, guild_id) do
-    DiscordElixir.RestClient.resource(conn, :patch, "guilds/#{guild_id}/embed")
+    DiscordEx.RestClient.resource(conn, :patch, "guilds/#{guild_id}/embed")
   end
 
   # Private Methods

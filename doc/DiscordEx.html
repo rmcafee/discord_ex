@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordElixir.RestClient – Discord Elixir v1.1.3</title>
+    <title>DiscordEx – Discord Elixir v1.1.3</title>
     <link rel="stylesheet" href="dist/app-88251e7c81.css" />
     
     <script src="dist/sidebar_items.js"></script>
@@ -59,10 +59,10 @@
 
       <h1>
         <small class="visible-xs">Discord Elixir v1.1.3</small>
-        DiscordElixir.RestClient
+        DiscordEx
         
         
-          <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest_client.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_elixir.ex#L1" title="View Source" class="view-source" rel="help">
             <i class="icon-code"></i>
           </a>
         
@@ -70,8 +70,7 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Discord RestClient. Used a GenServer so that you can have multiple
-clients in one application.</p>
+          <p>Base Discord Elixir Module</p>
 
         </section>
       
@@ -85,22 +84,6 @@ clients in one application.</p>
             Summary
           </h1>
           
-  <div class="summary-types summary">
-    <h2>
-      <a href="#types">Types</a>
-    </h2>
-    <div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:request_reply/0">request_reply()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Response body with  related options</p>
-</div>
-  
-</div>
-
-  </div>
-
 
           
   <div class="summary-functions summary">
@@ -109,23 +92,19 @@ clients in one application.</p>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#init/2">init(atom, opts)</a>
+    <a href="#bot_auth_url/2">bot_auth_url(client_id, permissions)</a>
   </div>
+  
+    <div class="summary-synopsis"><p>Discord Bot Authorization URL</p>
+</div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#resource/4">resource(connection, method, path, payload \\ nil)</a>
+    <a href="#discord_url/0">discord_url()</a>
   </div>
   
-</div>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#start_link/1">start_link(opts)</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Start process and HTTP Client.
-{:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})</p>
+    <div class="summary-synopsis"><p>Discord API URL</p>
 </div>
   
 </div>
@@ -140,25 +119,6 @@ clients in one application.</p>
         </section>
       
 
-      
-        <section id="types" class="types details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#types">
-              <i class="icon-link"></i>
-            </a>
-            Types
-          </h1>
-          <div class="types-list">
-            <div id="t:request_reply/0" class="type-detail">
-  <pre><code class="elixir"><a href="#t:request_reply/0">request_reply</a> :: {atom, map, map}</code></pre>
-  
-    <div class="typespec-doc"><p>Response body with  related options</p>
-</div>
-  
-</div>
-
-          </div>
-        </section>
       
 
       
@@ -169,32 +129,14 @@ clients in one application.</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="init/2">
+          <div class="detail" id="bot_auth_url/2">
   <div class="detail-header">
-    <a href="#init/2" class="detail-link" title="Link to this function">
+    <a href="#bot_auth_url/2" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">init(atom, opts)</span>
+    <span class="signature">bot_auth_url(client_id, permissions)</span>
     
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest_client.ex#L32" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
-     </a>
-    
-    
-  </div>
-  
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="resource/4">
-  <div class="detail-header">
-    <a href="#resource/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
-    </a>
-    <span class="signature">resource(connection, method, path, payload \\ nil)</span>
-    
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest_client.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_elixir.ex#L14" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -205,32 +147,41 @@ clients in one application.</p>
       <h4 class="specs-title">Specs</h4>
       <div class="specs-list">
         
-          <pre><code class="elixir">resource(pid, atom, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map) :: <a href="#t:request_reply/0">request_reply</a></code></pre>
+          <pre><code class="elixir">bot_auth_url(number, number) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
         
       </div>
     </div>
   
   <section class="docstring">
-    
+    <p>Discord Bot Authorization URL</p>
+
   </section>
 </div>
-<div class="detail" id="start_link/1">
+<div class="detail" id="discord_url/0">
   <div class="detail-header">
-    <a href="#start_link/1" class="detail-link" title="Link to this function">
+    <a href="#discord_url/0" class="detail-link" title="Link to this function">
       <i class="icon-link"></i>
     </a>
-    <span class="signature">start_link(opts)</span>
+    <span class="signature">discord_url()</span>
     
-      <a href="https://github.com/rmcafee/discord_elixir/blob/master/lib/discord_elixir/rest_client/rest_client.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_elixir.ex#L8" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
     
   </div>
   
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">discord_url :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+        
+      </div>
+    </div>
+  
   <section class="docstring">
-    <p>Start process and HTTP Client.
-{:ok, conn} = DiscordElixir.RestClient.start_link(%{token: token})</p>
+    <p>Discord API URL</p>
 
   </section>
 </div>

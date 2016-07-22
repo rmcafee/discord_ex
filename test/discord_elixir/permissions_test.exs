@@ -1,8 +1,8 @@
-defmodule DiscordElixir.PermissionsTest do
+defmodule DiscordEx.PermissionsTest do
   use ExUnit.Case
-  doctest DiscordElixir.Permissions
+  doctest DiscordEx.Permissions
 
-  alias DiscordElixir.Permissions
+  alias DiscordEx.Permissions
 
   test "permissions are added correctly" do
     permissions =

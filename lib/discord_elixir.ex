@@ -1,4 +1,4 @@
-defmodule DiscordElixir do
+defmodule DiscordEx do
   @moduledoc """
   Base Discord Elixir Module
   """

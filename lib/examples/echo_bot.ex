@@ -1,4 +1,4 @@
-defmodule DiscordElixir.EchoBot do
+defmodule DiscordEx.EchoBot do
   @moduledoc """
   An all so original echo and ping bot!
 
@@ -6,8 +6,8 @@ defmodule DiscordElixir.EchoBot do
   """
   require Logger
 
-  alias DiscordElixir.Client.Helpers.MessageHelper
-  alias DiscordElixir.RestClient.Resources.Channel
+  alias DiscordEx.Client.Helpers.MessageHelper
+  alias DiscordEx.RestClient.Resources.Channel
 
   # Message Handler
   def handle_event({:message_create, payload}, state) do

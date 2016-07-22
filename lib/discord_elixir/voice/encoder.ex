@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Voice.Encoder do
+defmodule DiscordEx.Voice.Encoder do
   @moduledoc """
   Voice Encoder
   """

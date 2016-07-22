@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Client.Utility do
+defmodule DiscordEx.Client.Utility do
   @moduledoc """
   Utilty methods to be used for discord clients.
 

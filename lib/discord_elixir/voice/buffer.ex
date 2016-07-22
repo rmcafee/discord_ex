@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Voice.Buffer do
+defmodule DiscordEx.Voice.Buffer do
   @moduledoc """
   Buffer Module for holding and reading audio.
   """

@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RestClient.Resources.Image do
+defmodule DiscordEx.RestClient.Resources.Image do
   @moduledoc """
   Convience helper for images
   """
@@ -17,7 +17,7 @@ defmodule DiscordElixir.RestClient.Resources.Image do
   """
   @spec icon_url(String.t, String.t) :: String.t
   def icon_url(server_id, icon_id) do
-    "#{DiscordElixir.discord_url}/guilds/#{server_id}/icons/#{icon_id}.jpg"
+    "#{DiscordEx.discord_url}/guilds/#{server_id}/icons/#{icon_id}.jpg"
   end
 
   @doc """
@@ -34,6 +34,6 @@ defmodule DiscordElixir.RestClient.Resources.Image do
   """
   @spec avatar_url(String.t, String.t) :: String.t
   def avatar_url(user_id, avatar_id) do
-    "#{DiscordElixir.discord_url}/users/#{user_id}/avatars/#{avatar_id}.jpg"
+    "#{DiscordEx.discord_url}/users/#{user_id}/avatars/#{avatar_id}.jpg"
   end
 end

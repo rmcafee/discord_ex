@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RestClient.Resources.User do
+defmodule DiscordEx.RestClient.Resources.User do
   @moduledoc """
   Convience helper for user resource
   """
@@ -19,10 +19,10 @@ defmodule DiscordElixir.RestClient.Resources.User do
   @spec login(String.t, String.t) :: map
   def login(email, password) do
     HTTPoison.start
-    response = HTTPoison.post!("#{DiscordElixir.discord_url}/auth/login", {:form, [email: email, password: password]}, %{"Content-type" => "application/x-www-form-urlencoded"})
+    response = HTTPoison.post!("#{DiscordEx.discord_url}/auth/login", {:form, [email: email, password: password]}, %{"Content-type" => "application/x-www-form-urlencoded"})
     data = response.body |> Poison.decode!
     if data["token"] do
-      DiscordElixir.RestClient.start_link(%{token: data["token"]})
+      DiscordEx.RestClient.start_link(%{token: data["token"]})
     else
       {:error, data}
     end
@@ -42,7 +42,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec logout(pid) :: atom
   def logout(conn) do
-    response = DiscordElixir.RestClient.resource(conn, :post, "/auth/logout")
+    response = DiscordEx.RestClient.resource(conn, :post, "/auth/logout")
     case response do
       :invalid ->
         Process.exit(conn, "Logout")
@@ -66,7 +66,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec query(pid, String.t, number) :: list
   def query(conn, username, limit \\ 25) do
-    DiscordElixir.RestClient.resource(conn, :get, "users", %{q: username, limit: limit})
+    DiscordEx.RestClient.resource(conn, :get, "users", %{q: username, limit: limit})
   end
 
   @doc """
@@ -82,7 +82,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec current(pid) :: map
   def current(conn) do
-    DiscordElixir.RestClient.resource(conn, :get, "users/@me")
+    DiscordEx.RestClient.resource(conn, :get, "users/@me")
   end
 
   @doc """
@@ -99,7 +99,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec get(pid, number) :: map
   def get(conn, user_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "users/#{user_id}")
+    DiscordEx.RestClient.resource(conn, :get, "users/#{user_id}")
   end
 
   @doc """
@@ -120,7 +120,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
     password  = options[:password]
     username  = options[:username]
     avatar    = options[:avatar]
-    DiscordElixir.RestClient.resource(conn, :patch_form, "users/@me", %{username: username, avatar: avatar, email: email, password: password})
+    DiscordEx.RestClient.resource(conn, :patch_form, "users/@me", %{username: username, avatar: avatar, email: email, password: password})
   end
 
   @doc """
@@ -136,7 +136,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec guilds(pid) :: list
   def guilds(conn) do
-    DiscordElixir.RestClient.resource(conn, :get, "users/@me/guilds")
+    DiscordEx.RestClient.resource(conn, :get, "users/@me/guilds")
   end
 
   @doc """
@@ -153,7 +153,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec leave_guild(pid, number) :: nil
   def leave_guild(conn, guild_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "users/@me/guilds/#{guild_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "users/@me/guilds/#{guild_id}")
     case response do
       :invalid -> :ok
             _  -> :error
@@ -173,7 +173,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec dm_channels(pid) :: map
   def dm_channels(conn) do
-    DiscordElixir.RestClient.resource(conn, :get, "users/@me/channels")
+    DiscordEx.RestClient.resource(conn, :get, "users/@me/channels")
   end
 
   @doc """
@@ -190,7 +190,7 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec create_dm_channel(pid, number) :: map
   def create_dm_channel(conn, recipient_id) do
-    DiscordElixir.RestClient.resource(conn, :post, "users/@me/channels", %{recipient_id: recipient_id})
+    DiscordEx.RestClient.resource(conn, :post, "users/@me/channels", %{recipient_id: recipient_id})
   end
 
   @doc """
@@ -206,6 +206,6 @@ defmodule DiscordElixir.RestClient.Resources.User do
   """
   @spec connections(pid) :: list
   def connections(conn) do
-    DiscordElixir.RestClient.resource(conn, :get, "users/@me/connections")
+    DiscordEx.RestClient.resource(conn, :get, "users/@me/connections")
   end
 end

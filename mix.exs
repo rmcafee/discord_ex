@@ -1,12 +1,12 @@
-defmodule DiscordElixir.Mixfile do
+defmodule DiscordEx.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :discord_elixir,
+    [app: :discord_ex,
      version: "1.1.3",
      elixir: "~> 1.3",
      name: "Discord Elixir",
-     source_url: "https://github.com/rmcafee/discord_elixir",
+     source_url: "https://github.com/rmcafee/discord_ex",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
      package: package,
@@ -51,11 +51,11 @@ defmodule DiscordElixir.Mixfile do
   end
 
   defp package do
-     [name: :discord_elixir,
-     description: "Library for use with the Discord API",
+     [name: :discord_ex,
+     description: "Library for use with the Discord REST and Realtime API",
      files: ["lib", "mix.exs", "README*", "LICENSE*"],
      maintainers: ["Rahsun McAfee"],
      licenses: ["MIT"],
-     links: %{"GitHub" => "https://github.com/rmcafee/discord_elixir"}]
+     links: %{"GitHub" => "https://github.com/rmcafee/discord_ex"}]
   end
 end

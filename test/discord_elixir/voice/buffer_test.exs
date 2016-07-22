@@ -1,8 +1,8 @@
-defmodule DiscordElixir.Voice.BufferTest do
+defmodule DiscordEx.Voice.BufferTest do
   use ExUnit.Case
-  doctest DiscordElixir.Voice.Buffer
+  doctest DiscordEx.Voice.Buffer
 
-  alias DiscordElixir.Voice.Buffer
+  alias DiscordEx.Voice.Buffer
 
   setup do
     buffer = Buffer.start

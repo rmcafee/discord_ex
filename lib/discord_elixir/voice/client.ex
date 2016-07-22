@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Voice.Client do
+defmodule DiscordEx.Voice.Client do
   @moduledoc """
   This client is for specifically working with voice. You can pass this process
   to your regular client if you wish to use it with your bot.
@@ -6,13 +6,13 @@ defmodule DiscordElixir.Voice.Client do
   ## Examples
 
       token = "<your-token>"
-      DiscordElixir.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 23208203092390)
+      DiscordEx.Voice.Client.connect(base_client, %{guild_id: 392090239, channel_id: 23208203092390)
       #=> {:ok, #PID<0.180.0>}
   """
-  import DiscordElixir.Client.Utility
+  import DiscordEx.Client.Utility
 
-  alias DiscordElixir.Voice.Controller
-  alias DiscordElixir.Voice.UDP
+  alias DiscordEx.Voice.Controller
+  alias DiscordEx.Voice.UDP
 
   require Logger
 
@@ -93,7 +93,7 @@ defmodule DiscordElixir.Voice.Client do
   @doc "Send all the information over to base client in order to kill this client"
   def websocket_info(:disconnect, _connection, state) do
     # Disconnect form Server
-    DiscordElixir.Client.voice_state_update(state[:client_pid],
+    DiscordEx.Client.voice_state_update(state[:client_pid],
                                             state[:guild_id],
                                             nil,
                                             state[:user_id],
@@ -193,7 +193,7 @@ defmodule DiscordElixir.Voice.Client do
 
     # Send payload to client on local udp information
     load = %{"protocol" => "udp", "data" => %{"address" => my_ip, "port" => my_port, "mode" => "xsalsa20_poly1305"}}
-    payload = payload_build_json(opcode(DiscordElixir.Voice.Client.opcodes, :select_protocol), load)
+    payload = payload_build_json(opcode(DiscordEx.Voice.Client.opcodes, :select_protocol), load)
     :websocket_client.cast(self, {:text, payload})
   end
 

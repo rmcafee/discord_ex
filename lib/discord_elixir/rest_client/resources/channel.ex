@@ -1,4 +1,4 @@
-defmodule DiscordElixir.RestClient.Resources.Channel do
+defmodule DiscordEx.RestClient.Resources.Channel do
   @moduledoc """
   Convience helper for channel
   """
@@ -17,7 +17,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec get(pid, number) :: map
   def get(conn, channel_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "channels/#{channel_id}")
+    DiscordEx.RestClient.resource(conn, :get, "channels/#{channel_id}")
   end
 
   @doc """
@@ -37,7 +37,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec modify(pid, number, map) :: map
   def modify(conn, channel_id, options) do
-    DiscordElixir.RestClient.resource(conn, :patch, "channels/#{channel_id}", options)
+    DiscordEx.RestClient.resource(conn, :patch, "channels/#{channel_id}", options)
   end
 
   @doc """
@@ -56,7 +56,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec delete(pid, number) :: map
   def delete(conn, channel_id) do
-    DiscordElixir.RestClient.resource(conn, :delete, "channels/#{channel_id}")
+    DiscordEx.RestClient.resource(conn, :delete, "channels/#{channel_id}")
   end
 
   @doc """
@@ -75,7 +75,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec messages(pid, number) :: map
   def messages(conn, channel_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "channels/#{channel_id}/messages")
+    DiscordEx.RestClient.resource(conn, :get, "channels/#{channel_id}/messages")
   end
 
   @doc """
@@ -95,7 +95,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec send_message(pid, number, String.t) :: map
   def send_message(conn, channel_id, message_data) do
-    DiscordElixir.RestClient.resource(conn, :post, "channels/#{channel_id}/messages", message_data)
+    DiscordEx.RestClient.resource(conn, :post, "channels/#{channel_id}/messages", message_data)
   end
 
   @doc """
@@ -115,7 +115,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec send_file(pid, number, map) :: map
   def send_file(conn, channel_id, file_data) do
-    DiscordElixir.RestClient.resource(conn, :post_multipart, "channels/#{channel_id}/messages", file_data)
+    DiscordEx.RestClient.resource(conn, :post_multipart, "channels/#{channel_id}/messages", file_data)
   end
 
   @doc """
@@ -136,7 +136,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec update_message(pid, number, number, String.t) :: map
   def update_message(conn, channel_id, message_id, message) do
-    DiscordElixir.RestClient.resource(conn, :patch, "channels/#{channel_id}/messages/#{message_id}", %{content:  message})
+    DiscordEx.RestClient.resource(conn, :patch, "channels/#{channel_id}/messages/#{message_id}", %{content:  message})
   end
 
   @doc """
@@ -156,7 +156,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec delete_message(pid, number, number) :: atom
   def delete_message(conn, channel_id, message_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "channels/#{channel_id}/messages/#{message_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "channels/#{channel_id}/messages/#{message_id}")
     case response do
       :invalid -> :ok
             _  -> :error
@@ -180,7 +180,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec bulk_delete_messages(pid, number, list) :: atom
   def bulk_delete_messages(conn, channel_id, message_ids) do
-    response = DiscordElixir.RestClient.resource(conn, :post, "channels/#{channel_id}/messages/bulk_delete", %{messages: message_ids})
+    response = DiscordEx.RestClient.resource(conn, :post, "channels/#{channel_id}/messages/bulk_delete", %{messages: message_ids})
     case response do
                  :invalid -> :ok
                      data -> data
@@ -205,7 +205,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec edit_permissions(pid, number, number, map) :: map
   def edit_permissions(conn, channel_id, overwrite_id, options) do
-    DiscordElixir.RestClient.resource(conn, :post, "channels/#{channel_id}/permissions/#{overwrite_id}", options)
+    DiscordEx.RestClient.resource(conn, :post, "channels/#{channel_id}/permissions/#{overwrite_id}", options)
   end
 
   @doc """
@@ -225,7 +225,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec delete_permissions(pid, number, number) :: map
   def delete_permissions(conn, channel_id, overwrite_id) do
-    response = DiscordElixir.RestClient.resource(conn, :delete, "channels/#{channel_id}/permissions/#{overwrite_id}")
+    response = DiscordEx.RestClient.resource(conn, :delete, "channels/#{channel_id}/permissions/#{overwrite_id}")
     case response do
       :invalid -> :ok
             _  -> :error
@@ -248,7 +248,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec get_invites(pid, number) :: list
   def get_invites(conn, channel_id) do
-    DiscordElixir.RestClient.resource(conn, :get, "channels/#{channel_id}/invites")
+    DiscordEx.RestClient.resource(conn, :get, "channels/#{channel_id}/invites")
   end
 
   @doc """
@@ -268,7 +268,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec create_invite(pid, number, map) :: map
   def create_invite(conn, channel_id, options) do
-    DiscordElixir.RestClient.resource(conn, :post, "channels/#{channel_id}/invites", options)
+    DiscordEx.RestClient.resource(conn, :post, "channels/#{channel_id}/invites", options)
   end
 
   @doc """
@@ -289,7 +289,7 @@ defmodule DiscordElixir.RestClient.Resources.Channel do
   """
   @spec trigger_typing(pid, number) :: atom
   def trigger_typing(conn, channel_id) do
-   response = DiscordElixir.RestClient.resource(conn, :post, "channels/#{channel_id}/typing")
+   response = DiscordEx.RestClient.resource(conn, :post, "channels/#{channel_id}/typing")
    case response do
      :invalid -> :ok
      _  -> :error

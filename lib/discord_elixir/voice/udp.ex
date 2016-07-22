@@ -1,4 +1,4 @@
-defmodule DiscordElixir.Voice.UDP do
+defmodule DiscordEx.Voice.UDP do
   @moduledoc """
   Voice UDP Setup functions
   """

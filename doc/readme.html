@@ -61,23 +61,26 @@
 <p>Discord library for Elixir. I needed it and figured I’d share.</p>
 <p>This library is useful for making calls and implementing a bot as well.</p>
 <p>Please always use <a href="https://discordapp.com/developers/docs">Discord Developer Docs</a> as a reference.</p>
-<h2>Installation</h2>
-<ol>
+<h2 id="installation"> Installation</h2><ol>
 <li><p>Add discord_ex to your list of dependencies in <code class="inline">mix.exs</code>:</p>
-<pre><code class="elixir"># From Hex
-def deps do
-  [{:discord_ex, &quot;~&gt; 1.1.4&quot;}]
-end
-
-# From Github
+<pre><code class="elixir">    # From Hex
+    def deps do
+        [{:discord_ex, &quot;~&gt; 1.1.4&quot;}]
+    end
+    ```
+</code></pre>
+<pre><code class="elixir"># From Github
 def deps do
   [{:discord_ex, git: &quot;git@github.com:rmcafee/discord_ex.git&quot;, tag: &quot;1.1.4&quot;}]
-end</code></pre>
+end
+```</code></pre>
 </li>
 <li><p>Ensure discord_ex is started before your application:</p>
-<pre><code class="elixir">def application do
-  [applications: [:discord_ex]]
-end</code></pre>
+<pre><code class="elixir">    def application do
+      [applications: [:discord_ex]]
+    end
+    ```
+</code></pre>
 </li>
 <li>Look at the examples/echo_bot.ex file and you should honestly be
  good to go.
@@ -95,7 +98,7 @@ def handle_event({event, _payload}, state) do
 end</code></pre>
 <p>2) Setup an event handler to handle whatever event you want:</p>
 <pre><code class="elixir">def handle_event({:message_create, payload}, state) do
-  # Your stuff happens here # 
+  # Your stuff happens here #
   {:ok, state}
 end</code></pre>
 <p>3) Now to start your client it is as easy as:</p>
@@ -114,10 +117,10 @@ User.current(state[:rest_client])</code></pre>
 <p>1) Create a connection with initial voice channel information and voice options:</p>
 <pre><code class="elixir">{:ok, client} = DiscordEx.Client.start_link(%{
     token: token,
-    handler: YourHandler, 
+    handler: YourHandler,
     voice: %{
-        guild_id: &lt;guild_id&gt;, 
-        channel_id: &lt;initial_channel_id&gt;, 
+        guild_id: &lt;guild_id&gt;,
+        channel_id: &lt;initial_channel_id&gt;,
         self_deaf: false}
 })</code></pre>
 <p>2) Now in your handler you can access the voice client in your handlers state.</p>
@@ -127,7 +130,7 @@ User.current(state[:rest_client])</code></pre>
 </ul>
 <p><strong>If you want to seperate your voice client from the general client:</strong></p>
 <p>1) Create a connection like before. You can attach a bot handler if you wish.</p>
-<pre><code class="elixir">{:ok, client } = DiscordEx.Client.start_link(%{token: &lt;token&gt;})                                                    </code></pre>
+<pre><code class="elixir">{:ok, client } = DiscordEx.Client.start_link(%{token: &lt;token&gt;})</code></pre>
 <p>2) Now create a voice client as you piggy back off the bot.</p>
 <pre><code class="elixir">{:ok, voice_client} = DiscordEx.Voice.Client.connect(client, %{
     guild_id: &lt;guild_id&gt;,
@@ -164,8 +167,7 @@ DiscordEx.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
-<p><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></p>
-<hr class="thin"/>
+<h2><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></h2>
 <pre><code class="elixir">alias DiscordEx.RestClient.Resources.Channel
 
 Channel.bulk_delete_messages/3
@@ -244,8 +246,7 @@ User.logout/1
 User.modify/2
 User.query/3</code></pre>
 <p><a href="DiscordEx.RestClient.Resources.User.html">user-resource-doc</a></p>
-<h2>TODOS</h2>
-<ul>
+<h2 id="todos"> TODOS</h2><ul>
 <li>Would love more tests!
 </li>
 <li>DRY up some similar behaviour.

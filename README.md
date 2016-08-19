@@ -1,5 +1,7 @@
 # Discord Ex - Discord Elixir Library
 
+[![Build Status](https://travis-ci.org/rmcafee/discord_ex.svg?branch=master)](https://travis-ci.org/rmcafee/discord_ex)
+
 Discord library for Elixir. I needed it and figured I'd share.
 
 This library is useful for making calls and implementing a bot as well.

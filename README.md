@@ -68,9 +68,10 @@ end
 ```elixir
 {:ok, bot_client } = DiscordEx.Client.start_link(%{
 	token: <token>,
-	handler: YourBotNameHere
+	handler: YourBotHandler
 })
 ```
+where `YourBotHandler` is name of your module which implements `handle_event`.
 
 Alright you are done. Go forth and prosper!
 

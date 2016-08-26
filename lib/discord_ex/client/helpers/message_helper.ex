@@ -73,4 +73,34 @@ defmodule DiscordEx.Client.Helpers.MessageHelper do
       |> User.dm_channels
       |> Enum.find(fn(c) -> String.to_integer(c["id"]) == channel_id end)
   end
+
+  @doc """
+  Actionable Mention and DM Message
+  This checks that an incoming message is private or is a mention to the current user.
+  ## Parameters
+    - payload: Data from the triggered event.
+    - state: Current state of bot.
+  ## Example
+      MessageHelper.actionable_message_for_me?(payload, state)
+      #=> true
+  """
+  @spec actionable_message_for_me?(map, map) :: boolean
+  def actionable_message_for_me?(payload, state) do
+
+    author_id = payload.data["author"]["id"]
+    channel_id  = payload.data["channel_id"]
+    mentions    = payload.data["mentions"]
+
+    if author_id != state[:client_id] do
+      _message_in_private_channel?(channel_id, state) || _message_mentions_me?(mentions, state)
+    else
+      false
+    end
+  end
+
+  defp _message_mentions_me?(mentions, state) do
+    Enum.find mentions, fn(m) ->
+      m["id"] == state[:client_id]
+    end
+  end
 end

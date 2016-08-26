@@ -76,6 +76,8 @@ Alright you are done. Go forth and prosper!
 
 **As a note your bot_client is a gen_server that will have state properties that contain:**
 
+**:client_id** - your ClientID, so you don't have to constantly ask API for it
+
 **:rest_client** - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:
 
 ```elixir
@@ -83,6 +85,7 @@ alias DiscordEx.RestClient.Resources.User
 
 User.current(state[:rest_client])
 ```
+
 
 ## Voice Client Usage
 

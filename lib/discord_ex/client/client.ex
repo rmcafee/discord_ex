@@ -44,6 +44,17 @@ defmodule DiscordEx.Client do
     {:ok, rest_client} = DiscordEx.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)
 
+    id = DiscordEx.RestClient.Resources.User.current(rest_client)["id"]
+    # for more info about below `if` see #11 in GitHub:
+    id =
+      if ! is_integer(id) do
+        {int_id, _} = Integer.parse(id)
+        int_id
+      else
+        id
+      end
+    opts = Map.put(opts, :client_id, id)
+
     :crypto.start()
     :ssl.start()
     :websocket_client.start_link(socket_url(opts), __MODULE__,opts)

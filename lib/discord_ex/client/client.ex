@@ -35,6 +35,11 @@ defmodule DiscordEx.Client do
   @static_events [:ready, :guild_create, :voice_state_update]
 
   def start_link(opts) do
+
+    if opts[:token] == nil do
+      raise "No Discord API token provided."
+    end
+
     # We go ahead and add this to the state early as we use it to get the websocket gateway to start.
     {:ok, rest_client} = DiscordEx.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)

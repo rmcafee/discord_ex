@@ -86,7 +86,41 @@ defmodule DiscordEx.Client.Helpers.MessageHelper do
     {cmd, msg}
   end
 
+  @doc """
+  Parses a message payload which is content leading with provided prefix.
+  Returns a tuple with the command and the message.
+
+  ## Parameters
+
+    - prefix: prefix for your command
+    - payload: Data from the triggered event.
+
+  ## Example
+
+      MessageHelper.msg_command_parse(payload, "!")
+      #=> {"ping", "me please!"}
+  """
+  @spec msg_command_parse(map, String) :: {String.t, String.t}
+  def msg_command_parse(payload, prefix) do
+    content = payload.data["content"]
+    if String.starts_with?(content, prefix) do
+      tmp = _take_prefix(content, prefix)
+      [cmd|tail] = String.split(tmp, ~r/\s/u, parts: 2)
+      msg = List.first(tail)
+      {cmd, msg}
+    else
+      {nil, content}
+    end
+  end
+
   # Private Functions
+
+  # fast, as proposed in Elixir documentation
+  defp _take_prefix(full, prefix) do
+    base = byte_size(prefix)
+    <<_::binary-size(base), rest::binary>> = full
+    rest
+  end
 
   defp _message_mentions_user?(mentions, username) do
     Enum.find mentions, fn(m) -> m["username"] == username end

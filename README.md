@@ -22,7 +22,7 @@ Please always use [Discord Developer Docs](https://discordapp.com/developers/doc
     ```elixir
     # From Github
     def deps do
-      [{:discord_ex, git: "git@github.com:rmcafee/discord_ex.git", tag: "1.1.4"}]
+      [{:discord_ex, git: "https://github.com/rmcafee/discord_ex.git", tag: "1.1.4"}]
     end
     ```
 

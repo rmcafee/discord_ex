@@ -12,7 +12,7 @@ defmodule DiscordEx.Connections.REST do
 
   defp standard_headers do
     %{
-      "User-Agent" => "DiscordBot (discord-ex, 1.1.4)"
+      "User-Agent" => "DiscordBot (discord-ex, 1.1.8)"
     }
   end
 

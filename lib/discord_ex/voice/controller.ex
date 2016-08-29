@@ -108,7 +108,7 @@ defmodule DiscordEx.Voice.Controller do
   end
 
   defp _sleep_timer(now_time, last_time, delay_time \\ 17) do
-    if (now_time - last_time) < delay_time do
+    if now_time - last_time < delay_time do
       delay_time - (now_time - last_time)
     else
       0

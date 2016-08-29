@@ -149,8 +149,8 @@ defmodule DiscordEx.Client do
 
   @doc "Initiate voice connection update state call"
   def websocket_info({:start_voice_connection, options}, _connection, state) do
-    self_mute = if (options[:self_mute] == nil), do: false, else: options[:self_mute]
-    self_deaf = if (options[:self_deaf] == nil), do: true, else: options[:self_mute]
+    self_mute = if options[:self_mute] == nil, do: false, else: options[:self_mute]
+    self_deaf = if options[:self_deaf] == nil, do: true, else: options[:self_mute]
     data = %{
       "channel_id" => options[:channel_id],
       "guild_id"   => options[:guild_id],
@@ -237,7 +237,7 @@ defmodule DiscordEx.Client do
     version  = opts[:version] || 4
     url = DiscordEx.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
       |> String.replace("gg/", "")
-    url <> "?v=#{version}&encoding=etf" |> String.to_char_list
+    String.to_char_list(url <> "?v=#{version}&encoding=etf")
   end
 
   defp _update_agent_sequence(data, state) do

@@ -45,16 +45,15 @@ defmodule DiscordEx.Client do
     opts = Map.put(opts, :rest_client, rest_client)
 
     id = DiscordEx.RestClient.Resources.User.current(rest_client)["id"]
-    # for more info about below `if` see #11 in GitHub:
-    id =
-      if ! is_integer(id) do
+    cid =
+      if is_integer(id) do
+        id
+      else
         {int_id, _} = Integer.parse(id)
         int_id
-      else
-        id
       end
-    opts = Map.put(opts, :client_id, id)
 
+    opts = Map.put(opts, :client_id, cid)
     opts = Map.put(opts, :guilds, [])
 
     :crypto.start()

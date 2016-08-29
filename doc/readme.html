@@ -72,7 +72,7 @@
 </code></pre>
 <pre><code class="elixir"># From Github
 def deps do
-  [{:discord_ex, git: &quot;git@github.com:rmcafee/discord_ex.git&quot;, tag: &quot;1.1.4&quot;}]
+  [{:discord_ex, git: &quot;https://github.com/rmcafee/discord_ex.git&quot;, tag: &quot;1.1.4&quot;}]
 end
 ```</code></pre>
 </li>
@@ -105,15 +105,20 @@ end</code></pre>
 <p>3) Now to start your client it is as easy as:</p>
 <pre><code class="elixir">{:ok, bot_client } = DiscordEx.Client.start_link(%{
     token: &lt;token&gt;,
-    handler: YourBotNameHere
+    handler: YourBotHandler
 })</code></pre>
+<p>where <code class="inline">YourBotHandler</code> is name of your module which implements <code class="inline">handle_event</code>.</p>
 <p>Alright you are done. Go forth and prosper!</p>
 <p><strong>As a note your bot_client is a gen_server that will have state properties that contain:</strong></p>
+<p><strong>:client_id</strong> - your ClientID, so you don’t have to constantly ask API for it</p>
 <p><strong>:rest_client</strong> - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:</p>
 <pre><code class="elixir">alias DiscordEx.RestClient.Resources.User
 
 User.current(state[:rest_client])</code></pre>
-<h2 id="voice-client-usage"> Voice Client Usage</h2><p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed and accessible from /usr/local/bin to use the audio feature.</p>
+<h2 id="voice-client-usage"> Voice Client Usage</h2><p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed.</p>
+<p>If your dca-rs is not installed as <code class="inline">/usr/local/bin/dca-rs</code> you can provide path
+to it in your <code class="inline">config.exs</code> with:</p>
+<pre><code class="elixir">config :discord_ex, dca_rs_path: &quot;/your/path/dca-rs&quot;</code></pre>
 <p><strong>For best results that include easy accessibility and efficient process management include voice information whenoy create your client.</strong></p>
 <p>1) Create a connection with initial voice channel information and voice options:</p>
 <pre><code class="elixir">{:ok, client} = DiscordEx.Client.start_link(%{

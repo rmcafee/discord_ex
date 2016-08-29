@@ -101,10 +101,40 @@
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#actionable_message_for_me?/2">actionable_message_for_me?(payload, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Actionable Mention and DM Message
+This checks that an incoming message is private or is a mention to the current user.</p>
+<h2>Parameters</h2>
+<ul>
+<li>payload: Data from the triggered event.
+</li>
+<li>state: Current state of bot.
+</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="elixir">MessageHelper.actionable_message_for_me?(payload, state)
+#=&gt; true</code></pre>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#msg_command_parse/1">msg_command_parse(payload)</a>
   </div>
   
     <div class="summary-synopsis"><p>Parses a message payload which is content leading with ‘!’.
+Returns a tuple with the command and the message</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#msg_command_parse/2">msg_command_parse(payload, prefix)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Parses a message payload which is content leading with provided prefix.
 Returns a tuple with the command and the message</p>
 </div>
   
@@ -171,6 +201,45 @@ Returns a tuple with the command and the message</p>
 
   </section>
 </div>
+<div class="detail" id="actionable_message_for_me?/2">
+  <div class="detail-header">
+    <a href="#actionable_message_for_me?/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">actionable_message_for_me?(payload, state)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L49" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">actionable_message_for_me?(map, map) :: boolean</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Actionable Mention and DM Message
+This checks that an incoming message is private or is a mention to the current user.</p>
+<h2>Parameters</h2>
+<ul>
+<li>payload: Data from the triggered event.
+</li>
+<li>state: Current state of bot.
+</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="elixir">MessageHelper.actionable_message_for_me?(payload, state)
+#=&gt; true</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="msg_command_parse/1">
   <div class="detail-header">
     <a href="#msg_command_parse/1" class="detail-link" title="Link to this function">
@@ -178,7 +247,7 @@ Returns a tuple with the command and the message</p>
     </a>
     <span class="signature">msg_command_parse(payload)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L52" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L76" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -204,6 +273,45 @@ Returns a tuple with the command and the message.</p>
 </ul>
 <h2>Example</h2>
 <pre><code class="elixir">MessageHelper.msg_command_parse(payload)
+#=&gt; {&quot;ping&quot;, &quot;me please!&quot;}</code></pre>
+
+  </section>
+</div>
+<div class="detail" id="msg_command_parse/2">
+  <div class="detail-header">
+    <a href="#msg_command_parse/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">msg_command_parse(payload, prefix)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L104" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">msg_command_parse(map, String) :: {<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Parses a message payload which is content leading with provided prefix.
+Returns a tuple with the command and the message.</p>
+<h2>Parameters</h2>
+<ul>
+<li>prefix: prefix for your command
+</li>
+<li>payload: Data from the triggered event.
+</li>
+</ul>
+<h2>Example</h2>
+<pre><code class="elixir">MessageHelper.msg_command_parse(payload, &quot;!&quot;)
 #=&gt; {&quot;ping&quot;, &quot;me please!&quot;}</code></pre>
 
   </section>

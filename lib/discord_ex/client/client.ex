@@ -207,10 +207,7 @@ defmodule DiscordEx.Client do
   end
 
   def handle_event({:voice_state_update, payload}, state) do
-    new_voice_states = state[:voice_states]
-                      |> Enum.filter(fn(m) -> m.user_id != payload.data.user_id end)
-                      |> List.insert_at(-1, payload.data)
-    new_state = Map.merge(state, %{voice_states: new_voice_states})
+    new_state = _update_voice_state(state, payload)
     {:ok, new_state}
   end
 
@@ -276,6 +273,17 @@ defmodule DiscordEx.Client do
       send(client_pid, {:clear_from_state, [:voice]})
       send(client_pid, {:update_state, %{voice_client: voice_client}})
     end
+  end
+
+  defp _update_voice_state(current_state, payload) do
+    unselected_guilds = Enum.filter(current_state.guilds, fn(g) -> g.guild_id != payload.data.guild_id end)
+    selected_guild = Enum.find(current_state.guilds, fn(g) -> g.guild_id == payload.data.guild_id end)
+    new_voice_states = selected_guild[:voice_states]
+                      |> Enum.filter(fn(m) -> m.user_id != payload.data.user_id end)
+                      |> List.insert_at(-1, payload.data)
+    updated_guild = Map.merge(selected_guild, %{voice_states: new_voice_states})
+    guilds = List.insert_at(unselected_guilds, -1, updated_guild)
+    Map.merge(current_state, %{guilds: guilds})
   end
 
   ### VOICE SETUP FUNCTIONS ###

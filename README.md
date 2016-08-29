@@ -90,7 +90,13 @@ User.current(state[:rest_client])
 
 ## Voice Client Usage
 
-Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](https://github.com/nstafie/dca-rs) installed and accessible from /usr/local/bin to use the audio feature.
+Keep in mind you will need to have [ffmpeg](https://ffmpeg.org) and [dca-rs](https://github.com/nstafie/dca-rs) installed.
+
+If your dca-rs is not installed as `/usr/local/bin/dca-rs` you can provide path
+to it in your `config.exs` with:
+```elixir
+config :discord_ex, dca_rs_path: "/your/path/dca-rs"
+```
 
 **For best results that include easy accessibility and efficient process management include voice information whenoy create your client.**
 

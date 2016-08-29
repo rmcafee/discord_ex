@@ -18,7 +18,8 @@ defmodule DiscordEx.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger, :httpoison, :porcelain]]
+    [applications: [:logger, :httpoison, :porcelain],
+     env: [dca_rs_path: "/usr/local/bin/dca-rs"]]
   end
 
   # Dependencies can be Hex packages:

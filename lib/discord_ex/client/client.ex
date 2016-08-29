@@ -55,6 +55,8 @@ defmodule DiscordEx.Client do
       end
     opts = Map.put(opts, :client_id, id)
 
+    opts = Map.put(opts, :guilds, [])
+
     :crypto.start()
     :ssl.start()
     :websocket_client.start_link(socket_url(opts), __MODULE__,opts)
@@ -195,8 +197,12 @@ defmodule DiscordEx.Client do
   end
 
   def handle_event({:guild_create, payload}, state) do
-    new_state = Map.merge(state, %{guild_id: payload.data[:id],
-                               voice_states: payload.data[:voice_states]})
+
+    guild = %{guild_id: payload.data[:id],
+              voice_states: payload.data[:voice_states]}
+    new_guilds = state[:guilds] ++ [guild]
+    new_state = Map.merge(state, %{guilds: new_guilds})
+
     {:ok, new_state}
   end
 

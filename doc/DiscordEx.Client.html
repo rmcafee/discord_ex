@@ -70,8 +70,9 @@
 
       
         <section id="moduledoc" class="docstring">
-          <p>Connect to Discord to recieve and send data in realtime
-You shouldn’t be using this directly. You should pass it to a handler.</p>
+          <p>Connect to Discord to recieve and send data in realtime</p>
+<p>You shouldn’t be using this directly apart from calling <a href="#start_link/1"><code class="inline">start_link/1</code></a>
+and <a href="#status_update/2"><code class="inline">status_update/2</code></a>. You should pass it to a handler.</p>
 <h2>Examples</h2>
 <pre><code class="elixir">token = &quot;&lt;your-token&gt;&quot;
 DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
@@ -163,6 +164,15 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
 </div>
 <div class="summary-row">
   <div class="summary-signature">
+    <a href="#status_update/2">status_update(state, new_status)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Changes your status</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
     <a href="#voice_state_update/5">voice_state_update(client_pid, guild_id, channel_id, user_id, options \\ %{})</a>
   </div>
   
@@ -225,7 +235,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">_voice_setup_gather_data(caller_pid, data \\ %{}, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L290" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L298" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -244,7 +254,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">handle_event(arg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L187" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L195" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -262,7 +272,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">identify(state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L218" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L226" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -280,7 +290,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">init(state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L65" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L67" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -299,7 +309,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">onconnect(WSReq, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L76" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L78" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -318,7 +328,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">ondisconnect(arg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L82" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L84" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -337,7 +347,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">opcodes()</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L20" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -355,7 +365,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">socket_url(opts)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L236" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L244" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -382,7 +392,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">start_link(opts)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L39" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -393,6 +403,44 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     
   </section>
 </div>
+<div class="detail" id="status_update/2">
+  <div class="detail-header">
+    <a href="#status_update/2" class="detail-link" title="Link to this function">
+      <i class="icon-link"></i>
+    </a>
+    <span class="signature">status_update(state, new_status)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L343" class="view-source" rel="help" title="View Source">
+       <i class="icon-code"></i>
+     </a>
+    
+    
+  </div>
+  
+    <div class="specs">
+      <h4 class="specs-title">Specs</h4>
+      <div class="specs-list">
+        
+          <pre><code class="elixir">status_update(map, map) :: nil</code></pre>
+        
+      </div>
+    </div>
+  
+  <section class="docstring">
+    <p>Changes your status</p>
+<h2>Parameters</h2>
+<ul>
+<li><p>new_status: map with new status</p>
+<p>  Supported keys in that map: <code class="inline">:idle_since</code> and <code class="inline">:game_name</code>.
+  If some of them are missing <code class="inline">nil</code> is used.</p>
+</li>
+</ul>
+<h2>Examples</h2>
+<pre><code class="elixir">new_status = %{idle_since: 123456, game_name: &quot;some game&quot;}
+Client.status_update(state, new_status)</code></pre>
+
+  </section>
+</div>
 <div class="detail" id="voice_state_update/5">
   <div class="detail-header">
     <a href="#voice_state_update/5" class="detail-link" title="Link to this function">
@@ -400,7 +448,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">voice_state_update(client_pid, guild_id, channel_id, user_id, options \\ %{})</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L102" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L104" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -443,7 +491,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L108" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L110" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -462,7 +510,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">websocket_info(arg1, connection, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L129" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L131" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     
@@ -481,7 +529,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L178" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L186" class="view-source" rel="help" title="View Source">
        <i class="icon-code"></i>
      </a>
     

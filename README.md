@@ -81,6 +81,39 @@ Alright you are done. Go forth and prosper!
 
 **:rest_client** - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:
 
+### Possible events:
+
+Those events are described [here](https://discordapp.com/developers/docs/topics/gateway#events).
+
+```elixir
+:resumed
+:channel_create
+:channel_update
+:channel_delete
+:guild_update
+:guild_delete
+:guild_ban_add
+:guild_ban_remove
+:guild_emoji_update
+:guild_integrations_update
+:guild_member_add
+:guild_member_remove
+:guild_member_update
+:guild_members_chunk
+:guild_role_create
+:guild_role_update
+:guild_role_delete
+:message_create
+:message_update
+:message_delete
+:message_delete_bulk
+:presence_update
+:typing_start
+:user_settings_update
+:user_update
+:voice_server_update
+```
+
 ```elixir
 alias DiscordEx.RestClient.Resources.User
 

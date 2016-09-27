@@ -38,6 +38,12 @@ defmodule DiscordEx.Client do
 
   def start_link(opts) do
 
+    opts = if opts[:selfbot] != true do
+      Map.update(opts, :token, nil, &("Bot " <> &1))
+    else
+      opts
+    end
+
     if opts[:token] == nil do
       raise "No Discord API token provided."
     end
@@ -46,7 +52,13 @@ defmodule DiscordEx.Client do
     {:ok, rest_client} = DiscordEx.RestClient.start_link(%{token: opts[:token]})
     opts = Map.put(opts, :rest_client, rest_client)
 
-    id = DiscordEx.RestClient.Resources.User.current(rest_client)["id"]
+    user = DiscordEx.RestClient.Resources.User.current(rest_client)
+    case user do
+      %{"message" => "401: Unauthorized"} ->
+        raise "401: Unauthorized - You used invalid token, or bot token for selfbot."
+      _ -> nil
+    end
+    id = user["id"]
     cid =
       if is_integer(id) do
         id

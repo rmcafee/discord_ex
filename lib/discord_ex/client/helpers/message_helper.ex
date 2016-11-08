@@ -123,18 +123,16 @@ defmodule DiscordEx.Client.Helpers.MessageHelper do
   end
 
   defp _message_mentions_user?(mentions, username) do
-    Enum.find mentions, fn(m) -> m["username"] == username end
+    Enum.find(mentions, fn(m) -> m["username"] == username end) != nil
   end
 
   defp _message_in_private_channel?(channel_id, state) do
     state[:rest_client]
       |> User.dm_channels
-      |> Enum.find(fn(c) -> String.to_integer(c["id"]) == channel_id end)
+      |> Enum.find(fn(c) -> String.to_integer(c["id"]) == channel_id end) != nil
   end
 
   defp _message_mentions_me?(mentions, state) do
-    Enum.find mentions, fn(m) ->
-      m["id"] == state[:client_id]
-    end
+    Enum.find(mentions, fn(m) -> m["id"] == state[:client_id] end) != nil
   end
 end

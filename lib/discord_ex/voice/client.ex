@@ -16,7 +16,7 @@ defmodule DiscordEx.Voice.Client do
 
   require Logger
 
-  def opcodes do
+  def opcodes() do
     %{
       :identify             => 0,
       :select_protocol      => 1,
@@ -24,6 +24,7 @@ defmodule DiscordEx.Voice.Client do
       :heartbeat            => 3,
       :session_description  => 4,
       :speaking             => 5,
+      :heartbeat_interval   => 8
     }
   end
 
@@ -33,7 +34,7 @@ defmodule DiscordEx.Voice.Client do
   @spec connect(pid, map) :: {:ok, pid}
   def connect(base_client, options \\ %{}) do
     task = Task.async fn ->
-      send(base_client, {:start_voice_connection_listener, self})
+      send(base_client, {:start_voice_connection_listener, self()})
       send(base_client, {:start_voice_connection, options})
       receive do opts -> opts end
     end
@@ -68,7 +69,7 @@ defmodule DiscordEx.Voice.Client do
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def init(state) do
-    controller = Controller.start(self)
+    controller = Controller.start(self())
     new_state = Map.merge(state, %{controller: controller})
     {:once, new_state}
   end
@@ -136,13 +137,13 @@ defmodule DiscordEx.Voice.Client do
       "delay" => 0,
       "speaking" => value
     }
-    payload = payload_build_json(opcode(opcodes, :speaking), data)
-    :websocket_client.cast(self, {:text, payload})
+    payload = payload_build_json(opcode(opcodes(), :speaking), data)
+    :websocket_client.cast(self(), {:text, payload})
     {:ok, state}
   end
 
   def websocket_handle({:text, payload}, _socket, state) do
-    data  = payload_decode(opcodes, {:text, payload})
+    data  = payload_decode(opcodes(), {:text, payload})
     event = data.op
     handle_event({event, data}, state)
   end
@@ -156,7 +157,7 @@ defmodule DiscordEx.Voice.Client do
 
   def handle_event({:ready, payload}, state) do
     new_state = Map.merge(state, payload.data)
-    _heartbeat_loop(state, payload.data["heartbeat_interval"], self)
+    _heartbeat_loop(state, payload.data["heartbeat_interval"], self())
     _establish_udp_connect(state, payload)
     {:ok, new_state}
   end
@@ -187,8 +188,8 @@ defmodule DiscordEx.Voice.Client do
       "session_id" => state[:session_id],
       "token" => state[:token]
     }
-    payload = payload_build_json(opcode(opcodes, :identify), data)
-    :websocket_client.cast(self, {:text, payload})
+    payload = payload_build_json(opcode(opcodes(), :identify), data)
+    :websocket_client.cast(self(), {:text, payload})
   end
 
   # Establish UDP Connection
@@ -201,14 +202,14 @@ defmodule DiscordEx.Voice.Client do
 
     # Send payload to client on local udp information
     load = %{"protocol" => "udp", "data" => %{"address" => my_ip, "port" => my_port, "mode" => "xsalsa20_poly1305"}}
-    payload = payload_build_json(opcode(DiscordEx.Voice.Client.opcodes, :select_protocol), load)
-    :websocket_client.cast(self, {:text, payload})
+    payload = payload_build_json(opcode(DiscordEx.Voice.Client.opcodes(), :select_protocol), load)
+    :websocket_client.cast(self(), {:text, payload})
   end
 
   defp _update_udp_connection_state(my_port, discord_ip, discord_port, send_socket) do
     udp_recv_options = [:binary, active: false, reuseaddr: true]
     {:ok, recv_socket} = :gen_udp.open(my_port, udp_recv_options)
-    send(self, {:update_state, %{udp_ip_send: discord_ip,
+    send(self(), {:update_state, %{udp_ip_send: discord_ip,
                                  udp_port_send: discord_port,
                                  udp_socket_send: send_socket,
                                  udp_socket_recv: recv_socket}})
@@ -221,7 +222,7 @@ defmodule DiscordEx.Voice.Client do
   end
 
   defp _heartbeat(state, interval, socket_process) do
-    payload = payload_build_json(opcode(opcodes, :heartbeat), nil)
+    payload = payload_build_json(opcode(opcodes(), :heartbeat), nil)
     :websocket_client.cast(socket_process, {:text, payload})
     :timer.sleep(interval)
     _heartbeat_loop(state, interval, socket_process)

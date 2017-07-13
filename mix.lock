@@ -20,10 +20,10 @@
   "nacl": {:hex, :nacl, "0.3.0", "aa7009e7d72c91948b0fefc707b4d81bb23bf54d8e9908ca6dfc6d26f34a114e", [:rebar], []},
   "poison": {:hex, :poison, "2.2.0", "4763b69a8a77bd77d26f477d196428b741261a761257ff1cf92753a0d4d24a63", [:mix], []},
   "poly1305": {:hex, :poly1305, "0.4.2", "92f0459edb6a2ac5ff2c2fd05bb61c6f9a3f2e22f83a77b0e7663168a450f34c", [:mix], [{:chacha20, "~> 0.3", [hex: :chacha20, optional: false]}, {:equivalex, "~> 0.1", [hex: :equivalex, optional: false]}]},
-  "porcelain": {:hex, :porcelain, "2.0.1", "9c3db2b47d8cf6879c0d9ac79db8657333974a88faff09e856569e00c1b5e119", [:mix], []},
+  "porcelain": {:hex, :porcelain, "2.0.3", "2d77b17d1f21fed875b8c5ecba72a01533db2013bd2e5e62c6d286c029150fdc", [:mix], []},
   "salsa20": {:hex, :salsa20, "0.3.1", "684a635b87c71fc8e8e0a21629d22f56944e2f032cc650f542c85e6bae38fc19", [:mix], []},
   "savory": {:hex, :savory, "0.0.2", "edad30ca5cd11e36000e19ddc68daf6fd04d5142beb1899ff79e1afbe64f63ee", [:make, :mix], []},
-  "socket": {:hex, :socket, "0.3.5", "6c23772e7eda60f129f36dd69a61930aab18ae9b8d74d7f767c85355cf0b585d", [:mix], []},
-  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0", "edee20847c42e379bf91261db474ffbe373f8acb56e9079acb6038d4e0bf414f", [:rebar, :make], []},
-  "temp": {:hex, :temp, "0.4.1", "5e8a0fa2013837b4bbe7ae8bd613c1d44879250e72026564ecae53cedab4fdd6", [:mix], []},
-  "websocket_client": {:hex, :websocket_client, "1.1.0", "c1ac9162a2286d3ca747417b1717090e762becba1f9f0bde359cb0318b066636", [:rebar3], []}}
+  "socket": {:hex, :socket, "0.3.12", "4a6543815136503fee67eff0932da1742fad83f84c49130c854114153cc549a6", [:mix], []},
+  "ssl_verify_fun": {:hex, :ssl_verify_fun, "1.1.0", "edee20847c42e379bf91261db474ffbe373f8acb56e9079acb6038d4e0bf414f", [:make, :rebar], []},
+  "temp": {:hex, :temp, "0.4.3", "b641c3ce46094839bff110fdb64162536d640d9d47ca2c37add9104a2fa3bd81", [:mix], []},
+  "websocket_client": {:hex, :websocket_client, "1.2.4", "14ec1ca4b6d247b44ccd9a80af8f6ca98328070f6c1d52a5cb00bc9d939d63b8", [:rebar3], []}}

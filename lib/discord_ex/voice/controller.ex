@@ -10,7 +10,7 @@ defmodule DiscordEx.Voice.Controller do
 
   def listen_socket(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, :udp_socket_recv, self})
+      send(voice_client, {:get_state, :udp_socket_recv, self()})
       receive do
         {:udp_socket_recv, socket} -> socket
       end
@@ -19,8 +19,8 @@ defmodule DiscordEx.Voice.Controller do
   end
 
   def start(voice_client) do
-    {:ok, seq} = Agent.start_link(fn -> :random.uniform(93_920_290) end)
-    {:ok, time} = Agent.start_link(fn -> :random.uniform(83_290_239) end)
+    {:ok, seq} = Agent.start_link(fn -> :rand.uniform(93_920_290) end)
+    {:ok, time} = Agent.start_link(fn -> :rand.uniform(83_290_239) end)
 
     %{buffer: Buffer.start(),
       voice_client: voice_client,

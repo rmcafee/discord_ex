@@ -30,7 +30,9 @@ defmodule DiscordEx.Client do
       :resume                 => 6,
       :reconnect              => 7,
       :request_guild_members  => 8,
-      :invalid_session        => 9
+      :invalid_session        => 9,
+      :hello                  => 10,
+      :heartbeat_ack          => 11
     }
   end
 
@@ -78,7 +80,7 @@ defmodule DiscordEx.Client do
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
   def init(state) do
     # State sequence management process and set it's state
-    {:ok, agent_seq_num} = Agent.start_link fn -> 0 end
+    {:ok, agent_seq_num} = Agent.start_link fn -> nil end
 
     new_state = state
       |> Map.put(:client_pid, self()) # Pass the client state to use it
@@ -95,6 +97,7 @@ defmodule DiscordEx.Client do
 
   def ondisconnect({:remote, :closed}, _state) do
     # Stub for beter actions later
+    {:close, {:remote, :closed}, _state}
   end
 
   @doc """
@@ -120,7 +123,7 @@ defmodule DiscordEx.Client do
   end
 
   def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode(opcodes, {:binary, payload})
+    data  = payload_decode(opcodes(), {:binary, payload})
     event = normalize_atom(data.event_name)
 
     # Keeps the sequence tracker process updated
@@ -131,11 +134,20 @@ defmodule DiscordEx.Client do
       send(state[:voice_setup], {self(), data, state})
     end
 
-    # Call handler unless it is a static event
-    if state[:handler] && !_static_event?(event) do
-      state[:handler].handle_event({event, data}, state)
-    else
-      handle_event({event, data}, state)
+    case data[:op] do
+      :hello ->
+        _heartbeat_loop(state, data.data.heartbeat_interval, self())
+        {:ok, state}
+      :heartbeat_ack ->
+        Logger.debug("Heartbeat ACK")
+        {:ok, state}
+      :dispatch  ->
+        # Call handler unless it is a static event
+        if state[:handler] && !_static_event?(event) do
+          state[:handler].handle_event({event, data}, state)
+        else
+          handle_event({event, data}, state)
+        end
     end
   end
 
@@ -171,8 +183,8 @@ defmodule DiscordEx.Client do
       "self_mute"  => self_mute,
       "self_deaf"  => self_deaf
     }
-    payload = payload_build(opcode(opcodes, :voice_state_update), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :voice_state_update), data)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
@@ -183,15 +195,16 @@ defmodule DiscordEx.Client do
   end
 
   def websocket_info({:voice_state_update, opts}, _connection, state) do
+    Logger.debug("Voice status update")
     data = for {key, val} <- opts, into: %{}, do: {Atom.to_string(key), val}
-    payload = payload_build(opcode(opcodes, :voice_state_update), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :voice_state_update), data)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
   def websocket_info({:update_status, new_status}, _connection, state) do
-    payload = payload_build(opcode(opcodes, :status_update), new_status)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :status_update), new_status)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
@@ -205,7 +218,6 @@ defmodule DiscordEx.Client do
   end
 
   def handle_event({:ready, payload}, state) do
-    _heartbeat_loop(state, payload.data.heartbeat_interval, self)
     new_state = Map.put(state, :session_id, payload.data[:session_id])
 
     if state[:voice] do
@@ -248,13 +260,13 @@ defmodule DiscordEx.Client do
       "compress" => false,
       "large_threshold" => 250
     }
-    payload = payload_build(opcode(opcodes, :identify), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :identify), data)
+    :websocket_client.cast(self(), {:binary, payload})
   end
 
   @spec socket_url(map) :: String.t
   def socket_url(opts) do
-    version  = opts[:version] || 4
+    version  = opts[:version] || 6
     url = DiscordEx.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
       |> String.replace("gg/", "")
     String.to_char_list(url <> "?v=#{version}&encoding=etf")
@@ -278,7 +290,7 @@ defmodule DiscordEx.Client do
 
   defp _heartbeat(state, interval, socket_process) do
     value = agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(opcodes, :heartbeat), value)
+    payload = payload_build(opcode(opcodes(), :heartbeat), value)
     :websocket_client.cast(socket_process, {:binary, payload})
     :timer.sleep(interval)
     _heartbeat_loop(state, interval, socket_process)

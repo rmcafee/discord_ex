@@ -18,8 +18,8 @@ defmodule DiscordEx.RestClient do
   Start process and HTTP Client.
   {:ok, conn} = DiscordEx.RestClient.start_link(%{token: token})
   """
-  def start_link(opts) do
-    GenServer.start_link(__MODULE__, opts)
+  def start_link(opts, server_opts \\ []) do
+    GenServer.start_link(__MODULE__, opts, server_opts)
   end
 
   @spec resource(pid, atom, String.t, map) :: request_reply

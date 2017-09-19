@@ -196,7 +196,7 @@ defmodule DiscordEx.Client do
   end
 
   def websocket_terminate(reason, _conn_state, state) do
-    Logger.info "Websocket closed in state #{inspect state} wih reason #{inspect reason}"
+    Logger.info "Websocket closed in state #{inspect state} with reason #{inspect reason}"
     Logger.info "Killing seq_num process!"
     Process.exit(state[:agent_seq_num], :kill)
     Logger.info "Killing rest_client process!"

@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/rmcafee/discord_ex.svg?branch=master)](https://travis-ci.org/rmcafee/discord_ex) [![Hex pm](https://img.shields.io/hexpm/v/discord_ex.svg)](https://hex.pm/packages/discord_ex)
 
+### Due to time constraints and Discord changes this project has become stale. A new co-maintainer is in the works to help work on a major update that should make the library easier to use and resolve some issues.
+
 Discord library for Elixir. I needed it and figured I'd share.
 
 This library is useful for making calls and implementing a bot as well.

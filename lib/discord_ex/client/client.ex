@@ -120,7 +120,7 @@ defmodule DiscordEx.Client do
   end
 
   def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode(opcodes, {:binary, payload})
+    data  = payload_decode(opcodes(), {:binary, payload})
     event = normalize_atom(data.event_name)
 
     # Keeps the sequence tracker process updated
@@ -171,8 +171,8 @@ defmodule DiscordEx.Client do
       "self_mute"  => self_mute,
       "self_deaf"  => self_deaf
     }
-    payload = payload_build(opcode(opcodes, :voice_state_update), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :voice_state_update), data)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
@@ -184,14 +184,14 @@ defmodule DiscordEx.Client do
 
   def websocket_info({:voice_state_update, opts}, _connection, state) do
     data = for {key, val} <- opts, into: %{}, do: {Atom.to_string(key), val}
-    payload = payload_build(opcode(opcodes, :voice_state_update), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :voice_state_update), data)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
   def websocket_info({:update_status, new_status}, _connection, state) do
-    payload = payload_build(opcode(opcodes, :status_update), new_status)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :status_update), new_status)
+    :websocket_client.cast(self(), {:binary, payload})
     {:ok, state}
   end
 
@@ -205,7 +205,7 @@ defmodule DiscordEx.Client do
   end
 
   def handle_event({:ready, payload}, state) do
-    _heartbeat_loop(state, payload.data.heartbeat_interval, self)
+    _heartbeat_loop(state, payload.data.heartbeat_interval, self())
     new_state = Map.put(state, :session_id, payload.data[:session_id])
 
     if state[:voice] do
@@ -248,8 +248,8 @@ defmodule DiscordEx.Client do
       "compress" => false,
       "large_threshold" => 250
     }
-    payload = payload_build(opcode(opcodes, :identify), data)
-    :websocket_client.cast(self, {:binary, payload})
+    payload = payload_build(opcode(opcodes(), :identify), data)
+    :websocket_client.cast(self(), {:binary, payload})
   end
 
   @spec socket_url(map) :: String.t
@@ -257,7 +257,7 @@ defmodule DiscordEx.Client do
     version  = opts[:version] || 4
     url = DiscordEx.RestClient.resource(opts[:rest_client], :get, "gateway")["url"]
       |> String.replace("gg/", "")
-    String.to_char_list(url <> "?v=#{version}&encoding=etf")
+    String.to_charlist(url <> "?v=#{version}&encoding=etf")
   end
 
   defp _update_agent_sequence(data, state) do
@@ -278,7 +278,7 @@ defmodule DiscordEx.Client do
 
   defp _heartbeat(state, interval, socket_process) do
     value = agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(opcodes, :heartbeat), value)
+    payload = payload_build(opcode(opcodes(), :heartbeat), value)
     :websocket_client.cast(socket_process, {:binary, payload})
     :timer.sleep(interval)
     _heartbeat_loop(state, interval, socket_process)

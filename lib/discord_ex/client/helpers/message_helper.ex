@@ -81,7 +81,7 @@ defmodule DiscordEx.Client.Helpers.MessageHelper do
     msg =
       payload.data["content"]
       |> String.replace("!#{cmd}", "")
-      |> String.strip
+      |> String.trim
 
     {cmd, msg}
   end

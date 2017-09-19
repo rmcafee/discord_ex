@@ -9,8 +9,8 @@ defmodule DiscordEx.Mixfile do
      source_url: "https://github.com/rmcafee/discord_ex",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     package: package,
-     deps: deps,
+     package: package(),
+     deps: deps(),
      docs: [extras: ["README.md"]]]
   end
 

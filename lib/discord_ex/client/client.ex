@@ -15,6 +15,7 @@ defmodule DiscordEx.Client do
 
   import DiscordEx.Client.Utility
 
+  alias DiscordEx.Heartbeat
   alias DiscordEx.RestClient.Resources.User
 
   @behaviour :websocket_client
@@ -74,7 +75,7 @@ defmodule DiscordEx.Client do
 
     :crypto.start()
     :ssl.start()
-    :websocket_client.start_link(socket_url(opts), __MODULE__,opts)
+    :websocket_client.start_link(socket_url(opts), __MODULE__, opts)
   end
 
   # Required Functions and Default Callbacks ( you shouldn't need to touch these to use client)
@@ -85,6 +86,7 @@ defmodule DiscordEx.Client do
     new_state = state
       |> Map.put(:client_pid, self()) # Pass the client state to use it
       |> Map.put(:agent_seq_num, agent_seq_num) # Pass agent sequence num
+      |> Map.put(:heartbeat_pid, nil) # Place for Heartbeat process pid
 
     {:once, new_state}
   end
@@ -95,9 +97,9 @@ defmodule DiscordEx.Client do
     {:ok, state}
   end
 
-  def ondisconnect({:remote, :closed}, _state) do
-    # Stub for beter actions later
-    {:close, {:remote, :closed}, _state}
+  def ondisconnect({:remote, :closed}, state) do
+    # Reconnection with resume opcode should be attempted here
+    {:close, {:remote, :closed}, state}
   end
 
   @doc """
@@ -122,34 +124,71 @@ defmodule DiscordEx.Client do
     :ok
   end
 
+  @doc "Handle binary data sent by Discord over the Websocket"
   def websocket_handle({:binary, payload}, _socket, state) do
-    data  = payload_decode(opcodes(), {:binary, payload})
-    event = normalize_atom(data.event_name)
+    data = payload_decode(opcodes(), {:binary, payload})
 
     # Keeps the sequence tracker process updated
     _update_agent_sequence(data, state)
+
+    # Handle data based on opcode sent by Discord
+    _handle_data(data, state)
+  end
+
+  defp _handle_data(%{op: :hello} = data, state) do
+    # Discord sends hello op immediately after connection
+    # Start sending heartbeat with interval defined by the hello packet
+    Logger.debug("Discord: Hello")
+    {:ok, heartbeat_pid} = Heartbeat.start_link(
+      state[:agent_seq_num],
+      data.data.heartbeat_interval,
+      self()
+    )
+    {:ok, %{state | heartbeat_pid: heartbeat_pid}}
+  end
+
+  defp _handle_data(%{op: :heartbeat_ack} = _data, state) do
+    # Discord sends heartbeat_ack after we send a heartbeat
+    # If ack is not received, the connection is stale
+    Logger.debug("Discord: Heartbeat ACK")
+    Heartbeat.ack(state[:heartbeat_pid])
+    {:ok, state}
+  end
+
+  defp _handle_data(%{op: :dispatch, event_name: event_name} = data, state) do
+    # Dispatch op carries actual content like channel messages
+    Logger.debug(fn -> "Discord: Dispatch #{event_name}" end)
+    event = normalize_atom(event_name)
 
     # This will setup the voice_client if it is not already setup
     if state[:voice_setup] && _voice_valid_event(event, data, state) do
       send(state[:voice_setup], {self(), data, state})
     end
 
-    case data[:op] do
-      :hello ->
-        _heartbeat_loop(state, data.data.heartbeat_interval, self)
-        {:ok, state}
-      :heartbeat_ack ->
-        Logger.debug("Heartbeat ACK")   
-        {:ok, state}
-      :dispatch  ->
-        # Call handler unless it is a static event
-        if state[:handler] && !_static_event?(event) do
-          state[:handler].handle_event({event, data}, state)
-        else
-          handle_event({event, data}, state)
-        end
+    # Call event handler unless it is a static event
+    if state[:handler] && !_static_event?(event) do
+      state[:handler].handle_event({event, data}, state)
+    else
+      handle_event({event, data}, state)
     end
   end
+
+  defp _handle_data(%{op: :reconnect} = _data, state) do
+    Logger.warn("Discord enforced Reconnect")
+    # Discord enforces reconnection. Websocket should be
+    # reconnected and resume opcode sent to playback missed messages.
+    # For now just kill the connection so that a supervisor can restart us.
+    {:close, "Discord enforced reconnect", state}
+  end
+
+  defp _handle_data(%{op: :invalid_session} = _data, state) do
+    Logger.warn("Discord: Invalid session")
+    # On resume Discord will send invalid_session if our session id is too old
+    # to be resumed.
+    # For now just kill the connection so that a supervisor can restart us.
+    {:close, "Invalid session", state}
+  end
+
 
   # Behavioural placeholder
   def websocket_info(:start, _connection, state) do
@@ -207,12 +246,21 @@ defmodule DiscordEx.Client do
     {:ok, state}
   end
 
+  def websocket_info(:heartbeat_stale, _connection, state) do
+    # Heartbeat process reports stale connection. Websocket should be
+    # reconnected and resume opcode sent to playback missed messages.
+    # For now just kill the connection so that a supervisor can restart us.
+    {:close, "Heartbeat stale", state}
+  end
+
   def websocket_terminate(reason, _conn_state, state) do
     Logger.info "Websocket closed in state #{inspect state} with reason #{inspect reason}"
     Logger.info "Killing seq_num process!"
     Process.exit(state[:agent_seq_num], :kill)
     Logger.info "Killing rest_client process!"
     Process.exit(state[:rest_client], :kill)
+    Logger.info "Killing heartbeat process!"
+    Process.exit(state[:heartbeat_pid], :kill)
     :ok
   end
 
@@ -279,20 +327,6 @@ defmodule DiscordEx.Client do
 
   defp _static_event?(event) do
     Enum.find(@static_events, fn(e) -> e == event end)
-  end
-
-  # Connection Heartbeat
-  defp _heartbeat_loop(state, interval, socket_process) do
-    spawn_link(fn -> _heartbeat(state, interval, socket_process) end)
-    :ok
-  end
-
-  defp _heartbeat(state, interval, socket_process) do
-    value = agent_value(state[:agent_seq_num])
-    payload = payload_build(opcode(opcodes(), :heartbeat), value)
-    :websocket_client.cast(socket_process, {:binary, payload})
-    :timer.sleep(interval)
-    _heartbeat_loop(state, interval, socket_process)
   end
 
   defp _connect_voice_to_client(client_pid, state) do

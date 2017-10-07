@@ -17,12 +17,12 @@ defmodule DiscordEx.Connections.REST do
   end
 
   defp process_request_headers(headers) when is_map(headers) do
-    merged_headers = Map.merge(standard_headers, headers)
+    merged_headers = Map.merge(standard_headers(), headers)
     Map.to_list(merged_headers)
   end
 
   defp process_request_headers(headers) do
-    Map.to_list(standard_headers) ++ headers
+    Map.to_list(standard_headers()) ++ headers
   end
 
   defp process_request_body(body) do

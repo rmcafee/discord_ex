@@ -1,6 +1,8 @@
 # Discord Ex - Discord Elixir Library
 
-[![Build Status](https://travis-ci.org/rmcafee/discord_ex.svg?branch=master)](https://travis-ci.org/rmcafee/discord_ex)
+[![Build Status](https://travis-ci.org/rmcafee/discord_ex.svg?branch=master)](https://travis-ci.org/rmcafee/discord_ex) [![Hex pm](https://img.shields.io/hexpm/v/discord_ex.svg)](https://hex.pm/packages/discord_ex)
+
+### Due to time constraints and Discord changes this project has become stale. A new co-maintainer is in the works to help work on a major update that should make the library easier to use and resolve some issues.
 
 Discord library for Elixir. I needed it and figured I'd share.
 
@@ -10,32 +12,32 @@ Please always use [Discord Developer Docs](https://discordapp.com/developers/doc
 
 ## Installation
 
-  1. Add discord_ex to your list of dependencies in `mix.exs`:
+1. Add discord_ex to your list of dependencies in `mix.exs`:
 
-    ```elixir
-    # From Hex
-    def deps do
-        [{:discord_ex, "~> 1.1.8"}]
-    end
-    ```
+```elixir
+# From Hex
+def deps do
+    [{:discord_ex, "~> 1.1.8"}]
+end
+```
 
-    ```elixir
-    # From Github
-    def deps do
-      [{:discord_ex, git: "https://github.com/rmcafee/discord_ex.git", tag: "1.1.8"}]
-    end
-    ```
+```elixir
+# From Github
+def deps do
+  [{:discord_ex, git: "https://github.com/rmcafee/discord_ex.git", tag: "1.1.8"}]
+end
+```
 
-  2. Ensure discord_ex is started before your application:
+2. Ensure discord_ex is started before your application:
 
-    ```elixir
-    def application do
-      [applications: [:discord_ex]]
-    end
-    ```
+```elixir
+def application do
+  [applications: [:discord_ex]]
+end
+```
 
-  3. Look at the examples/echo_bot.ex file and you should honestly be
-     good to go.
+3. Look at the examples/echo_bot.ex file and you should honestly be
+   good to go.
 
 ## Realtime and Bot Client Usage
 

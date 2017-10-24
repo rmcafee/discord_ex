@@ -42,7 +42,7 @@ defmodule DiscordEx.Mixfile do
       {:dns, "~> 0.0.3"},
       {:porcelain, "~> 2.0.1"},
       {:temp, "~> 0.4"},
-      {:credo, "~> 0.4.5", only: [:dev, :test]},
+      {:credo, "~> 0.8.7", only: [:dev, :test]},
 
       # Docs dependencies
       {:earmark, "~> 0.1", only: :docs},

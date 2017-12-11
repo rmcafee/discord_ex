@@ -5,7 +5,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>DiscordEx.RestClient – Discord Elixir v1.1.18</title>
+    <title>DiscordEx.Heartbeat – Discord Elixir v1.1.18</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
     <script src="dist/sidebar_items-506f2099ca.js"></script>
@@ -66,9 +66,9 @@
 
       <h1>
         <small class="visible-xs">Discord Elixir v1.1.18</small>
-        DiscordEx.RestClient
+        DiscordEx.Heartbeat
         
-          <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/rest_client.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -77,8 +77,9 @@
 
       
         <section id="moduledoc">
-          <p>Discord RestClient. Used a GenServer so that you can have multiple
-clients in one application.</p>
+          <p>Heartbeat service for Discord websocket connection.
+Sends heartbeat on interval and detects stale connection if heartbeat ack
+is not received.</p>
 
         </section>
       
@@ -93,22 +94,6 @@ clients in one application.</p>
             Summary
           </h1>
           
-  <div class="summary-types summary">
-    <h2>
-      <a href="#types">Types</a>
-    </h2>
-    <div class="summary-row">
-  <div class="summary-signature">
-    <a href="#t:request_reply/0">request_reply()</a>
-  </div>
-  
-    <div class="summary-synopsis"><p>Response body with  related options</p>
-</div>
-  
-</div>
-
-  </div>
-
 
           
   <div class="summary-functions summary">
@@ -117,24 +102,38 @@ clients in one application.</p>
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#init/2">init(atom, opts)</a>
+    <a href="#ack/1">ack(pid)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#resource/4">resource(connection, method, path, payload \\ nil)</a>
+    <a href="#handle_call/3">handle_call(msg, from, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Reset heartbeat</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_info/2">handle_info(msg, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Heartbeat ACK not received, connection is stale. Stop heartbeat</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#reset/1">reset(pid)</a>
   </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#start_link/2">start_link(opts, server_opts \\ [])</a>
+    <a href="#start_link/4">start_link(agent_seq_num, interval, socket_pid, opts \\ [])</a>
   </div>
-  
-    <div class="summary-synopsis"><p>Start process and HTTP Client.
-{:ok, conn} = DiscordEx.RestClient.start_link(%{token: token})</p>
-</div>
   
 </div>
 
@@ -146,48 +145,6 @@ clients in one application.</p>
         </section>
       
 
-      
-        <section id="types" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#types">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Types
-          </h1>
-          <div class="types-list">
-            <div class="detail" id="t:request_reply/0">
-  
-  
-  <div class="detail-header">
-    <a href="#t:request_reply/0" class="detail-link" title="Link to this type">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this type</span>
-    </a>
-    <span class="signature">request_reply()</span>
-    
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/rest_client.ex#L13" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>request_reply() :: {atom(), map(), map()}</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    <p>Response body with  related options</p>
-
-  </section>
-</div>
-
-          </div>
-        </section>
       
 
       
@@ -199,17 +156,17 @@ clients in one application.</p>
             </a>
             Functions
           </h1>
-          <div class="detail" id="init/2">
+          <div class="detail" id="ack/1">
   
   
   <div class="detail-header">
-    <a href="#init/2" class="detail-link" title="Link to this function">
+    <a href="#ack/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">init(atom, opts)</span>
+    <span class="signature">ack(pid)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/rest_client.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L22" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -221,49 +178,17 @@ clients in one application.</p>
     
   </section>
 </div>
-<div class="detail" id="resource/4">
+<div class="detail" id="handle_call/3">
   
-  
-    <span id="resource/3"></span>
   
   <div class="detail-header">
-    <a href="#resource/4" class="detail-link" title="Link to this function">
+    <a href="#handle_call/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">resource(connection, method, path, payload \\ nil)</span>
+    <span class="signature">handle_call(msg, from, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/rest_client.ex#L26" class="view-source" rel="help" title="View Source">
-       <span class="icon-code" aria-hidden="true"></span>
-       <span class="sr-only">View Source</span>
-     </a>
-    
-    
-    
-      <div class="specs">
-        
-          <pre>resource(pid(), atom(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), map()) :: <a href="#t:request_reply/0">request_reply</a>()</pre>
-        
-      </div>
-    
-  </div>
-  <section class="docstring">
-    
-  </section>
-</div>
-<div class="detail" id="start_link/2">
-  
-  
-    <span id="start_link/1"></span>
-  
-  <div class="detail-header">
-    <a href="#start_link/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <span class="signature">start_link(opts, server_opts \\ [])</span>
-    
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/rest_client.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L72" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
@@ -272,9 +197,77 @@ clients in one application.</p>
     
   </div>
   <section class="docstring">
-    <p>Start process and HTTP Client.
-{:ok, conn} = DiscordEx.RestClient.start_link(%{token: token})</p>
+    <p>Reset heartbeat</p>
 
+  </section>
+</div>
+<div class="detail" id="handle_info/2">
+  
+  
+  <div class="detail-header">
+    <a href="#handle_info/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">handle_info(msg, state)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L51" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    <p>Heartbeat ACK not received, connection is stale. Stop heartbeat.</p>
+
+  </section>
+</div>
+<div class="detail" id="reset/1">
+  
+  
+  <div class="detail-header">
+    <a href="#reset/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">reset(pid)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L18" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="start_link/4">
+  
+  
+    <span id="start_link/3"></span>
+  
+  <div class="detail-header">
+    <a href="#start_link/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">start_link(agent_seq_num, interval, socket_pid, opts \\ [])</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L14" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
+    
+  </div>
+  <section class="docstring">
+    
   </section>
 </div>
 

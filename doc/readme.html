@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>Discord Ex - Discord Elixir Library – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>Discord Ex - Discord Elixir Library – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
 <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +31,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,9 +55,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,36 +65,50 @@
 
 
 <h1>Discord Ex - Discord Elixir Library</h1>
-<p><a href="https://travis-ci.org/rmcafee/discord_ex"><img src="https://travis-ci.org/rmcafee/discord_ex.svg?branch=master" alt="Build Status"/></a></p>
+<p><a href="https://travis-ci.org/rmcafee/discord_ex"><img src="https://travis-ci.org/rmcafee/discord_ex.svg?branch=master" alt="Build Status"/></a> <a href="https://hex.pm/packages/discord_ex"><img src="https://img.shields.io/hexpm/v/discord_ex.svg" alt="Hex pm"/></a></p>
+<h3 id="due-to-time-constraints-and-discord-changes-this-project-has-become-stale-a-new-co-maintainer-is-in-the-works-to-help-work-on-a-major-update-that-should-make-the-library-easier-to-use-and-resolve-some-issues" class="section-heading">
+  <a href="#due-to-time-constraints-and-discord-changes-this-project-has-become-stale-a-new-co-maintainer-is-in-the-works-to-help-work-on-a-major-update-that-should-make-the-library-easier-to-use-and-resolve-some-issues" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Due to time constraints and Discord changes this project has become stale. A new co-maintainer is in the works to help work on a major update that should make the library easier to use and resolve some issues.
+</h3>
+
 <p>Discord library for Elixir. I needed it and figured I’d share.</p>
 <p>This library is useful for making calls and implementing a bot as well.</p>
 <p>Please always use <a href="https://discordapp.com/developers/docs">Discord Developer Docs</a> as a reference.</p>
-<h2 id="installation"> Installation</h2><ol>
-<li><p>Add discord_ex to your list of dependencies in <code class="inline">mix.exs</code>:</p>
-<pre><code class="elixir">    # From Hex
-    def deps do
-        [{:discord_ex, &quot;~&gt; 1.1.8&quot;}]
-    end
-    ```
-</code></pre>
-<pre><code class="elixir"># From Github
-def deps do
-  [{:discord_ex, git: &quot;https://github.com/rmcafee/discord_ex.git&quot;, tag: &quot;1.1.8&quot;}]
-end
-```</code></pre>
-</li>
-<li><p>Ensure discord_ex is started before your application:</p>
-<pre><code class="elixir">    def application do
-      [applications: [:discord_ex]]
-    end
-    ```
-</code></pre>
-</li>
-<li>Look at the examples/echo_bot.ex file and you should honestly be
- good to go.
+<h2 id="installation" class="section-heading">
+  <a href="#installation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Installation
+</h2>
+
+<ol>
+<li>Add discord_ex to your list of dependencies in <code class="inline">mix.exs</code>:
 </li>
 </ol>
-<h2 id="realtime-and-bot-client-usage"> Realtime and Bot Client Usage</h2><p>So you want to create a bot huh? Easy peezy.</p>
+<pre><code class="elixir"># From Hex
+def deps do
+    [{:discord_ex, &quot;~&gt; 1.1.18&quot;}]
+end</code></pre>
+<pre><code class="elixir"># From Github
+def deps do
+  [{:discord_ex, git: &quot;https://github.com/rmcafee/discord_ex.git&quot;, tag: &quot;1.1.18&quot;}]
+end</code></pre>
+<ol start="2">
+<li>Ensure discord_ex is started before your application:
+</li>
+</ol>
+<pre><code class="elixir">def application do
+  [applications: [:discord_ex]]
+end</code></pre>
+<ol start="3">
+<li>Look at the examples/echo_bot.ex file and you should honestly be
+   good to go.
+</li>
+</ol>
+<h2 id="realtime-and-bot-client-usage" class="section-heading">
+  <a href="#realtime-and-bot-client-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Realtime and Bot Client Usage
+</h2>
+
+<p>So you want to create a bot huh? Easy peezy.</p>
 <p>1) Create a bot with a default handler to handle any event:</p>
 <pre><code class="elixir"># Default Fallback Handler for all events!
 # This way things don&#39;t blow up when you get an event you
@@ -112,7 +133,11 @@ end</code></pre>
 <p><strong>As a note your bot_client is a gen_server that will have state properties that contain:</strong></p>
 <p><strong>:client_id</strong> - your ClientID, so you don’t have to constantly ask API for it</p>
 <p><strong>:rest_client</strong> - you can use this process to make calls without having to setup another rest client connection. So in your callback you can do this in your callback with ease:</p>
-<h3>Possible events:</h3>
+<h3 id="possible-events" class="section-heading">
+  <a href="#possible-events" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Possible events:
+</h3>
+
 <p>Those events are described <a href="https://discordapp.com/developers/docs/topics/gateway#events">here</a>.</p>
 <pre><code class="elixir">:resumed
 :channel_create
@@ -143,7 +168,12 @@ end</code></pre>
 <pre><code class="elixir">alias DiscordEx.RestClient.Resources.User
 
 User.current(state[:rest_client])</code></pre>
-<h2 id="voice-client-usage"> Voice Client Usage</h2><p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed.</p>
+<h2 id="voice-client-usage" class="section-heading">
+  <a href="#voice-client-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Voice Client Usage
+</h2>
+
+<p>Keep in mind you will need to have <a href="https://ffmpeg.org">ffmpeg</a> and <a href="https://github.com/nstafie/dca-rs">dca-rs</a> installed.</p>
 <p>If your dca-rs is not installed as <code class="inline">/usr/local/bin/dca-rs</code> you can provide path
 to it in your <code class="inline">config.exs</code> with:</p>
 <pre><code class="elixir">config :discord_ex, dca_rs_path: &quot;/your/path/dca-rs&quot;</code></pre>
@@ -174,7 +204,12 @@ to it in your <code class="inline">config.exs</code> with:</p>
 <pre><code class="elixir">DiscordEx.Voice.Controller.play(voice_client,&quot;/path/to/your/audio.wav&quot;, %{volumne: 128})</code></pre>
 <p><strong>If you want to stop it so you can play something else just stop it:</strong></p>
 <pre><code class="elixir">DiscordEx.Voice.Controller.stop(voice_client)</code></pre>
-<h2 id="rest-client-usage"> REST Client Usage</h2><p>The easy way to use discord resources is by doing the following.</p>
+<h2 id="rest-client-usage" class="section-heading">
+  <a href="#rest-client-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  REST Client Usage
+</h2>
+
+<p>The easy way to use discord resources is by doing the following.</p>
 <pre><code class="elixir"># alias the resource you wish to use to make it easy on yourself
 
 alias DiscordEx.RestClient.Resources.User
@@ -201,7 +236,11 @@ DiscordEx.RestClient.resource(conn, :post, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :put, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :patch, &lt;url&gt;, &lt;map-of-data&gt;)
 DiscordEx.RestClient.resource(conn, :delete, &lt;url&gt;)</code></pre>
-<h2><strong> The following Resources are supported - you can look at their docs for examples and more information: </strong></h2>
+<h2 id="the-following-resources-are-supported-you-can-look-at-their-docs-for-examples-and-more-information" class="section-heading">
+  <a href="#the-following-resources-are-supported-you-can-look-at-their-docs-for-examples-and-more-information" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <strong> The following Resources are supported - you can look at their docs for examples and more information: </strong>
+</h2>
+
 <pre><code class="elixir">alias DiscordEx.RestClient.Resources.Channel
 
 Channel.bulk_delete_messages/3
@@ -280,7 +319,12 @@ User.logout/1
 User.modify/2
 User.query/3</code></pre>
 <p><a href="DiscordEx.RestClient.Resources.User.html">user-resource-doc</a></p>
-<h2 id="todos"> TODOS</h2><ul>
+<h2 id="todos" class="section-heading">
+  <a href="#todos" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  TODOS
+</h2>
+
+<ul>
 <li>Would love more tests!
 </li>
 <li>DRY up some similar behaviour.
@@ -293,20 +337,24 @@ User.query/3</code></pre>
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

@@ -3,8 +3,8 @@ defmodule DiscordEx.Mixfile do
 
   def project do
     [app: :discord_ex,
-     version: "1.1.17",
-     elixir: "~> 1.3",
+     version: "1.1.18",
+     elixir: "~> 1.5.2",
      name: "Discord Elixir",
      source_url: "https://github.com/rmcafee/discord_ex",
      build_embedded: Mix.env == :prod,
@@ -45,8 +45,8 @@ defmodule DiscordEx.Mixfile do
       {:credo, "~> 0.8.7", only: [:dev, :test]},
 
       # Docs dependencies
-      {:earmark, "~> 0.1", only: :docs},
-      {:ex_doc, "~> 0.11", only: :docs},
+      {:earmark, "~> 1.1", only: :docs},
+      {:ex_doc, "~> 0.16", only: :docs},
       {:inch_ex, "~> 0.2", only: :docs}
     ]
   end

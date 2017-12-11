@@ -1,20 +1,26 @@
     <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordEx.Client.Helpers.MessageHelper – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>DiscordEx.Client.Helpers.MessageHelper – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
     <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +31,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,9 +55,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,18 +65,18 @@
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.1.8</small>
+        <small class="visible-xs">Discord Elixir v1.1.18</small>
         DiscordEx.Client.Helpers.MessageHelper
         
-        
           <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L1" title="View Source" class="view-source" rel="help">
-            <i class="icon-code"></i>
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
           </a>
         
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>Bot Message Helpers</p>
 
         </section>
@@ -79,7 +86,8 @@
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
@@ -145,8 +153,6 @@ Returns a tuple with the command and the message</p>
 
           
 
-          
-
         </section>
       
 
@@ -156,37 +162,43 @@ Returns a tuple with the command and the message</p>
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Functions
           </h1>
           <div class="detail" id="actionable_message_for?/3">
+  
+  
   <div class="detail-header">
     <a href="#actionable_message_for?/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">actionable_message_for?(bot_name, payload, state)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L26" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">actionable_message_for?(<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map, map) :: boolean</code></pre>
+          <pre>actionable_message_for?(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), map(), map()) :: boolean()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Actionable Mention and DM Message</p>
 <p>This checks that an incoming message is private or is a mention to the defined user.</p>
-<h2>Parameters</h2>
+<h2 id="actionable_message_for?/3-parameters" class="section-heading">
+  <a href="#actionable_message_for?/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>bot_name: Name of the bot you are using.
 </li>
@@ -195,122 +207,153 @@ Returns a tuple with the command and the message</p>
 <li>state: Current state of bot.
 </li>
 </ul>
-<h2>Example</h2>
+<h2 id="actionable_message_for?/3-example" class="section-heading">
+  <a href="#actionable_message_for?/3-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
 <pre><code class="elixir">MessageHelper.actionable_message_for?(&quot;Mr.Botman&quot;, payload, state)
 #=&gt; true</code></pre>
 
   </section>
 </div>
 <div class="detail" id="actionable_message_for_me?/2">
+  
+  
   <div class="detail-header">
     <a href="#actionable_message_for_me?/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">actionable_message_for_me?(payload, state)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L49" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">actionable_message_for_me?(map, map) :: boolean</code></pre>
+          <pre>actionable_message_for_me?(map(), map()) :: boolean()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Actionable Mention and DM Message
 This checks that an incoming message is private or is a mention to the current user.</p>
-<h2>Parameters</h2>
+<h2 id="actionable_message_for_me?/2-parameters" class="section-heading">
+  <a href="#actionable_message_for_me?/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>payload: Data from the triggered event.
 </li>
 <li>state: Current state of bot.
 </li>
 </ul>
-<h2>Example</h2>
+<h2 id="actionable_message_for_me?/2-example" class="section-heading">
+  <a href="#actionable_message_for_me?/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
 <pre><code class="elixir">MessageHelper.actionable_message_for_me?(payload, state)
 #=&gt; true</code></pre>
 
   </section>
 </div>
 <div class="detail" id="msg_command_parse/1">
+  
+  
   <div class="detail-header">
     <a href="#msg_command_parse/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">msg_command_parse(payload)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L76" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">msg_command_parse(map) :: {<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+          <pre>msg_command_parse(map()) :: {<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Parses a message payload which is content leading with ‘!’.
 Returns a tuple with the command and the message.</p>
-<h2>Parameters</h2>
+<h2 id="msg_command_parse/1-parameters" class="section-heading">
+  <a href="#msg_command_parse/1-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>payload: Data from the triggered event.
 </li>
 </ul>
-<h2>Example</h2>
+<h2 id="msg_command_parse/1-example" class="section-heading">
+  <a href="#msg_command_parse/1-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
 <pre><code class="elixir">MessageHelper.msg_command_parse(payload)
 #=&gt; {&quot;ping&quot;, &quot;me please!&quot;}</code></pre>
 
   </section>
 </div>
 <div class="detail" id="msg_command_parse/2">
+  
+  
   <div class="detail-header">
     <a href="#msg_command_parse/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">msg_command_parse(payload, prefix)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/helpers/message_helper.ex#L104" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">msg_command_parse(map, String) :: {<a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>}</code></pre>
+          <pre>msg_command_parse(map(), String) :: {<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Parses a message payload which is content leading with provided prefix.
 Returns a tuple with the command and the message.</p>
-<h2>Parameters</h2>
+<h2 id="msg_command_parse/2-parameters" class="section-heading">
+  <a href="#msg_command_parse/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>prefix: prefix for your command
 </li>
 <li>payload: Data from the triggered event.
 </li>
 </ul>
-<h2>Example</h2>
+<h2 id="msg_command_parse/2-example" class="section-heading">
+  <a href="#msg_command_parse/2-example" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example
+</h2>
+
 <pre><code class="elixir">MessageHelper.msg_command_parse(payload, &quot;!&quot;)
 #=&gt; {&quot;ping&quot;, &quot;me please!&quot;}</code></pre>
 
@@ -321,26 +364,28 @@ Returns a tuple with the command and the message.</p>
       
 
       
-
-      
           <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>API Reference – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>API Reference – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="extras">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
 <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +31,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,33 +55,29 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-  <h1>
-    <small class="visible-xs">Discord Elixir v1.1.8</small>
-    API Reference
-  </h1>
 
-  <ul class="summary-links">
-    
-      <li><a href="#modules">Modules</a></li>
-    
-    
-    
-  </ul>
+<h1>
+  <small class="visible-xs">Discord Elixir v1.1.18</small>
+  API Reference
+</h1>
 
-  
-    <section id="modules" class="details-list">
-      <h1 class="section-heading">Modules</h1>
-      <div class="summary">
-        <div class="summary-row">
+
+  <section class="details-list">
+    <h2 id="modules" class="section-heading">
+  <a href="#modules" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Modules
+</h2>
+
+    <div class="summary">
+      <div class="summary-row">
   <div class="summary-signature"><a href="DiscordEx.html">DiscordEx</a></div>
   
     <div class="summary-synopsis"><p>Base Discord Ex Module</p>
@@ -112,6 +116,15 @@
   <div class="summary-signature"><a href="DiscordEx.EchoBot.html">DiscordEx.EchoBot</a></div>
   
     <div class="summary-synopsis"><p>An all so original echo and ping bot!</p>
+</div>
+  
+</div>
+<div class="summary-row">
+  <div class="summary-signature"><a href="DiscordEx.Heartbeat.html">DiscordEx.Heartbeat</a></div>
+  
+    <div class="summary-synopsis"><p>Heartbeat service for Discord websocket connection.
+Sends heartbeat on interval and detects stale connection if heartbeat ack
+is not received</p>
 </div>
   
 </div>
@@ -202,31 +215,36 @@ to your regular client if you wish to use it with your bot</p>
   
 </div>
 
-      </div>
-    </section>
-  
+    </div>
+  </section>
 
-  
 
-  
+
+
+
+
       <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

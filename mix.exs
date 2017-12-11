@@ -45,9 +45,9 @@ defmodule DiscordEx.Mixfile do
       {:credo, "~> 0.8.7", only: [:dev, :test]},
 
       # Docs dependencies
-      {:earmark, "~> 1.1", only: :docs},
-      {:ex_doc, "~> 0.16", only: :docs},
-      {:inch_ex, "~> 0.2", only: :docs}
+      {:earmark, "~> 1.1", only: [:dev, :docs]},
+      {:ex_doc, "~> 0.16", only: [:dev, :docs]},
+      {:inch_ex, "~> 0.2", only: [:dev, :docs]}
     ]
   end
 

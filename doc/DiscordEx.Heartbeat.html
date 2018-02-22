@@ -5,10 +5,10 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.18.1">
-    <title>DiscordEx.Permissions – Discord Elixir v1.1.18</title>
+    <title>DiscordEx.Heartbeat – Discord Elixir v1.1.18</title>
     <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-      <link rel="canonical" href="https://hexdocs.pm/discord_ex/DiscordEx.Permissions.html" />
+      <link rel="canonical" href="https://hexdocs.pm/discord_ex/DiscordEx.Heartbeat.html" />
     
     <script src="dist/sidebar_items-506f2099ca.js"></script>
     
@@ -68,9 +68,9 @@
 
       <h1>
         <small class="visible-xs">Discord Elixir v1.1.18</small>
-        DiscordEx.Permissions
+        DiscordEx.Heartbeat
         
-          <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/permissions.ex#L1" title="View Source" class="view-source" rel="help">
+          <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L1" title="View Source" class="view-source" rel="help">
             <span class="icon-code" aria-hidden="true"></span>
             <span class="sr-only">View Source</span>
           </a>
@@ -79,7 +79,9 @@
 
       
         <section id="moduledoc">
-          <p>Easily assign permissions with this helper module.</p>
+          <p>Heartbeat service for Discord websocket connection.
+Sends heartbeat on interval and detects stale connection if heartbeat ack
+is not received.</p>
 
         </section>
       
@@ -102,29 +104,38 @@
     </h2>
     <div class="summary-row">
   <div class="summary-signature">
-    <a href="#add/2">add(existing_permissions \\ 0, new_permission)</a>
+    <a href="#ack/1">ack(pid)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Add any permission to an existing set of permissions and return the complete permission value</p>
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#handle_call/3">handle_call(msg, from, state)</a>
+  </div>
+  
+    <div class="summary-synopsis"><p>Reset heartbeat</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#remove/2">remove(existing_permissions, new_permission)</a>
+    <a href="#handle_info/2">handle_info(msg, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Remove any permission from an existing set of permissions and return updated value</p>
+    <div class="summary-synopsis"><p>Heartbeat ACK not received, connection is stale. Stop heartbeat</p>
 </div>
   
 </div>
 <div class="summary-row">
   <div class="summary-signature">
-    <a href="#to_map/1">to_map(permissions)</a>
+    <a href="#reset/1">reset(pid)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Take current permission value and convert it to a map of permissions</p>
 </div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#start_link/4">start_link(agent_seq_num, interval, socket_pid, opts \\ [])</a>
+  </div>
   
 </div>
 
@@ -147,93 +158,118 @@
             </a>
             Functions
           </h1>
-          <div class="detail" id="add/2">
+          <div class="detail" id="ack/1">
   
-  
-    <span id="add/1"></span>
   
   <div class="detail-header">
-    <a href="#add/2" class="detail-link" title="Link to this function">
+    <a href="#ack/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">add(existing_permissions \\ 0, new_permission)</span>
+    <span class="signature">ack(pid)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/permissions.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L22" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
     
     
     
-      <div class="specs">
-        
-          <pre>add(integer(), atom()) :: integer()</pre>
-        
-      </div>
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="handle_call/3">
+  
+  
+  <div class="detail-header">
+    <a href="#handle_call/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">handle_call(msg, from, state)</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L72" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
     
   </div>
   <section class="docstring">
-    <p>Add any permission to an existing set of permissions and return the complete permission value.</p>
+    <p>Reset heartbeat</p>
 
   </section>
 </div>
-<div class="detail" id="remove/2">
+<div class="detail" id="handle_info/2">
   
   
   <div class="detail-header">
-    <a href="#remove/2" class="detail-link" title="Link to this function">
+    <a href="#handle_info/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">remove(existing_permissions, new_permission)</span>
+    <span class="signature">handle_info(msg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/permissions.ex#L39" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L51" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
     
     
     
-      <div class="specs">
-        
-          <pre>remove(integer(), atom()) :: integer()</pre>
-        
-      </div>
-    
   </div>
   <section class="docstring">
-    <p>Remove any permission from an existing set of permissions and return updated value.</p>
+    <p>Heartbeat ACK not received, connection is stale. Stop heartbeat.</p>
 
   </section>
 </div>
-<div class="detail" id="to_map/1">
+<div class="detail" id="reset/1">
   
   
   <div class="detail-header">
-    <a href="#to_map/1" class="detail-link" title="Link to this function">
+    <a href="#reset/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <span class="signature">to_map(permissions)</span>
+    <span class="signature">reset(pid)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/permissions.ex#L46" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L18" class="view-source" rel="help" title="View Source">
        <span class="icon-code" aria-hidden="true"></span>
        <span class="sr-only">View Source</span>
      </a>
     
     
     
-      <div class="specs">
-        
-          <pre>to_map(integer()) :: map()</pre>
-        
-      </div>
+  </div>
+  <section class="docstring">
+    
+  </section>
+</div>
+<div class="detail" id="start_link/4">
+  
+  
+    <span id="start_link/3"></span>
+  
+  <div class="detail-header">
+    <a href="#start_link/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <span class="signature">start_link(agent_seq_num, interval, socket_pid, opts \\ [])</span>
+    
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/heartbeat.ex#L14" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
+     </a>
+    
+    
     
   </div>
   <section class="docstring">
-    <p>Take current permission value and convert it to a map of permissions.</p>
-
+    
   </section>
 </div>
 

@@ -1,20 +1,28 @@
     <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordEx.Client – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>DiscordEx.Client – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+      <link rel="canonical" href="https://hexdocs.pm/discord_ex/DiscordEx.Client.html" />
+    
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
     <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +33,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,9 +57,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,22 +67,26 @@
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.1.8</small>
+        <small class="visible-xs">Discord Elixir v1.1.18</small>
         DiscordEx.Client
         
-        
           <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L1" title="View Source" class="view-source" rel="help">
-            <i class="icon-code"></i>
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
           </a>
         
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>Connect to Discord to recieve and send data in realtime</p>
 <p>You shouldn’t be using this directly apart from calling <a href="#start_link/1"><code class="inline">start_link/1</code></a>
 and <a href="#status_update/2"><code class="inline">status_update/2</code></a>. You should pass it to a handler.</p>
-<h2>Examples</h2>
+<h2 id="module-examples" class="section-heading">
+  <a href="#module-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">token = &quot;&lt;your-token&gt;&quot;
 DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
 #=&gt; {:ok, #PID&lt;0.178.0&gt;}</code></pre>
@@ -85,7 +98,8 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
@@ -185,7 +199,7 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
     <a href="#websocket_handle/3">websocket_handle(arg, socket, state)</a>
   </div>
   
-    <div class="summary-synopsis"><p>Callback implementation for <code class="inline">c::websocket_client.websocket_handle/3</code></p>
+    <div class="summary-synopsis"><p>Handle binary data sent by Discord over the Websocket</p>
 </div>
   
 </div>
@@ -213,8 +227,6 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
 
           
 
-          
-
         </section>
       
 
@@ -224,249 +236,301 @@ DiscordEx.Client.start_link(%{token: token, handler: DiscordEx.EchoBot})
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Functions
           </h1>
           <div class="detail" id="_voice_setup_gather_data/3">
+  
+  
+    <span id="_voice_setup_gather_data/2"></span>
+  
   <div class="detail-header">
     <a href="#_voice_setup_gather_data/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">_voice_setup_gather_data(caller_pid, data \\ %{}, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L298" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L355" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Start a voice connection listener process</p>
 
   </section>
 </div>
 <div class="detail" id="handle_event/2">
+  
+  
   <div class="detail-header">
     <a href="#handle_event/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">handle_event(arg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L195" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L292" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     
   </section>
 </div>
 <div class="detail" id="identify/1">
+  
+  
   <div class="detail-header">
     <a href="#identify/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">identify(state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L226" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L297" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     
   </section>
 </div>
 <div class="detail" id="init/1">
+  
+  
   <div class="detail-header">
     <a href="#init/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">init(state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L67" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L82" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Callback implementation for <code class="inline">c::websocket_client.init/1</code>.</p>
 
   </section>
 </div>
 <div class="detail" id="onconnect/2">
+  
+  
   <div class="detail-header">
     <a href="#onconnect/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">onconnect(WSReq, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L78" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L94" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Callback implementation for <code class="inline">c::websocket_client.onconnect/2</code>.</p>
 
   </section>
 </div>
 <div class="detail" id="ondisconnect/2">
+  
+  
   <div class="detail-header">
     <a href="#ondisconnect/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">ondisconnect(arg, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L84" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L100" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Callback implementation for <code class="inline">c::websocket_client.ondisconnect/2</code>.</p>
 
   </section>
 </div>
 <div class="detail" id="opcodes/0">
+  
+  
   <div class="detail-header">
     <a href="#opcodes/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">opcodes()</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L22" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L23" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     
   </section>
 </div>
 <div class="detail" id="socket_url/1">
+  
+  
   <div class="detail-header">
     <a href="#socket_url/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">socket_url(opts)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L244" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L315" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">socket_url(map) :: <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a></code></pre>
+          <pre>socket_url(map()) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     
   </section>
 </div>
 <div class="detail" id="start_link/1">
+  
+  
   <div class="detail-header">
     <a href="#start_link/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">start_link(opts)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L39" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L42" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     
   </section>
 </div>
 <div class="detail" id="status_update/2">
+  
+  
   <div class="detail-header">
     <a href="#status_update/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">status_update(state, new_status)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L343" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L400" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">status_update(map, map) :: nil</code></pre>
+          <pre>status_update(map(), map()) :: nil</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Changes your status</p>
-<h2>Parameters</h2>
+<h2 id="status_update/2-parameters" class="section-heading">
+  <a href="#status_update/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li><p>new_status: map with new status</p>
 <p>  Supported keys in that map: <code class="inline">:idle_since</code> and <code class="inline">:game_name</code>.
   If some of them are missing <code class="inline">nil</code> is used.</p>
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="status_update/2-examples" class="section-heading">
+  <a href="#status_update/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">new_status = %{idle_since: 123456, game_name: &quot;some game&quot;}
 Client.status_update(state, new_status)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="voice_state_update/5">
+  
+  
+    <span id="voice_state_update/4"></span>
+  
   <div class="detail-header">
     <a href="#voice_state_update/5" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">voice_state_update(client_pid, guild_id, channel_id, user_id, options \\ %{})</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L104" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L121" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">voice_state_update(pid, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>, map) :: atom</code></pre>
+          <pre>voice_state_update(pid(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), map()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Voice State Update for Users ( move users around voice channels )</p>
-<h2>Parameters</h2>
+<h2 id="voice_state_update/5-parameters" class="section-heading">
+  <a href="#voice_state_update/5-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>client_pid: Base client process
 </li>
@@ -479,63 +543,79 @@ Client.status_update(state, new_status)</code></pre>
 <li>options: Options to set on the user
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="voice_state_update/5-examples" class="section-heading">
+  <a href="#voice_state_update/5-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">DiscordEx.Client.voice_state_update(client, guild_id, user_id, channel_id, %{self_deaf: true, self_mute: false})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="websocket_handle/3">
+  
+  
   <div class="detail-header">
     <a href="#websocket_handle/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">websocket_handle(arg, socket, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L110" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L128" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
-    <p>Callback implementation for <code class="inline">c::websocket_client.websocket_handle/3</code>.</p>
+    <p>Handle binary data sent by Discord over the Websocket</p>
 
   </section>
 </div>
 <div class="detail" id="websocket_info/3">
+  
+  
   <div class="detail-header">
     <a href="#websocket_info/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">websocket_info(arg1, connection, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L131" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L249" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Initiate voice connection update state call</p>
 
   </section>
 </div>
 <div class="detail" id="websocket_terminate/3">
+  
+  
   <div class="detail-header">
     <a href="#websocket_terminate/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">websocket_terminate(reason, conn_state, state)</span>
     
-      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L186" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+      <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/client/client.ex#L256" class="view-source" rel="help" title="View Source">
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Callback implementation for <code class="inline">c::websocket_client.websocket_terminate/3</code>.</p>
 
@@ -546,26 +626,28 @@ Client.status_update(state, new_status)</code></pre>
       
 
       
-
-      
           <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

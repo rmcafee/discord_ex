@@ -1,20 +1,28 @@
     <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordEx.RestClient.Resources.Guild – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>DiscordEx.RestClient.Resources.Guild – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+      <link rel="canonical" href="https://hexdocs.pm/discord_ex/DiscordEx.RestClient.Resources.Guild.html" />
+    
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
     <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +33,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,9 +57,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,18 +67,18 @@
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.1.8</small>
+        <small class="visible-xs">Discord Elixir v1.1.18</small>
         DiscordEx.RestClient.Resources.Guild
         
-        
           <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L1" title="View Source" class="view-source" rel="help">
-            <i class="icon-code"></i>
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
           </a>
         
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>Convience helper for guild resource</p>
 
         </section>
@@ -79,7 +88,8 @@
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
@@ -357,8 +367,6 @@
 
           
 
-          
-
         </section>
       
 
@@ -368,38 +376,44 @@
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Functions
           </h1>
           <div class="detail" id="ban_member/4">
+  
+  
   <div class="detail-header">
     <a href="#ban_member/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">ban_member(conn, guild_id, user_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L225" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">ban_member(pid, number, number, map) :: atom</code></pre>
+          <pre>ban_member(pid(), number(), number(), map()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Ban guild member</p>
 <p>Create a guild ban, and optionally delete previous messages sent by
 the banned user. Requires the ‘BAN_MEMBERS’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="ban_member/4-parameters" class="section-heading">
+  <a href="#ban_member/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -410,76 +424,94 @@ the banned user. Requires the ‘BAN_MEMBERS’ permission.</p>
 <li>options: Option for banning which includes (delete-message-days)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="ban_member/4-examples" class="section-heading">
+  <a href="#ban_member/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.ban_member(conn, 9999999923792, 3290238023092309, %{delete-message-days: 3})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="bans/2">
+  
+  
   <div class="detail-header">
     <a href="#bans/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">bans(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L270" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">bans(pid, number) :: map</code></pre>
+          <pre>bans(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>List banned users</p>
-<h2>Parameters</h2>
+<h2 id="bans/2-parameters" class="section-heading">
+  <a href="#bans/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="bans/2-examples" class="section-heading">
+  <a href="#bans/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.bans(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="batch_modify_roles/3">
+  
+  
   <div class="detail-header">
     <a href="#batch_modify_roles/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">batch_modify_roles(conn, guild_id, role_option_array)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L333" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">batch_modify_roles(pid, number, list) :: map</code></pre>
+          <pre>batch_modify_roles(pid(), number(), list()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Batch modify roles</p>
 <p>Batch modify a set of role objects for the guild.
 Requires the ‘MANAGE_ROLES’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="batch_modify_roles/3-parameters" class="section-heading">
+  <a href="#batch_modify_roles/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -490,7 +522,11 @@ Requires the ‘MANAGE_ROLES’ permission.</p>
 <li>role_option_array: Options to update roles which include (id, name, permissions, position, color, hoist)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="batch_modify_roles/3-examples" class="section-heading">
+  <a href="#batch_modify_roles/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.batch_modify_roles(conn, 9999999923792, 3290238023092309, [
   %{id: 392092390909032, position: 1},
   %{id: 392053390902324, position: 2}
@@ -499,32 +535,37 @@ Requires the ‘MANAGE_ROLES’ permission.</p>
   </section>
 </div>
 <div class="detail" id="begin_prune/3">
+  
+  
   <div class="detail-header">
     <a href="#begin_prune/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">begin_prune(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L399" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">begin_prune(pid, number, map) :: map</code></pre>
+          <pre>begin_prune(pid(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Begin guild prune</p>
 <p>Begin a prune operation. Requires the ‘KICK_MEMBERS’ permission. </p>
-<h2>Parameters</h2>
+<h2 id="begin_prune/3-parameters" class="section-heading">
+  <a href="#begin_prune/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -533,106 +574,136 @@ Requires the ‘MANAGE_ROLES’ permission.</p>
 <li>options: Options to prune guild members which include (days)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="begin_prune/3-examples" class="section-heading">
+  <a href="#begin_prune/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.begin_prune(conn, 9999999923792, %{days: 7})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="channels/2">
+  
+  
   <div class="detail-header">
     <a href="#channels/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">channels(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L97" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">channels(pid, number) :: map</code></pre>
+          <pre>channels(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get guild channels</p>
-<h2>Parameters</h2>
+<h2 id="channels/2-parameters" class="section-heading">
+  <a href="#channels/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="channels/2-examples" class="section-heading">
+  <a href="#channels/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.channels(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="create/2">
+  
+  
   <div class="detail-header">
     <a href="#create/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">create(conn, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L40" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Create guild</p>
 <p>This endpoint is only available for whitelisted bots. If you believe
 you have a legitimate use case for automating guild creation, please
 contact support@discordapp.com.</p>
-<h2>Parameters</h2>
+<h2 id="create/2-parameters" class="section-heading">
+  <a href="#create/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>options: Options for creating a guild including (name, region, icon)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="create/2-examples" class="section-heading">
+  <a href="#create/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.create(conn, %{name: &quot;My Guild&quot;, region: &quot;Amsterdam&quot;, icon: &quot;/path/to/local/icon.jpg&quot;})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="create_channel/3">
+  
+  
   <div class="detail-header">
     <a href="#create_channel/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">create_channel(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L117" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">create_channel(pid, number, map) :: map</code></pre>
+          <pre>create_channel(pid(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Create guild channel</p>
 <p>Requires the ‘MANAGE_CHANNELS’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="create_channel/3-parameters" class="section-heading">
+  <a href="#create_channel/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -641,77 +712,95 @@ contact support@discordapp.com.</p>
 <li>options: Options for creating a guild channel including (name, type, bitrate)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="create_channel/3-examples" class="section-heading">
+  <a href="#create_channel/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.create_channel(conn, 93209203902, %{name: &quot;general-chat&quot;, type: &quot;text&quot;})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="create_empty_role/2">
+  
+  
   <div class="detail-header">
     <a href="#create_empty_role/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">create_empty_role(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L308" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">create_empty_role(pid, number) :: map</code></pre>
+          <pre>create_empty_role(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Create guild role</p>
 <p>Create a new empty role object for the guild. Requires the ‘MANAGE_ROLES’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="create_empty_role/2-parameters" class="section-heading">
+  <a href="#create_empty_role/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="create_empty_role/2-examples" class="section-heading">
+  <a href="#create_empty_role/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.create_empty_role(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="create_integration/3">
+  
+  
   <div class="detail-header">
     <a href="#create_integration/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">create_integration(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L518" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">create_integration(pid, number, map) :: atom</code></pre>
+          <pre>create_integration(pid(), number(), map()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Create guild integration</p>
 <p>Attach an integration object from the current user to the guild.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="create_integration/3-parameters" class="section-heading">
+  <a href="#create_integration/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -720,77 +809,95 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>options: Options for creating a guild integration including (type, id)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="create_integration/3-examples" class="section-heading">
+  <a href="#create_integration/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.create_integration(conn, 93209203902, %{id: 3288823892398298293, type: &quot;awesome-application&quot;})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="delete/2">
+  
+  
   <div class="detail-header">
     <a href="#delete/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">delete(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L80" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">delete(pid, number) :: map</code></pre>
+          <pre>delete(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Delete guild</p>
 <p>BE CAREFUL - YOU CAN NOT UNDO! User must be owner.</p>
-<h2>Parameters</h2>
+<h2 id="delete/2-parameters" class="section-heading">
+  <a href="#delete/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="delete/2-examples" class="section-heading">
+  <a href="#delete/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.delete(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="delete_integration/3">
+  
+  
   <div class="detail-header">
     <a href="#delete_integration/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">delete_integration(conn, guild_id, integration_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L569" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">delete_integration(pid, number, number) :: atom</code></pre>
+          <pre>delete_integration(pid(), number(), number()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Delete guild integration</p>
 <p>Delete the attached integration object for the guild.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="delete_integration/3-parameters" class="section-heading">
+  <a href="#delete_integration/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -799,38 +906,47 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>integration_id: Integration id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="delete_integration/3-examples" class="section-heading">
+  <a href="#delete_integration/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.delete_integration(conn, 93209203902, 3892898393)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="delete_role/3">
+  
+  
   <div class="detail-header">
     <a href="#delete_role/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">delete_role(conn, guild_id, role_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L375" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">delete_role(pid, number, number) :: atom</code></pre>
+          <pre>delete_role(pid(), number(), number()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Remove guild role</p>
 <p>Delete a guild role. Requires the ‘MANAGE_ROLES’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="delete_role/3-parameters" class="section-heading">
+  <a href="#delete_role/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -839,194 +955,239 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>role_id: Role id of guild member
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="delete_role/3-examples" class="section-heading">
+  <a href="#delete_role/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.delete_role(conn, 9999999923792, 3290238023092309)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="embed/2">
+  
+  
   <div class="detail-header">
     <a href="#embed/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">embed(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L477" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">embed(pid, number) :: map</code></pre>
+          <pre>embed(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get guild embed</p>
 <p>Returns the guild embed object.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="embed/2-parameters" class="section-heading">
+  <a href="#embed/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="embed/2-examples" class="section-heading">
+  <a href="#embed/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.embed(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="get/2">
+  
+  
   <div class="detail-header">
     <a href="#get/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">get(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L19" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">get(pid, <a href="http://elixir-lang.org/docs/stable/elixir/String.html#t:t/0">String.t</a>) :: map</code></pre>
+          <pre>get(pid(), map()) :: map()</pre>
         
-          <pre><code class="elixir">get(pid, map) :: map</code></pre>
+          <pre>get(pid(), <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get guild object</p>
-<h2>Parameters</h2>
+<h2 id="get/2-parameters" class="section-heading">
+  <a href="#get/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="get/2-examples" class="section-heading">
+  <a href="#get/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.get(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="integrations/2">
+  
+  
   <div class="detail-header">
     <a href="#integrations/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">integrations(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L497" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">integrations(pid, number) :: map</code></pre>
+          <pre>integrations(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get integrations</p>
 <p>Returns a list of integration objects for the guild.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="integrations/2-parameters" class="section-heading">
+  <a href="#integrations/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="integrations/2-examples" class="section-heading">
+  <a href="#integrations/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.integrations(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="invites/2">
+  
+  
   <div class="detail-header">
     <a href="#invites/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">invites(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L457" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">invites(pid, number) :: map</code></pre>
+          <pre>invites(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get invites</p>
 <p>Returns a list of invite objects (with invite metadata) for the guild.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="invites/2-parameters" class="section-heading">
+  <a href="#invites/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="invites/2-examples" class="section-heading">
+  <a href="#invites/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.invites(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="kick_member/3">
+  
+  
   <div class="detail-header">
     <a href="#kick_member/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">kick_member(conn, guild_id, user_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L199" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">kick_member(pid, number, number) :: atom</code></pre>
+          <pre>kick_member(pid(), number(), number()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Remove guild member (KICK)</p>
 <p>Remove a member from a guild. Requires ‘KICK_MEMBERS’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="kick_member/3-parameters" class="section-heading">
+  <a href="#kick_member/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1035,37 +1196,46 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>user_id: User id of guild member
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="kick_member/3-examples" class="section-heading">
+  <a href="#kick_member/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.kick_member(conn, 9999999923792, 3290238023092309)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="member/3">
+  
+  
   <div class="detail-header">
     <a href="#member/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">member(conn, guild_id, user_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L153" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">member(pid, number, number) :: map</code></pre>
+          <pre>member(pid(), number(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get guild member</p>
-<h2>Parameters</h2>
+<h2 id="member/3-parameters" class="section-heading">
+  <a href="#member/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1074,37 +1244,46 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>user_id: User id of guild member
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="member/3-examples" class="section-heading">
+  <a href="#member/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.member(conn, 9999999923792, 3290238023092309)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="members/3">
+  
+  
   <div class="detail-header">
     <a href="#members/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">members(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L135" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">members(pid, number, map) :: map</code></pre>
+          <pre>members(pid(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get guild members</p>
-<h2>Parameters</h2>
+<h2 id="members/3-parameters" class="section-heading">
+  <a href="#members/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1113,118 +1292,145 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>options: Other options which include (limit, offset)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="members/3-examples" class="section-heading">
+  <a href="#members/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.members(conn, 9999999923792, %{limit: 4})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="modify/3">
+  
+  
   <div class="detail-header">
     <a href="#modify/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">modify(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L61" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">modify(pid, number, map) :: map</code></pre>
+          <pre>modify(pid(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Modify guild</p>
 <p>Modify a guilds settings. Returns the updated guild object on success.</p>
-<h2>Parameters</h2>
+<h2 id="modify/3-parameters" class="section-heading">
+  <a href="#modify/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
-<li><p>options: Options for creating a guild  including</p>
-<pre><code class="elixir">     (name, region, verification_level, afk_channel_id, afk_timeout, icon(128x128), owner_id, splash(128x128))</code></pre>
+<li>options: Options for creating a guild  including
+ (name, region, verification_level, afk_channel_id, afk_timeout, icon(128x128), owner_id, splash(128x128))
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="modify/3-examples" class="section-heading">
+  <a href="#modify/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.modify(conn, 320923099923,
   %{name: &quot;My Guild&quot;, region: &quot;Amsterdam&quot;, icon: &quot;/path/to/local/icon.jpg&quot;, owner_id: 4930928030923})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="modify_embed/2">
+  
+  
   <div class="detail-header">
     <a href="#modify_embed/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">modify_embed(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L618" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">modify_embed(pid, number) :: map</code></pre>
+          <pre>modify_embed(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Modify guild embed</p>
 <p>Modify a guild embed object for the guild.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="modify_embed/2-parameters" class="section-heading">
+  <a href="#modify_embed/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="modify_embed/2-examples" class="section-heading">
+  <a href="#modify_embed/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.modify_embed(conn, 93209203902, %{enabled: false})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="modify_integration/4">
+  
+  
   <div class="detail-header">
     <a href="#modify_integration/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">modify_integration(conn, guild_id, integration_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L544" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">modify_integration(pid, number, number, map) :: atom</code></pre>
+          <pre>modify_integration(pid(), number(), number(), map()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Modify guild integration</p>
 <p>Modify the behavior and settings of a integration object for the
 guild. Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="modify_integration/4-parameters" class="section-heading">
+  <a href="#modify_integration/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1235,39 +1441,48 @@ guild. Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>options: Options for modifying a guild integration including (expire_behavior, expire_grace_period, enable_emoticons)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="modify_integration/4-examples" class="section-heading">
+  <a href="#modify_integration/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.modify_integration(conn, 93209203902, 3892898393, %{expire_grace_period: 300, enable_emoticons: true})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="modify_member/4">
+  
+  
   <div class="detail-header">
     <a href="#modify_member/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">modify_member(conn, guild_id, user_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L175" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">modify_member(pid, number, number, map) :: atom</code></pre>
+          <pre>modify_member(pid(), number(), number(), map()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Modify guild member</p>
 <p>When moving members to channels, the API user must have permissions
 to both connect to the channel and have the MOVE_MEMBERS permission.</p>
-<h2>Parameters</h2>
+<h2 id="modify_member/4-parameters" class="section-heading">
+  <a href="#modify_member/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1278,38 +1493,47 @@ to both connect to the channel and have the MOVE_MEMBERS permission.</p>
 <li>options: Options to update guild member which include (nick, roles, mute, deaf, channel_id)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="modify_member/4-examples" class="section-heading">
+  <a href="#modify_member/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.modify_member(conn, 9999999923792, 3290238023092309, %{nick: &quot;Jingo&quot;, mute: true, channel_id: 3920293092390})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="modify_role/4">
+  
+  
   <div class="detail-header">
     <a href="#modify_role/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">modify_role(conn, guild_id, role_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L354" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">modify_role(pid, number, number, map) :: map</code></pre>
+          <pre>modify_role(pid(), number(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Modify role</p>
 <p>Modify a guild role. Requires the ‘MANAGE_ROLES’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="modify_role/4-parameters" class="section-heading">
+  <a href="#modify_role/4-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1320,37 +1544,46 @@ to both connect to the channel and have the MOVE_MEMBERS permission.</p>
 <li>options: Options to update roles which include (name, permissions, position, color, hoist)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="modify_role/4-examples" class="section-heading">
+  <a href="#modify_role/4-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.modify_role(conn, 320923099923, 3290930290923, %{name: &quot;super-administrator&quot;, color: 11830404, permissions: 66321471})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="prune_count/3">
+  
+  
   <div class="detail-header">
     <a href="#prune_count/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">prune_count(conn, guild_id, options)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L417" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">prune_count(pid, number, map) :: map</code></pre>
+          <pre>prune_count(pid(), number(), map()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get prune count</p>
-<h2>Parameters</h2>
+<h2 id="prune_count/3-parameters" class="section-heading">
+  <a href="#prune_count/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1359,77 +1592,95 @@ to both connect to the channel and have the MOVE_MEMBERS permission.</p>
 <li>options: Options to prune guild members which include (days)
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="prune_count/3-examples" class="section-heading">
+  <a href="#prune_count/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.prune_count(conn, 9999999923792, %{days: 7})</code></pre>
 
   </section>
 </div>
 <div class="detail" id="roles/2">
+  
+  
   <div class="detail-header">
     <a href="#roles/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">roles(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L289" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">roles(pid, number) :: map</code></pre>
+          <pre>roles(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>List guild roles</p>
 <p>Returns a list of role objects for the guild. Requires the ‘MANAGE_ROLES’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="roles/2-parameters" class="section-heading">
+  <a href="#roles/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="roles/2-examples" class="section-heading">
+  <a href="#roles/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.roles(conn, 9999999923792)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="sync_integration/3">
+  
+  
   <div class="detail-header">
     <a href="#sync_integration/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">sync_integration(conn, guild_id, integration_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L594" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">sync_integration(pid, number, number) :: atom</code></pre>
+          <pre>sync_integration(pid(), number(), number()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Sync guild integration</p>
 <p>Sync an integration.
 Requires the ‘MANAGE_GUILD’ permission.</p>
-<h2>Parameters</h2>
+<h2 id="sync_integration/3-parameters" class="section-heading">
+  <a href="#sync_integration/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1438,38 +1689,47 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>integration_id: Integration id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="sync_integration/3-examples" class="section-heading">
+  <a href="#sync_integration/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.sync_integration(conn, 93209203902, 3892898393)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="unban_member/3">
+  
+  
   <div class="detail-header">
     <a href="#unban_member/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">unban_member(conn, guild_id, user_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L249" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">unban_member(pid, number, number) :: atom</code></pre>
+          <pre>unban_member(pid(), number(), number()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Remove or Lift Ban</p>
 <p>Remove the ban for a user. Requires the ‘BAN_MEMBERS’ permissions.</p>
-<h2>Parameters</h2>
+<h2 id="unban_member/3-parameters" class="section-heading">
+  <a href="#unban_member/3-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
@@ -1478,46 +1738,59 @@ Requires the ‘MANAGE_GUILD’ permission.</p>
 <li>user_id: User id of guild member
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="unban_member/3-examples" class="section-heading">
+  <a href="#unban_member/3-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.unban_member(conn, 9999999923792, 3290238023092309)</code></pre>
 
   </section>
 </div>
 <div class="detail" id="voice_regions/2">
+  
+  
   <div class="detail-header">
     <a href="#voice_regions/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">voice_regions(conn, guild_id)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/rest_client/resources/guild.ex#L437" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">voice_regions(pid, number) :: map</code></pre>
+          <pre>voice_regions(pid(), number()) :: map()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get voice regions</p>
 <p>Returns a list of voice region objects for the guild.
 Unlike the similar /voice route, this returns VIP servers when the guild is VIP-enabled.</p>
-<h2>Parameters</h2>
+<h2 id="voice_regions/2-parameters" class="section-heading">
+  <a href="#voice_regions/2-parameters" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Parameters
+</h2>
+
 <ul>
 <li>conn: User connection for REST holding auth info
 </li>
 <li>guild_id: Guild id
 </li>
 </ul>
-<h2>Examples</h2>
+<h2 id="voice_regions/2-examples" class="section-heading">
+  <a href="#voice_regions/2-examples" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples
+</h2>
+
 <pre><code class="elixir">Guild.voice_regions(conn, 9999999923792)</code></pre>
 
   </section>
@@ -1527,26 +1800,28 @@ Unlike the similar /voice route, this returns VIP servers when the guild is VIP-
       
 
       
-
-      
           <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

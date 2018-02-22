@@ -1,20 +1,28 @@
     <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.12.0">
-    <title>DiscordEx.Voice.Buffer – Discord Elixir v1.1.8</title>
-    <link rel="stylesheet" href="dist/app-88251e7c81.css" />
+    <meta name="generator" content="ExDoc v0.18.1">
+    <title>DiscordEx.Voice.Buffer – Discord Elixir v1.1.18</title>
+    <link rel="stylesheet" href="dist/app-c922dbe7ef.css" />
     
-    <script src="dist/sidebar_items.js"></script>
+      <link rel="canonical" href="https://hexdocs.pm/discord_ex/DiscordEx.Voice.Buffer.html" />
+    
+    <script src="dist/sidebar_items-506f2099ca.js"></script>
+    
+    
+    
+    
   </head>
   <body data-type="modules">
+    <script>try { if(localStorage.getItem('night-mode')) document.body.className += ' night-mode'; } catch (e) { }</script>
 
     <div class="main">
 <button class="sidebar-toggle">
-  <i class="icon-menu"></i>
+  <span class="icon-menu" aria-hidden="true"></span>
+  <span class="sr-only">Toggle Sidebar</span>
 </button>
 <section class="sidebar">
 
@@ -25,16 +33,18 @@
         Discord Elixir
       </h1>
       <h2 class="sidebar-projectVersion">
-        v1.1.8
+        v1.1.18
       </h2>
     </div>
     
   </a>
 
-  <div class="sidebar-search">
-    <i class="icon-search"></i>
-    <input type="text" class="sidebar-searchInput" placeholder="search" autocomplete="off" />
-  </div>
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button">
+      <span class="icon-search" aria-hidden="true"></span>
+    </button>
+    <input name="q" type="text" id="search-list" class="search-input" placeholder="search" aria-label="Search" autocomplete="off" />
+  </form>
 
   <ul class="sidebar-listNav">
     <li><a id="extras-list" href="#full-list">Pages</a></li>
@@ -47,9 +57,8 @@
 
     
   </ul>
-
+  <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
-  <div class="sidebar-noResults"></div>
 </section>
 
 <section class="content">
@@ -58,18 +67,18 @@
 
 
       <h1>
-        <small class="visible-xs">Discord Elixir v1.1.8</small>
+        <small class="visible-xs">Discord Elixir v1.1.18</small>
         DiscordEx.Voice.Buffer
         
-        
           <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L1" title="View Source" class="view-source" rel="help">
-            <i class="icon-code"></i>
+            <span class="icon-code" aria-hidden="true"></span>
+            <span class="sr-only">View Source</span>
           </a>
         
       </h1>
 
       
-        <section id="moduledoc" class="docstring">
+        <section id="moduledoc">
           <p>Buffer Module for holding and reading audio.</p>
 
         </section>
@@ -79,7 +88,8 @@
         <section id="summary" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#summary">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Summary
           </h1>
@@ -168,8 +178,6 @@
 
           
 
-          
-
         </section>
       
 
@@ -179,220 +187,236 @@
         <section id="functions" class="details-list">
           <h1 class="section-heading">
             <a class="hover-link" href="#functions">
-              <i class="icon-link"></i>
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
             </a>
             Functions
           </h1>
           <div class="detail" id="drain/4">
+  
+  
+    <span id="drain/3"></span>
+  
   <div class="detail-header">
     <a href="#drain/4" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">drain(queue, size_in_bits, function, time \\ 0)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L43" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
+    
   </div>
-  
   <section class="docstring">
     <p>Drain the buffer based off the bit size and apply the result to the function - you don’t actually have to use time to make use of this</p>
 
   </section>
 </div>
 <div class="detail" id="drain_dca/3">
+  
+  
+    <span id="drain_dca/2"></span>
+  
   <div class="detail-header">
     <a href="#drain_dca/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">drain_dca(queue, function, time \\ 0)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L54" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">drain_dca(pid, function, integer) :: binary</code></pre>
+          <pre>drain_dca(pid(), function(), integer()) :: binary()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Drain the buffer which is assumed to contain just a DCA file with opus packets which have a header that dictate the size of a frame and the packets passed to the function</p>
 
   </section>
 </div>
 <div class="detail" id="dump/1">
+  
+  
   <div class="detail-header">
     <a href="#dump/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">dump(queue)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L76" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">dump(pid) :: atom</code></pre>
+          <pre>dump(pid()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Dump everything out of the buffer</p>
 
   </section>
 </div>
 <div class="detail" id="read/2">
+  
+  
   <div class="detail-header">
     <a href="#read/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">read(queue, size_in_bits)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L21" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">read(pid, integer) :: binary</code></pre>
+          <pre>read(pid(), integer()) :: binary()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Read off of the buffer based on a set bit size</p>
 
   </section>
 </div>
 <div class="detail" id="read/3">
+  
+  
   <div class="detail-header">
     <a href="#read/3" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">read(queue, size_in_bits, atom)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L30" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">read(pid, integer, atom) :: binary</code></pre>
+          <pre>read(pid(), integer(), atom()) :: binary()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Read off of the buffer based on a set bit size and return the integer format</p>
 
   </section>
 </div>
 <div class="detail" id="size/1">
+  
+  
   <div class="detail-header">
     <a href="#size/1" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">size(queue)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L70" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">size(pid) :: integer</code></pre>
+          <pre>size(pid()) :: integer()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Get the size of the buffer</p>
 
   </section>
 </div>
 <div class="detail" id="start/0">
+  
+  
   <div class="detail-header">
     <a href="#start/0" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">start()</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L7" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">start :: pid</code></pre>
+          <pre>start() :: pid()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Create a new queue</p>
 
   </section>
 </div>
 <div class="detail" id="write/2">
+  
+  
   <div class="detail-header">
     <a href="#write/2" class="detail-link" title="Link to this function">
-      <i class="icon-link"></i>
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
     </a>
     <span class="signature">write(queue, new_data)</span>
     
       <a href="https://github.com/rmcafee/discord_ex/blob/master/lib/discord_ex/voice/buffer.ex#L14" class="view-source" rel="help" title="View Source">
-       <i class="icon-code"></i>
+       <span class="icon-code" aria-hidden="true"></span>
+       <span class="sr-only">View Source</span>
      </a>
     
     
-  </div>
-  
-    <div class="specs">
-      <h4 class="specs-title">Specs</h4>
-      <div class="specs-list">
+    
+      <div class="specs">
         
-          <pre><code class="elixir">write(pid, binary) :: atom</code></pre>
+          <pre>write(pid(), binary()) :: atom()</pre>
         
       </div>
-    </div>
-  
+    
+  </div>
   <section class="docstring">
     <p>Write to the buffer/queue binary data</p>
 
@@ -403,26 +427,28 @@
       
 
       
-
-      
           <footer class="footer">
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.12.0),
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" rel="help" target="_blank">ExDoc</a> (v0.18.1),
           </span>
           <span class="line">
             designed by
             <a href="https://twitter.com/dignifiedquire" target="_blank" title="@dignifiedquire">Friedel Ziegelmayer</a>.
             </span>
         </p>
-        <button class="night-mode-toggle" />
+        <button class="night-mode-toggle"><span class="sr-only">Switch theme</span></button>
       </footer>
     </div>
   </div>
 </section>
 </div>
-  <script src="dist/app-21f1a20b9e.js"></script>
+  <script src="dist/app-778c9ef903.js"></script>
+  
+  
+  
+  
   </body>
 </html>
 

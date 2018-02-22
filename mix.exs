@@ -3,14 +3,14 @@ defmodule DiscordEx.Mixfile do
 
   def project do
     [app: :discord_ex,
-     version: "1.1.8",
-     elixir: "~> 1.3",
+     version: "1.1.18",
+     elixir: "~> 1.5.2",
      name: "Discord Elixir",
      source_url: "https://github.com/rmcafee/discord_ex",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
-     package: package,
-     deps: deps,
+     package: package(),
+     deps: deps(),
      docs: [extras: ["README.md"]]]
   end
 
@@ -34,7 +34,7 @@ defmodule DiscordEx.Mixfile do
   defp deps do
     [
       {:poison, "~> 2.0"},
-      {:websocket_client, "~> 1.2"},
+      {:websocket_client, "~> 1.2.4"},
       {:httpoison, "~> 0.9.0"},
       {:kcl, "~> 0.6.3"},
       {:poly1305, "~> 0.4.2"},
@@ -42,12 +42,12 @@ defmodule DiscordEx.Mixfile do
       {:dns, "~> 0.0.3"},
       {:porcelain, "~> 2.0.1"},
       {:temp, "~> 0.4"},
-      {:credo, "~> 0.4.5", only: [:dev, :test]},
+      {:credo, "~> 0.8.7", only: [:dev, :test]},
 
       # Docs dependencies
-      {:earmark, "~> 0.1", only: :docs},
-      {:ex_doc, "~> 0.11", only: :docs},
-      {:inch_ex, "~> 0.2", only: :docs}
+      {:earmark, "~> 1.1", only: [:dev, :docs]},
+      {:ex_doc, "~> 0.16", only: [:dev, :docs]},
+      {:inch_ex, "~> 0.2", only: [:dev, :docs]}
     ]
   end
 

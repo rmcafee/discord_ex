@@ -61,7 +61,7 @@ defmodule DiscordEx.Voice.UDP do
 
   defp _secret_key(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, :secret_key, self})
+      send(voice_client, {:get_state, :secret_key, self()})
       receive do
         {:secret_key, value} -> :erlang.list_to_binary(value)
       end
@@ -71,7 +71,7 @@ defmodule DiscordEx.Voice.UDP do
 
   defp _port(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, "port", self})
+      send(voice_client, {:get_state, "port", self()})
       receive do
         {"port", value} -> value
       end
@@ -81,7 +81,7 @@ defmodule DiscordEx.Voice.UDP do
 
   defp _address(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, :udp_ip_send, self})
+      send(voice_client, {:get_state, :udp_ip_send, self()})
       receive do
         {:udp_ip_send, value} -> Socket.Address.parse(value)
       end
@@ -91,7 +91,7 @@ defmodule DiscordEx.Voice.UDP do
 
   defp _ssrc(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, "ssrc", self})
+      send(voice_client, {:get_state, "ssrc", self()})
       receive do
         {"ssrc", value} -> value
       end
@@ -101,7 +101,7 @@ defmodule DiscordEx.Voice.UDP do
 
   def _send_socket(voice_client) do
     task = Task.async fn ->
-      send(voice_client, {:get_state, :udp_socket_send, self})
+      send(voice_client, {:get_state, :udp_socket_send, self()})
       receive do
         {:udp_socket_send, socket} -> socket
       end

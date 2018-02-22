@@ -39,7 +39,7 @@ defmodule DiscordEx.Voice.BufferTest do
     Buffer.write(state[:buffer], <<2>>)
     Buffer.write(state[:buffer], <<3>>)
     Buffer.drain state[:buffer], 8, fn(data, time) ->
-      send self, {data, time}
+      send self(), {data, time}
     end
 
     assert_received {<<1>>, 0}
@@ -60,10 +60,10 @@ defmodule DiscordEx.Voice.BufferTest do
     Buffer.write(state[:buffer], packet_1)
     Buffer.write(state[:buffer], packet_2)
 
-    assert Buffer.size(state[:buffer]) == 60032 
+    assert Buffer.size(state[:buffer]) == 60032
 
     Buffer.drain_dca state[:buffer], fn(data, time) ->
-      send self, {data, time}
+      send self(), {data, time}
     end
 
     assert_received {<<0::size(p1_size_in_bits)>>, 0}

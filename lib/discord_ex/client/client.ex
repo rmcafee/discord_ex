@@ -278,6 +278,7 @@ defmodule DiscordEx.Client do
 
     guild = %{guild_id: payload.data[:id],
               members: payload.data[:members],
+              channels: payload.data[:channels],
               voice_states: payload.data[:voice_states]}
     new_guilds = state[:guilds] ++ [guild]
     new_state = Map.merge(state, %{guilds: new_guilds})

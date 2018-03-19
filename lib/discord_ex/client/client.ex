@@ -277,9 +277,13 @@ defmodule DiscordEx.Client do
   def handle_event({:guild_create, payload}, state) do
 
     guild = %{guild_id: payload.data[:id],
+              members: payload.data[:members],
+              channels: payload.data[:channels],
               voice_states: payload.data[:voice_states]}
     new_guilds = state[:guilds] ++ [guild]
     new_state = Map.merge(state, %{guilds: new_guilds})
+
+    state[:handler].handle_event({:guild_create, payload}, new_state)
 
     {:ok, new_state}
   end
